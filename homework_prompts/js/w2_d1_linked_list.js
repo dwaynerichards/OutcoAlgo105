@@ -247,41 +247,27 @@ testCount = [0, 0];
 
 assert(testCount, "has insert method", () => {
   let linkedList = new LinkedList();
-  return (
-    Object.prototype.toString.apply(linkedList.insert) === "[object Function]"
-  );
+  return Object.prototype.toString.apply(linkedList.insert) === "[object Function]";
 });
 
 assert(testCount, "able to insert a node into empty linked list", () => {
   let linkedList = new LinkedList();
   linkedList.insert(5, 0);
-  return (
-    linkedList.length === 1 &&
-    linkedList.head.value === 5 &&
-    linkedList.tail.value === 5
-  );
+  return linkedList.length === 1 && linkedList.head.value === 5 && linkedList.tail.value === 5;
 });
 
 assert(testCount, "able to insert a node after another node", () => {
   let linkedList = new LinkedList();
   linkedList.insert(5, 0);
   linkedList.insert(10, 1);
-  return (
-    linkedList.length === 2 &&
-    linkedList.head.value === 5 &&
-    linkedList.tail.value === 10
-  );
+  return linkedList.length === 2 && linkedList.head.value === 5 && linkedList.tail.value === 10;
 });
 
 assert(testCount, "able to insert a node before another node", () => {
   let linkedList = new LinkedList();
   linkedList.insert(5, 0);
   linkedList.insert(10, 0);
-  return (
-    linkedList.length === 2 &&
-    linkedList.head.value === 10 &&
-    linkedList.tail.value === 5
-  );
+  return linkedList.length === 2 && linkedList.head.value === 10 && linkedList.tail.value === 5;
 });
 
 assert(testCount, "able to insert a node in between two nodes", () => {
@@ -297,20 +283,12 @@ assert(testCount, "able to insert a node in between two nodes", () => {
   );
 });
 
-assert(
-  testCount,
-  "does not insert a node if index is out of bounds linked list",
-  () => {
-    let linkedList = new LinkedList();
-    linkedList.insert(5, -1);
-    linkedList.insert(10, 3);
-    return (
-      linkedList.length === 0 &&
-      linkedList.head === null &&
-      linkedList.tail === null
-    );
-  }
-);
+assert(testCount, "does not insert a node if index is out of bounds linked list", () => {
+  let linkedList = new LinkedList();
+  linkedList.insert(5, -1);
+  linkedList.insert(10, 3);
+  return linkedList.length === 0 && linkedList.head === null && linkedList.tail === null;
+});
 console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
 
 console.log("LinkedList Append Method");
@@ -318,30 +296,20 @@ testCount = [0, 0];
 
 assert(testCount, "has append method", () => {
   let linkedList = new LinkedList();
-  return (
-    Object.prototype.toString.apply(linkedList.append) === "[object Function]"
-  );
+  return Object.prototype.toString.apply(linkedList.append) === "[object Function]";
 });
 
 assert(testCount, "able to append a node into empty linked list", () => {
   let linkedList = new LinkedList();
   linkedList.append(5);
-  return (
-    linkedList.length === 1 &&
-    linkedList.head.value === 5 &&
-    linkedList.tail.value === 5
-  );
+  return linkedList.length === 1 && linkedList.head.value === 5 && linkedList.tail.value === 5;
 });
 
 assert(testCount, "able to append a second node", () => {
   let linkedList = new LinkedList();
   linkedList.append(5);
   linkedList.append(10);
-  return (
-    linkedList.length === 2 &&
-    linkedList.head.value === 5 &&
-    linkedList.tail.value === 10
-  );
+  return linkedList.length === 2 && linkedList.head.value === 5 && linkedList.tail.value === 10;
 });
 
 assert(testCount, "able to append a third node", () => {
@@ -349,11 +317,7 @@ assert(testCount, "able to append a third node", () => {
   linkedList.append(5);
   linkedList.append(10);
   linkedList.append(15);
-  return (
-    linkedList.length === 3 &&
-    linkedList.head.value === 5 &&
-    linkedList.tail.value === 15
-  );
+  return linkedList.length === 3 && linkedList.head.value === 5 && linkedList.tail.value === 15;
 });
 
 console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
@@ -363,9 +327,7 @@ testCount = [0, 0];
 
 assert(testCount, "has delete method", () => {
   let linkedList = new LinkedList();
-  return (
-    Object.prototype.toString.apply(linkedList.delete) === "[object Function]"
-  );
+  return Object.prototype.toString.apply(linkedList.delete) === "[object Function]";
 });
 
 assert(testCount, "able to delete a node from the head", () => {
@@ -390,39 +352,23 @@ assert(testCount, "able to delete a node in between two nodes", () => {
   linkedList.append(10);
   linkedList.append(15);
   linkedList.delete(1);
-  return (
-    linkedList.length === 2 &&
-    linkedList.head.value === 5 &&
-    linkedList.tail.value === 15
-  );
+  return linkedList.length === 2 && linkedList.head.value === 5 && linkedList.tail.value === 15;
 });
 
 assert(testCount, "able to delete the only node in a linked list", () => {
   let linkedList = new LinkedList();
   linkedList.append(5);
   linkedList.delete(0);
-  return (
-    linkedList.length === 0 &&
-    linkedList.head === null &&
-    linkedList.tail === null
-  );
+  return linkedList.length === 0 && linkedList.head === null && linkedList.tail === null;
 });
 
-assert(
-  testCount,
-  "does not delete a node when the index is out of bounds",
-  () => {
-    let linkedList = new LinkedList();
-    linkedList.append(5);
-    linkedList.delete(-1);
-    linkedList.delete(2);
-    return (
-      linkedList.length === 1 &&
-      linkedList.head.value === 5 &&
-      linkedList.tail.value === 5
-    );
-  }
-);
+assert(testCount, "does not delete a node when the index is out of bounds", () => {
+  let linkedList = new LinkedList();
+  linkedList.append(5);
+  linkedList.delete(-1);
+  linkedList.delete(2);
+  return linkedList.length === 1 && linkedList.head.value === 5 && linkedList.tail.value === 5;
+});
 
 console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
 
@@ -431,9 +377,7 @@ testCount = [0, 0];
 
 assert(testCount, "has contains method", () => {
   let linkedList = new LinkedList();
-  return (
-    Object.prototype.toString.apply(linkedList.contains) === "[object Function]"
-  );
+  return Object.prototype.toString.apply(linkedList.contains) === "[object Function]";
 });
 
 assert(testCount, "returns true if linked list contains value", () => {
@@ -444,17 +388,13 @@ assert(testCount, "returns true if linked list contains value", () => {
   return linkedList.contains(15) === true;
 });
 
-assert(
-  testCount,
-  "returns false if linked list does not contains value",
-  () => {
-    let linkedList = new LinkedList();
-    linkedList.append(5);
-    linkedList.append(10);
-    linkedList.append(15);
-    return linkedList.contains(8) === false;
-  }
-);
+assert(testCount, "returns false if linked list does not contains value", () => {
+  let linkedList = new LinkedList();
+  linkedList.append(5);
+  linkedList.append(10);
+  linkedList.append(15);
+  return linkedList.contains(8) === false;
+});
 
 console.log("PASSED: " + testCount[0] + " / " + testCount[1]);
 
