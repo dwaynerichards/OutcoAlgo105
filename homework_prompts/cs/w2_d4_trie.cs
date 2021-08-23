@@ -1,5 +1,5 @@
 ﻿/**
- *  Homework 11 - Trie
+ *  Homework - Trie
  *
  *  Problem 1: TrieNode class
  *
@@ -117,9 +117,9 @@ class Test{
         Console.WriteLine("TrieNode Class");
         runTest(trieNodeClassTest1, "able to create an instance", testCount);
         runTest(trieNodeClassTest2, "has value property", testCount);
-        runTest(trieNodeClassTest3, "has end property", testCount);  
-        runTest(trieNodeClassTest4, "end property instatiated to false", testCount);  
-        runTest(trieNodeClassTest5, "able to assign a end upon instantiation", testCount);  
+        runTest(trieNodeClassTest3, "has end property", testCount);
+        runTest(trieNodeClassTest4, "end property instatiated to false", testCount);
+        runTest(trieNodeClassTest5, "able to assign a end upon instantiation", testCount);
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -128,7 +128,7 @@ class Test{
         Console.WriteLine("Trie Class");
         runTest(trieClassTest1, "able to create an instance", testCount);
         runTest(trieClassTest2, "has root property", testCount);
-        runTest(trieClassTest3, "root property is a TrieNode", testCount);  
+        runTest(trieClassTest3, "root property is a TrieNode", testCount);
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -137,7 +137,7 @@ class Test{
         Console.WriteLine("Trie Insert Method");
         runTest(trieInsertMethodTest1, "has insert method", testCount);
         runTest(trieInsertMethodTest2, "able to insert a word into empty trie", testCount);
-        runTest(trieInsertMethodTest3, "able to insert words that overlap into trie", testCount);  
+        runTest(trieInsertMethodTest3, "able to insert words that overlap into trie", testCount);
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -146,11 +146,11 @@ class Test{
         Console.WriteLine("Trie IsWord Method");
         runTest(trieIsWordMethodTest1, "has isWord method", testCount);
         runTest(trieIsWordMethodTest2, "should return false for an empty string as input", testCount);
-        runTest(trieIsWordMethodTest3, "should return true for a word that exists", testCount);  
-        runTest(trieIsWordMethodTest4, "should return false for a word that does not exist", testCount);  
-        runTest(trieIsWordMethodTest5, "should return true for a word that exists within a larger word", testCount);  
-        runTest(trieIsWordMethodTest6, "should return true for a word that is a larger word", testCount);  
-        runTest(trieIsWordMethodTest7, "should return false if a smaller word was not added, but exists in a larger word", testCount);  
+        runTest(trieIsWordMethodTest3, "should return true for a word that exists", testCount);
+        runTest(trieIsWordMethodTest4, "should return false for a word that does not exist", testCount);
+        runTest(trieIsWordMethodTest5, "should return true for a word that exists within a larger word", testCount);
+        runTest(trieIsWordMethodTest6, "should return true for a word that is a larger word", testCount);
+        runTest(trieIsWordMethodTest7, "should return false if a smaller word was not added, but exists in a larger word", testCount);
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -159,9 +159,9 @@ class Test{
         Console.WriteLine("Trie StartsWith Method");
         runTest(trieStartsWithMethodTest1, "has startsWith method", testCount);
         runTest(trieStartsWithMethodTest2, "returns null if no words start with input", testCount);
-        runTest(trieStartsWithMethodTest3, "returns correct prefixes including input that is a word", testCount);  
-        runTest(trieStartsWithMethodTest4, "returns the correct prefixes", testCount);  
-        runTest(trieStartsWithMethodTest5, "returns all words if input is empty string", testCount);  
+        runTest(trieStartsWithMethodTest3, "returns correct prefixes including input that is a word", testCount);
+        runTest(trieStartsWithMethodTest4, "returns the correct prefixes", testCount);
+        runTest(trieStartsWithMethodTest5, "returns all words if input is empty string", testCount);
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -170,9 +170,9 @@ class Test{
         Console.WriteLine("Trie Remove Method");
         runTest(trieRemoveMethodTest1, "has remove method", testCount);
         runTest(trieRemoveMethodTest2, "removes a word that exists", testCount);
-        runTest(trieRemoveMethodTest3, "does not remove a word that does not exist", testCount);  
-        runTest(trieRemoveMethodTest4, "does not remove letters at that belong to a longer word", testCount);  
-        runTest(trieRemoveMethodTest5, "removes letters from longer word and keeps shorter letters", testCount);  
+        runTest(trieRemoveMethodTest3, "does not remove a word that does not exist", testCount);
+        runTest(trieRemoveMethodTest4, "does not remove letters at that belong to a longer word", testCount);
+        runTest(trieRemoveMethodTest5, "removes letters from longer word and keeps shorter letters", testCount);
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -387,5 +387,5 @@ class Test{
         } catch {}
         string result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testName;
         Console.WriteLine(result);
-    } 
+    }
 }

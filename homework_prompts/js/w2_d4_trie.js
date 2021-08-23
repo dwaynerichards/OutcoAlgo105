@@ -1,5 +1,5 @@
 /**
- *  Homework 11 - Trie
+ *  Homework - Trie
  *
  *  TrieNode class
  *

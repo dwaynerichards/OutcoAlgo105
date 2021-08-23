@@ -1,5 +1,5 @@
 /*
- * Homework 03 - Decrease and Conquer
+ * Homework - Decrease and Conquer
  * Utilize the decrease and conquer pattern to solve these problems.
  */
 

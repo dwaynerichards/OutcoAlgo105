@@ -24,8 +24,8 @@
               Create a Node class
 
               The Node class should contain the following properties:
-              key: {Integer}
-              value: {Integer}
+              key: {string}
+              value: {string}
               previous: {*Node} (initially null)
               next: {*Node} (initially null)
 
@@ -64,7 +64,7 @@
 
      lruCache.get('doc'); => 'david'
      lruCache.set('swe', 'ron');
-     lruCache.get('cpo'); => -1
+     lruCache.get('cpo'); => ''
 
 */
 

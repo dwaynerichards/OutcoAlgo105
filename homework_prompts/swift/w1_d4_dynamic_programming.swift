@@ -1,5 +1,5 @@
 /*
- *  Homework 06 - Dynamic Programming - Moving Window
+ *  Homework - Dynamic Programming - Moving Window
  *
  *  Problem 1: Max Consecutive Sum
  *

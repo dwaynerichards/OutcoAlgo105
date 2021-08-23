@@ -1,5 +1,5 @@
 #
-#  Homework 12 - Binary Heap
+#  Homework - Binary Heap
 #
 #  Problem: Binary Heap Class
 #

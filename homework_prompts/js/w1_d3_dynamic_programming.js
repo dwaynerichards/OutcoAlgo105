@@ -1,5 +1,5 @@
 /*
- *  Homework 05 - Dynamic Programming
+ *  Homework - Dynamic Programming
  *
  *  Instructions: Dynamic programming takes a lot of practice to recognize as
  *                well as develop algorithms. Thus we will be working on a few

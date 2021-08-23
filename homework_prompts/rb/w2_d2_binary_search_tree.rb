@@ -1,4 +1,4 @@
-#  Homework 10 - Binary Search Tree
+#  Homework - Binary Search Tree
 #
 #  Problem 1: Node class
 #

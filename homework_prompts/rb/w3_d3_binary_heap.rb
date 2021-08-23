@@ -1,4 +1,4 @@
-#  Homework 12 - Heap
+#  Homework - Heap
 #
 #  Prompt: Create a Heap class/constructor
 #

@@ -1,5 +1,5 @@
 /*
- *  Homework 14 - Hash Table
+ *  Homework - Hash Table
  *
  *  Problem: Hash Table
  *
