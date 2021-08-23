@@ -1,4 +1,4 @@
-# Homework 03 - Decrease and Conquer
+# Homework - Decrease and Conquer
 
 # Number of Ones: Given a sorted bit array (values of either 0 or 1),
 # ... determine the number of 1's in the array.

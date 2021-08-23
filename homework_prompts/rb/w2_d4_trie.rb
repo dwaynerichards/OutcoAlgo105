@@ -1,4 +1,4 @@
-#  Homework 11 - Trie
+#  Homework - Trie
 #
 #  Problem 1: TrieNode class
 #

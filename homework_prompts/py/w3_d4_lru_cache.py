@@ -1,5 +1,5 @@
 #
-#  Homework 15 - LRU Cache
+#  Homework - LRU Cache
 #
 #  Problem: LRU Cache Class
 #
@@ -25,8 +25,8 @@
 #              Create a Node class
 #
 #              The Node class should contain the following properties:
-#              key: {Integer}
-#              value: {Integer}
+#              key: {String}
+#              value: {String}
 #              previous: {Node} (initially None)
 #              next: {Node} (initially None)
 #

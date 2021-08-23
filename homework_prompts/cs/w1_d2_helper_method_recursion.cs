@@ -1,5 +1,5 @@
 ﻿/*
- *  Homework 04 - Helper Method Recursion
+ *  Homework - Helper Method Recursion
  *
  *  Instructions: Using the Helper Method Recursive Pattern work through the
  *  following problems.

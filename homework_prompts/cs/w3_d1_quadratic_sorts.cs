@@ -1,5 +1,5 @@
 ﻿/**
- *  Homework 07 - Quadratic Sorts
+ *  Homework - Quadratic Sorts
  *
  *  Problem 1: Insertion Sort
  *
@@ -84,7 +84,7 @@ class Test{
         Console.WriteLine(testName);
         runTest(sortTest1, sorter, "should sort example input", testCount);
         runTest(sortTest2, sorter, "should sort single-element input", testCount);
-        runTest(sortTest3, sorter, "should sort moderate-sized input", testCount);  
+        runTest(sortTest3, sorter, "should sort moderate-sized input", testCount);
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -122,11 +122,11 @@ class Test{
         return true;
     }
 
-   
+
     // do not edit below, this is to wrap the test and check for exceptions
-    private static void runTest(Func<Func<int[], int[]>, bool> test, 
+    private static void runTest(Func<Func<int[], int[]>, bool> test,
             Func<int[], int[]> sorter, string testName, int[] testCount){
-        
+
         testCount[1]++;
         bool testPassed = false;
         // Attempt to run test and suppress exceptions on failure
@@ -136,5 +136,5 @@ class Test{
         } catch {}
         string result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testName;
         Console.WriteLine(result);
-    } 
+    }
 }

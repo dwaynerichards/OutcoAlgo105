@@ -1,5 +1,5 @@
 /*
- *  Homework 06 - Dynamic Programming
+ *  Homework - Dynamic Programming
  *
  *
  *  Problem 1:  Max Consecutive Sum

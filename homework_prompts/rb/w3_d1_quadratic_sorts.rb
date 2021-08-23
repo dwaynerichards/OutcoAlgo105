@@ -1,4 +1,4 @@
-# Homework 07 - Quadratic Sorts
+# Homework - Quadratic Sorts
 #
 # Problem 1: Insertion Sort
 #
