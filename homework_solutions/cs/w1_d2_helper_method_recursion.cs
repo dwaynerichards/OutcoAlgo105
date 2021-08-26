@@ -1,5 +1,5 @@
 ﻿/*
- *  Homework - Helper Method Recursion
+ *  Homework 04 - Helper Method Recursion
  *
  *  Instructions: Using the Helper Method Recursive Pattern work through the
  *  following problems.
@@ -221,6 +221,7 @@ class Power {
 
     public static int compute(int a, int b) {
         return multiply(a, b, 1);
+        //return result;
     }
 
     public static int multiply(int numBase, int exponent, int result) {

@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
 *  Target Practice - Dynamic Programming - Tabulation/Memoization
+=======
+*  Target Practice 02 - Dynamic Programming - Tabulation/Memoization
+>>>>>>> f1d7873 (adds new files)
 *
 *          Given an array of coins and a target total, return how many
 *          unique ways there are to use the coins to make up that total.
@@ -34,8 +38,15 @@
 *
 */
 
+<<<<<<< HEAD
 
 class DPProblems {
+=======
+import java.io.*;
+import java.util.*;
+
+class Problems {
+>>>>>>> f1d7873 (adds new files)
 
    // Time Complexity:
    // Auxiliary Space Complexity:
@@ -51,10 +62,19 @@ class DPProblems {
  ////////////////////////////////////////////////////////////
 
  // use the Main class to run the test cases
+<<<<<<< HEAD
  class DPTests {
    // an interface to perform tests
    public interface Test {
      boolean execute();
+=======
+ class Main {
+   private int[] testCount;
+
+   // an interface to perform tests
+   public interface Test {
+     public boolean execute();
+>>>>>>> f1d7873 (adds new files)
    }
 
    public static void main(String[] args) {
@@ -64,6 +84,7 @@ class DPProblems {
      System.out.println("Coin Sum Tests");
 
      // tests are in the form as shown
+<<<<<<< HEAD
      assertTest(testCount, "should work for first example case", () -> {
        int output = DPProblems.coinSum(new int[]{1,2,3}, 4);
        return output == 4;
@@ -77,6 +98,27 @@ class DPProblems {
      assertTest(testCount, "should work for a single coin", () -> {
        int output = DPProblems.coinSum(new int[]{2}, 10);
        return output == 1;
+=======
+     assertTest(testCount, "should work for first example case", new Test() {
+       public boolean execute() {
+         int output = Problems.coinSum(new int[]{1,2,3}, 4);
+         return output == 4;
+       }
+     });
+
+     assertTest(testCount, "should work for second example case", new Test() {
+       public boolean execute() {
+         int output = Problems.coinSum(new int[]{2,5,3,6}, 10);
+         return output == 5;
+       }
+     });
+
+     assertTest(testCount, "should work for a single coin", new Test() {
+       public boolean execute() {
+         int output = Problems.coinSum(new int[]{2}, 10);
+         return output == 1;
+       }
+>>>>>>> f1d7873 (adds new files)
      });
 
 
@@ -95,7 +137,11 @@ class DPProblems {
          pass = " true";
          count[0]++;
        }
+<<<<<<< HEAD
      } catch(Exception ignored) {}
+=======
+     } catch(Exception e) {}
+>>>>>>> f1d7873 (adds new files)
      String result = "  " + (count[1] + ")   ").substring(0, 5) + pass + " : " + name;
      System.out.println(result);
    }

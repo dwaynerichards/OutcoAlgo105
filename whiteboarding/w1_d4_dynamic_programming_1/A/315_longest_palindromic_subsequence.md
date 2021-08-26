@@ -188,6 +188,7 @@ class LongestPalindromicSubsequence {
   }
 }
 ```
+<<<<<<< HEAD
 ```python
 def longest_palindromic_substring(string):
   
@@ -214,6 +215,8 @@ def longest_palindromic_substring(string):
   
   return result
 ```
+=======
+>>>>>>> f1d7873 (adds new files)
 
 # Resources
 [Longest Palindromic Subsequence](https://www.geeksforgeeks.org/longest-palindromic-subsequence-dp-12/)

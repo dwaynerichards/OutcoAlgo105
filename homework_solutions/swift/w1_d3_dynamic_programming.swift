@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
  *  Homework - Dynamic Programming
+=======
+ *  Homework 05 - Dynamic Programming
+>>>>>>> f1d7873 (adds new files)
  *
  *
  *  Instructions: Dynamic programming takes a lot of practice to recognize as

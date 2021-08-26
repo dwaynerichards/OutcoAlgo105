@@ -1,5 +1,5 @@
 /*
- *  Target Practice - Recursion
+ *  Target Practice 01 - Recursion
  *
  *  Problem 1:  Powerset - Helper Method Recursion
  *
@@ -14,24 +14,6 @@
  *  Notes:     The input string will not contain duplicate characters
  *            The letters in the subset string must be in the same order
  *            as the original input.
- *
- *  Hints:
- *
- *  From Cracking the Coding Interview, by Gayle Laakmann McDowell. 8.4: Powerset
- *
- *  #273. How can you build all subsets of {a , b, c} from the subsets of {a , b}?
- *
- *  #290. Anything that is a subset of {a , b} is also a subset of {a , b , c}. Which sets are
- *  subsets of {a , b , c} but not {a , b}?
- *
- *  #338. Subsets that contain c will be subsets {a , b , c} but not {a , b}. Can you build these
- *  subsets from the subsets of (a , b}?
- *
- *  #354. You can build the remaining subsets by adding c to all the subsets of {a , b).
- *
- *  #373. You can also do this by mapping each subset to a binary number. The i th bit could
- *  represent a "boolean" flag for whether an element is in the set.
- *
  */
 
 import java.util.*;
@@ -93,10 +75,13 @@ class LatticePaths {
 ////////////////////////////////////////////////////////////
 
 // use the Main class to run the test cases
-class RecursionTests {
+class Main {
+
+  private int[] testCount;
+
   // an interface to perform tests
   public interface Test {
-      boolean execute();
+      public boolean execute();
   }
 
   public static void main(String[] args) {
@@ -105,63 +90,71 @@ class RecursionTests {
     System.out.println("Power Set Tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "should work on example input", () -> {
+    assertTest(testCount, "should work on example input", new Test() {
+      public boolean execute() {
 
-      List<String> result = Powerset.compute("abc");
+        List<String> result = Powerset.compute("abc");
 
-      List<String> answer = Arrays.asList("", "c", "b", "bc", "a", "ac", "ab", "abc");
+        List<String> answer = Arrays.asList("", "c", "b", "bc", "a", "ac", "ab", "abc");
 
-      Collections.sort(result);
-      Collections.sort(answer);
+        Collections.sort(result);
+        Collections.sort(answer);
 
-      return result.equals(answer);
+        return result.equals(answer);
+      }
     });
 
-    assertTest(testCount, "should work on empty input", () -> {
+    assertTest(testCount, "should work on empty input", new Test() {
+      public boolean execute() {
 
-      List<String> result = Powerset.compute("");
+        List<String> result = Powerset.compute("");
 
-      List<String> answer = new ArrayList<>(Collections.singletonList(""));
+        List<String> answer = Arrays.asList("");
 
-      Collections.sort(result);
-      Collections.sort(answer);
+        Collections.sort(result);
+        Collections.sort(answer);
 
-      return result.equals(answer);
+        return result.equals(answer);
+      }
     });
 
-    assertTest(testCount, "should work on two-letter input", () -> {
+    assertTest(testCount, "should work on two-letter input", new Test() {
+      public boolean execute() {
 
-      List<String> result = Powerset.compute("ab");
+        List<String> result = Powerset.compute("ab");
 
-      List<String> answer = Arrays.asList("","a","b","ab");
+        List<String> answer = Arrays.asList("","a","b","ab");
 
-      Collections.sort(result);
-      Collections.sort(answer);
+        Collections.sort(result);
+        Collections.sort(answer);
 
-      return result.equals(answer);
+        return result.equals(answer);
+      }
     });
 
-    assertTest(testCount, "should work on longer input", () -> {
+    assertTest(testCount, "should work on longer input", new Test() {
+      public boolean execute() {
 
-      List<String> result = Powerset.compute("abcdefg");
+        List<String> result = Powerset.compute("abcdefg");
 
-      List<String> answer = Arrays.asList("","g","f","fg","e","eg","ef","efg","d",
-              "dg","df","dfg","de","deg","def","defg","c","cg","cf","cfg","ce","ceg",
-              "cef","cefg","cd","cdg","cdf","cdfg","cde","cdeg","cdef","cdefg","b","bg",
-              "bf","bfg","be","beg","bef","befg","bd","bdg","bdf","bdfg","bde","bdeg",
-              "bdef","bdefg","bc","bcg","bcf","bcfg","bce","bceg","bcef","bcefg","bcd",
-              "bcdg","bcdf","bcdfg","bcde","bcdeg","bcdef","bcdefg","a","ag","af","afg",
-              "ae","aeg","aef","aefg","ad","adg","adf","adfg","ade","adeg","adef",
-              "adefg","ac","acg","acf","acfg","ace","aceg","acef","acefg","acd","acdg",
-              "acdf","acdfg","acde","acdeg","acdef","acdefg","ab","abg","abf","abfg",
-              "abe","abeg","abef","abefg","abd","abdg","abdf","abdfg","abde","abdeg",
-              "abdef","abdefg","abc","abcg","abcf","abcfg","abce","abceg","abcef",
-              "abcefg","abcd","abcdg","abcdf","abcdfg","abcde","abcdeg","abcdef","abcdefg");
+        List<String> answer = Arrays.asList("","g","f","fg","e","eg","ef","efg","d",
+                "dg","df","dfg","de","deg","def","defg","c","cg","cf","cfg","ce","ceg",
+                "cef","cefg","cd","cdg","cdf","cdfg","cde","cdeg","cdef","cdefg","b","bg",
+                "bf","bfg","be","beg","bef","befg","bd","bdg","bdf","bdfg","bde","bdeg",
+                "bdef","bdefg","bc","bcg","bcf","bcfg","bce","bceg","bcef","bcefg","bcd",
+                "bcdg","bcdf","bcdfg","bcde","bcdeg","bcdef","bcdefg","a","ag","af","afg",
+                "ae","aeg","aef","aefg","ad","adg","adf","adfg","ade","adeg","adef",
+                "adefg","ac","acg","acf","acfg","ace","aceg","acef","acefg","acd","acdg",
+                "acdf","acdfg","acde","acdeg","acdef","acdefg","ab","abg","abf","abfg",
+                "abe","abeg","abef","abefg","abd","abdg","abdf","abdfg","abde","abdeg",
+                "abdef","abdefg","abc","abcg","abcf","abcfg","abce","abceg","abcef",
+                "abcefg","abcd","abcdg","abcdf","abcdfg","abcde","abcdeg","abcdef","abcdefg");
 
-      Collections.sort(result);
-      Collections.sort(answer);
+        Collections.sort(result);
+        Collections.sort(answer);
 
-      return result.equals(answer);
+        return result.equals(answer);
+      }
     });
 
     // print the result of tests passed for a module
@@ -175,11 +168,23 @@ class RecursionTests {
     System.out.println("Lattice Paths Tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "should work on example case", () -> LatticePaths.compute(2, 3) == 10);
+    assertTest(testCount, "should work on example case", new Test() {
+      public boolean execute() {
+        return LatticePaths.compute(2, 3) == 10;
+      }
+    });
 
-    assertTest(testCount, "should return 1 for 0 x 0 lattice", () -> LatticePaths.compute(0, 0) == 1);
+    assertTest(testCount, "should return 1 for 0 x 0 lattice", new Test() {
+      public boolean execute() {
+        return LatticePaths.compute(0, 0) == 1;
+      }
+    });
 
-    assertTest(testCount, "should return 2496144 for 13 x 11 lattice", () -> LatticePaths.compute(13, 11) == 2496144);
+    assertTest(testCount, "should return 2496144 for 13 x 11 lattice", new Test() {
+      public boolean execute() {
+        return LatticePaths.compute(13, 11) == 2496144;
+      }
+    });
 
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -195,7 +200,7 @@ class RecursionTests {
         pass = " true";
         count[0]++;
       }
-    } catch(Exception ignored) {}
+    } catch(Exception e) {}
     String result = "  " + (count[1] + ")   ").substring(0, 5) + pass + " : " + name;
     System.out.println(result);
   }

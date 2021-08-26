@@ -1,5 +1,9 @@
 #
+<<<<<<< HEAD
 # Target Practice - Recursion
+=======
+# Target Practice 01 - Recursion
+>>>>>>> f1d7873 (adds new files)
 #
 # Problem 1: Power Set
 #
@@ -14,6 +18,7 @@
 # Note:     The input string will not contain duplicate characters
 #           The letters in the subset string must be in the same order
 #           as the original input.
+<<<<<<< HEAD
 #
 #  Hints:
 #
@@ -48,6 +53,8 @@ def powerset(input):
     return results
 
 
+=======
+>>>>>>> f1d7873 (adds new files)
 
 # Problem 2: Lattice Paths
 #
@@ -75,6 +82,25 @@ def powerset(input):
 #
 
 
+<<<<<<< HEAD
+=======
+def powerset(input):
+    results = []
+
+    def traverse(build, depth):
+        if (depth == len(input)):
+            results.append(build)
+            return
+
+        traverse(build, depth + 1)
+        traverse(build + input[depth], depth + 1)
+
+    traverse('', 0)
+    return results
+
+
+
+>>>>>>> f1d7873 (adds new files)
 # Time Complexity: O(2^(M+N))
 # Auxiliary Space Complexity: O(M+N)
 def lattice_paths(m, n):

@@ -1,6 +1,10 @@
 # Why do you want to work for this company?
 
+<<<<<<< HEAD
 Before the interview, ask them to choose a company they'd want to work for. Once they have a company in mind, the question should take one minute; minute and a half at most.
+=======
+Should take one minute; minute and a half at most
+>>>>>>> f1d7873 (adds new files)
 
 ##### Prompt
 
@@ -94,6 +98,7 @@ function knapsack(weights, values, capacity) {
 
 console.log(knapsack([10,20,30], [60,100,120], 50));
 ```
+<<<<<<< HEAD
 ### Top Down Dynamic Programic with a Memoized Approach
 
 ```python
@@ -176,6 +181,8 @@ def knapsack(weights, value, capacity):
   
 print(knapsack([2,3,4,5], [1,2,5,6], 8))
 ```
+=======
+>>>>>>> f1d7873 (adds new files)
 
 # Resources
 
