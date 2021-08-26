@@ -1,5 +1,5 @@
 /*
- *  Homework - Complexity
+ *  Complexity
  *
  *  For the following functions, write the expected Time and Auxiliary Space
  *  Complexity using what you know about nested loops, hash table look-ups and
@@ -11,7 +11,9 @@
 
 import java.util.*;
 
-class ComplexityHW {
+class Main {
+  public static void main(String[] args) {
+  }
 
   /*  Order of Magnitude
 
@@ -78,9 +80,9 @@ class ComplexityHW {
   */
   public static ArrayList<Integer> evens(int [] arr) {
     ArrayList<Integer> results = new ArrayList<>();
-    for (int value : arr) {
-      if (value % 2 == 0) {
-        results.add(value);
+    for(int i = 0; i < arr.length; i++) {
+      if(arr[i] % 2 == 0) {
+        results.add(arr[i]);
       }
     }
     return results;
@@ -106,8 +108,8 @@ class ComplexityHW {
   */
   public static int sum(int[] arr) {
     int total = 0;
-    for (int value : arr) {
-      total = total + value;
+    for(int i = 0; i < arr.length; i++) {
+      total = total + arr[i];
     }
     return total;
   }
@@ -141,11 +143,12 @@ class ComplexityHW {
       if(j >= arr2.length || (i < arr1.length && arr1[i] <= arr2[j])) {
         result[k] = arr1[i];
         i++;
+        k++;
       } else {
         result[k] = arr2[j];
         j++;
+        k++;
       }
-      k++;
     }
     return result;
   }
@@ -222,10 +225,12 @@ class ComplexityHW {
   */
   public static int firstTimesLast(int[] arr) {
     int result = 0;
-    if (arr.length >= 2) {
-      result = arr[0] * arr[arr.length - 1];
+    if (arr.length < 2) {
+      return result;
+    } else {
+      result = arr[0] * arr[arr.length-1];
+      return result;
     }
-    return result;
   }
 
 
@@ -236,7 +241,7 @@ class ComplexityHW {
    */
   public static char mostFrequentOccurrence(String str) {
     String lowerString = str.toLowerCase();
-    Map<Character, Integer> letters = new HashMap<>();
+    Map<Character, Integer> letters = new HashMap<Character, Integer>();
     char mostFrequent = str.charAt(0);
     char currentChar;
     int maxCount = 0;
@@ -305,7 +310,7 @@ class ComplexityHW {
     result[0] = 0;
     result[1] = 1;
 
-    System.out.println(Arrays.toString(result));
+    System.out.println(result);
 
     for(int i = 2; i < n+1; i++) {
       result[i] = result[i-1] + result[i-2];
@@ -319,10 +324,16 @@ class ComplexityHW {
  *  Time Complexity: O(N)
  *  Auxiliary Space Complexity: O(N)
  */
-  private static HashMap<Integer, Integer> fibCache = new HashMap<>();
+class NthFib {
 
-  public static int NthFib(int n) {
-    return searchFib(n);
+  private static HashMap<Integer, Integer> cache = new HashMap<Integer, Integer>();
+  private static int result;
+
+  public static int compute(int n) {
+    result = 0;
+
+    result = searchFib(n);
+    return result;
   }
 
   private static int searchFib(int index) {
@@ -332,17 +343,13 @@ class ComplexityHW {
       return index;
     }
 
-    if (fibCache.get(index) != null) {
-      return fibCache.get(index);
+    if (cache.get(index) != null) {
+      return cache.get(index);
     }
 
     solution = searchFib(index-1) + searchFib(index-2);
-    fibCache.put(index, solution);
+    cache.put(index, solution);
     return solution;
-  }
-
-  public static void main(String[] args) {
-    // Use main method to test any function in this HW you want to
   }
 
 }

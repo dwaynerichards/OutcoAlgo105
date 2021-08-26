@@ -1,12 +1,13 @@
 /*
- * Homework - Frequency Count
+ * Homework 02 - Frequency Count
  * Utilize the frequency count pattern to solve these problems.  Use a Hash Set
  * or an Array instead of a Hash Table where applicable.
  */
 
 import java.util.*;
+import java.io.*;
 
-class FCProblems {
+class Problems {
   /**
    *
    * Unique
@@ -30,10 +31,14 @@ class FCProblems {
 
    public static ArrayList<Integer> unique(int[] arr) {
       Map<Integer, Boolean> seen = new HashMap<>();
-     for (int value : arr) {
-       seen.put(value, true);
-     }
-     return new ArrayList<>(seen.keySet());
+      ArrayList<Integer> results = new ArrayList<>();
+      for (int i = 0; i < arr.length; i++) {
+        seen.put(arr[i], true);
+      }
+      for(int key : seen.keySet()) {
+        results.add(key);
+      }
+      return results;
    }
 
    /**
@@ -63,26 +68,26 @@ class FCProblems {
 
     public static HashMap<String, Integer> wordCount(String sentence) {
       if(sentence.length() == 0) {
-        return new HashMap<>();
+        return new HashMap<String, Integer>();
       }
 
       Set<Character> punctuations = new HashSet<>(Arrays.asList('?', '!', '.', '\'',','));
-      HashMap<String, Integer> wordCounts = new HashMap<>();
-      StringBuilder filteredSentence = new StringBuilder();
+      HashMap<String, Integer> wordCounts = new HashMap<String, Integer>();
+      String filteredSentence = "";
       int charIndex = 0;
 
       while (charIndex < sentence.length()) {
-        if(!punctuations.contains(sentence.charAt(charIndex))) {
-          filteredSentence.append(Character.toLowerCase(sentence.charAt(charIndex)));
+        if(punctuations.contains(sentence.charAt(charIndex)) == false) {
+          filteredSentence += Character.toLowerCase(sentence.charAt(charIndex));
         }
         charIndex += 1;
       }
-      String[] words = filteredSentence.toString().split("\\s+");
-      for (String word : words) {
-        if (wordCounts.containsKey(word)) {
-          wordCounts.put(word, wordCounts.get(word) + 1);
+      String[] words = filteredSentence.split("\\s+");
+      for(int word = 0; word < words.length; word++) {
+        if(wordCounts.containsKey(words[word])) {
+          wordCounts.put(words[word], wordCounts.get(words[word]) + 1);
         } else {
-          wordCounts.put(word, 1);
+          wordCounts.put(words[word], 1);
         }
       }
       return wordCounts;
@@ -111,12 +116,12 @@ class FCProblems {
 
      public static int rgb(String string) {
        char[] chars = string.toCharArray();
-       HashMap<Character, Integer> counts = new HashMap<>();
-       for (char aChar : chars) {
-         if (counts.containsKey(aChar)) {
-           counts.put(aChar, counts.get(aChar) + 1);
+       HashMap<Character, Integer> counts = new HashMap<Character, Integer>();
+       for(int i = 0; i < chars.length; i++){
+         if (counts.containsKey(chars[i])) {
+           counts.put(chars[i], counts.get(chars[i]) + 1 );
          } else {
-           counts.put(aChar, 1);
+           counts.put(chars[i], 1);
          }
        }
        if(counts.keySet().size() < 3) {
@@ -158,8 +163,8 @@ class FCProblems {
       HashSet<Integer> nums = new HashSet<>();
       ArrayList<Integer> result = new ArrayList<>();
 
-      for (int value : arr) {
-        nums.add(value);
+      for(int i = 0; i < arr.length; i++) {
+        nums.add(arr[i]);
       }
       for (int i = 1; i <= n; i++) {
         if(!nums.contains(i)) {
@@ -191,7 +196,7 @@ class FCProblems {
    public static String letterSort(String string) {
      int[] chars = new int[26];
      Arrays.fill(chars, 0);
-     StringBuilder result = new StringBuilder();
+     String result = "";
      for(int i = 0; i < string.length(); i++) {
        int charIndex = (int)Character.toLowerCase(string.charAt(i)) - 97;
        chars[charIndex] = chars[charIndex] + 1;
@@ -199,11 +204,11 @@ class FCProblems {
      for(int i = 0; i < chars.length; i++) {
        while(chars[i] > 0) {
          char letter = (char) (i + 97);
-         result.append(letter);
+         result += letter;
          chars[i] -= 1;
        }
      }
-     return result.toString();
+     return result;
    }
 
    /**
@@ -234,7 +239,7 @@ class FCProblems {
     public static String characterMode(String string) {
       int[] chars = new int[26];
       Arrays.fill(chars, 0);
-      StringBuilder result = new StringBuilder();
+      String result = "";
 
       for(int i = 0; i < string.length(); i++) {
         if(!(string.charAt(i) == ' ')) {
@@ -244,17 +249,17 @@ class FCProblems {
       }
       int max_frequency = 0;
 
-      for (int aChar : chars) {
-        if (aChar > max_frequency) {
-          max_frequency = aChar;
+      for(int c = 0; c < chars.length; c++) {
+        if(chars[c] > max_frequency) {
+          max_frequency = chars[c];
         }
       }
       for(int c = 0; c < chars.length; c++) {
         if (chars[c] == max_frequency) {
-          result.append((char) (c + 97));
+          result += (char) (c + 97);
         }
       }
-      return result.toString();
+      return result;
     }
 
   /**
@@ -325,15 +330,15 @@ class FCProblems {
     */
 
    public static ArrayList<Integer> getDuplicates(int[] arr) {
-     ArrayList<Integer> result = new ArrayList<>();
-     HashMap<Integer, Integer> seen = new HashMap<>();
+     ArrayList<Integer> result = new ArrayList<Integer>();
+     HashMap<Integer, Integer> seen = new HashMap<Integer, Integer>();
 
-     for (int value : arr) {
-       if (!seen.containsKey(value)) {
-         seen.put(value, 1);
-       } else if (seen.get(value) == 1) {
-         result.add(value);
-         seen.put(value, 2);
+     for(int i = 0; i < arr.length; i++) {
+       if(!seen.containsKey(arr[i])) {
+         seen.put(arr[i], 1);
+       } else if(seen.get(arr[i]) == 1) {
+         result.add(arr[i]);
+         seen.put(arr[i], 2);
        }
      }
      return result;
@@ -377,8 +382,8 @@ class FCProblems {
         chars[charIndex] = chars[charIndex] - 1;
       }
 
-      for (int aChar : chars) {
-        if (aChar != 0) {
+      for(int c = 0; c < chars.length; c++) {
+        if(chars[c] != 0) {
           return false;
         }
       }
@@ -413,7 +418,7 @@ class FCProblems {
      */
 
   public static boolean anagramPalindrome(String str) {
-    HashMap<Character, Integer> counts = new HashMap<>();
+    HashMap<Character, Integer> counts = new HashMap<Character, Integer>();
     int odds = 0;
 
     for(int i = 0; i < str.length(); i++) {
@@ -426,7 +431,8 @@ class FCProblems {
     }
 
     for (Character c : counts.keySet()) {
-      if(counts.get(c) % 2 != 0) {
+      if(counts.get(c) % 2 == 0) {
+      } else {
         odds++;
       }
     }
@@ -442,11 +448,12 @@ class FCProblems {
 ////////////////////////////////////////////////////////////
 
 // use the Main class to run the test cases
-class FreqCountTests {
+class Main {
+  private int[] testCount;
 
   // an interface to perform tests
   public interface Test {
-    boolean execute();
+    public boolean execute();
   }
 
   public static void main(String[] args) {
@@ -456,41 +463,49 @@ class FreqCountTests {
     System.out.println("Unique Tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "should return unique values from sorted list with duplicates", () -> {
-      ArrayList<Integer> output = FCProblems.unique(new int[]{1, 2, 4, 4, 5, 6});
-      ArrayList<Integer> test = new ArrayList<Integer>() {{
-        add(1);
-        add(2);
-        add(4);
-        add(5);
-        add(6);
-      }};
-      return arrayListsEqual(output, test);
+    assertTest(testCount, "should return unique values from sorted list with duplicates", new Test() {
+      public boolean execute() {
+        ArrayList<Integer> output = Problems.unique(new int[]{1, 2, 4, 4, 5, 6});
+        ArrayList<Integer> test = new ArrayList<Integer>() {{
+          add(1);
+          add(2);
+          add(4);
+          add(5);
+          add(6);
+        }};
+        return arrayListsEqual(output, test);
+      }
     });
 
-    assertTest(testCount, "should return single value for list with all duplicates", () -> {
-      ArrayList<Integer> output = FCProblems.unique(new int[]{2, 2, 2, 2, 2, 2});
-      ArrayList<Integer> test = new ArrayList<Integer>() {{
-        add(2);
-      }};
-      return arrayListsEqual(output, test);
+        assertTest(testCount, "should return single value for list with all duplicates", new Test() {
+      public boolean execute() {
+        ArrayList<Integer> output = Problems.unique(new int[]{2, 2, 2, 2, 2, 2});
+        ArrayList<Integer> test = new ArrayList<Integer>() {{
+          add(2);
+        }};
+        return arrayListsEqual(output, test);
+      }
     });
 
-    assertTest(testCount, "should return unique values from unsorted list with duplicates", () -> {
-      ArrayList<Integer> output = FCProblems.unique(new int[]{1,2,3,1,2});
-      ArrayList<Integer> test = new ArrayList<Integer>() {{
-        add(1);
-        add(2);
-        add(3);
-      }};
-      return arrayListsEqual(output, test);
+        assertTest(testCount, "should return unique values from unsorted list with duplicates", new Test() {
+      public boolean execute() {
+        ArrayList<Integer> output = Problems.unique(new int[]{1,2,3,1,2});
+        ArrayList<Integer> test = new ArrayList<Integer>() {{
+          add(1);
+          add(2);
+          add(3);
+        }};
+        return arrayListsEqual(output, test);
+      }
     });
 
-    assertTest(testCount, "should return an empty list from empty input", () -> {
-      ArrayList<Integer> output = FCProblems.unique(new int[]{});
-      ArrayList<Integer> test = new ArrayList<Integer>() {{
-      }};
-      return arrayListsEqual(output, test);
+        assertTest(testCount, "should return an empty list from empty input", new Test() {
+      public boolean execute() {
+        ArrayList<Integer> output = Problems.unique(new int[]{});
+        ArrayList<Integer> test = new ArrayList<Integer>() {{
+        }};
+        return arrayListsEqual(output, test);
+      }
     });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -500,21 +515,27 @@ class FreqCountTests {
     System.out.println("Word Count Tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "should return an object with each word and its frequency", () -> {
-      HashMap<String, Integer> output = FCProblems.wordCount("The cat and the hat.");
+    assertTest(testCount, "should return an object with each word and its frequency", new Test() {
+      public boolean execute() {
+        HashMap<String, Integer> output = Problems.wordCount("The cat and the hat.");
 
-      return output.get("the") == 2 && output.get("hat") == 1 && output.get("cat") == 1 && output.get("and") == 1;
+        return output.get("the").intValue() == 2 && output.get("hat").intValue() == 1 && output.get("cat").intValue() == 1 && output.get("and").intValue() == 1;
+      }
     });
 
-    assertTest(testCount, "should return object with each word excluding punctuations", () -> {
-      HashMap<String, Integer> output = FCProblems.wordCount("It's a man, it's a plane, it's superman!");
+    assertTest(testCount, "should return object with each word excluding punctuations", new Test() {
+      public boolean execute() {
+        HashMap<String, Integer> output = Problems.wordCount("It's a man, it's a plane, it's superman!");
 
-      return output.get("its") == 3 && output.get("a") == 2 && output.get("man") == 1 && output.get("plane") == 1 && output.get("superman") == 1;
+        return output.get("its").intValue() == 3 && output.get("a").intValue() == 2 && output.get("man").intValue() == 1 && output.get("plane").intValue() == 1 && output.get("superman").intValue() == 1;
+      }
     });
 
-    assertTest(testCount, "should return empty object for empty string input", () -> {
-      HashMap<String, Integer> output = FCProblems.wordCount("");
-      return output.isEmpty();
+    assertTest(testCount, "should return empty object for empty string input", new Test() {
+      public boolean execute() {
+        HashMap<String, Integer> output = Problems.wordCount("");
+        return output.isEmpty();
+      }
     });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -525,24 +546,32 @@ class FreqCountTests {
     System.out.println("rgb Count Tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "should return number correct number of rgb from input", () -> {
-      int output = FCProblems.rgb("rgbrgb");
-      return output == 2;
+    assertTest(testCount, "should return number correct number of rgb from input", new Test() {
+      public boolean execute() {
+        int output = Problems.rgb("rgbrgb");
+        return output == 2;
+      }
     });
 
-    assertTest(testCount, "should return correct number of rgb from input despite characters out of sequence", () -> {
-      int output = FCProblems.rgb("rbgrbrgrgbgrrggbbbbrgrgrgrg");
-      return output == 7;
+    assertTest(testCount, "should return correct number of rgb from input despite characters out of sequence", new Test() {
+      public boolean execute() {
+        int output = Problems.rgb("rbgrbrgrgbgrrggbbbbrgrgrgrg");
+        return output == 7;
+      }
     });
 
-    assertTest(testCount, "should return 0 as output for no number of rgb", () -> {
-      int output = FCProblems.rgb("bbrr");
-      return output == 0;
+    assertTest(testCount, "should return 0 as output for no number of rgb", new Test() {
+      public boolean execute() {
+        int output = Problems.rgb("bbrr");
+        return output == 0;
+      }
     });
 
-    assertTest(testCount, "should return 0 for empty input", () -> {
-      int output = FCProblems.rgb("");
-      return output == 0;
+    assertTest(testCount, "should return 0 for empty input", new Test() {
+      public boolean execute() {
+        int output = Problems.rgb("");
+        return output == 0;
+      }
     });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -553,33 +582,39 @@ class FreqCountTests {
     System.out.println("Missing Number Tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "should return [3] for input of [1, 4, 2]", () -> {
-      ArrayList<Integer> output = FCProblems.missingNumber(4, new int[]{1, 4, 2});
-      ArrayList<Integer> test = new ArrayList<Integer>() {{
-        add(3);
-      }};
-      return arrayListsEqual(output, test);
+    assertTest(testCount, "should return [3] for input of [1, 4, 2]", new Test() {
+      public boolean execute() {
+        ArrayList<Integer> output = Problems.missingNumber(4, new int[]{1, 4, 2});
+        ArrayList<Integer> test = new ArrayList<Integer>() {{
+          add(3);
+        }};
+        return arrayListsEqual(output, test);
+      }
     });
 
 
-    assertTest(testCount, "should return [2, 3, 5, 8] for input of [4, 7, 1, 6]", () -> {
-      ArrayList<Integer> output = FCProblems.missingNumber(8, new int[]{4, 7, 1, 6});
-      ArrayList<Integer> test = new ArrayList<Integer>() {{
-        add(2);
-        add(3);
-        add(5);
-        add(8);
-      }};
-      return arrayListsEqual(output, test);
+    assertTest(testCount, "should return [2, 3, 5, 8] for input of [4, 7, 1, 6]", new Test() {
+      public boolean execute() {
+        ArrayList<Integer> output = Problems.missingNumber(8, new int[]{4, 7, 1, 6});
+        ArrayList<Integer> test = new ArrayList<Integer>() {{
+          add(2);
+          add(3);
+          add(5);
+          add(8);
+        }};
+        return arrayListsEqual(output, test);
+      }
     });
 
-    assertTest(testCount, "should return [3, 5] for input of [6, 4, 2, 1]", () -> {
-        ArrayList<Integer> output = FCProblems.missingNumber(6, new int[]{6, 4, 2, 1});
+    assertTest(testCount, "should return [3, 5] for input of [6, 4, 2, 1]", new Test() {
+      public boolean execute() {
+        ArrayList<Integer> output = Problems.missingNumber(6, new int[]{6, 4, 2, 1});
         ArrayList<Integer> test = new ArrayList<Integer>() {{
           add(3);
           add(5);
         }};
         return arrayListsEqual(output, test);
+      }
     });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -589,19 +624,25 @@ class FreqCountTests {
     testCount[1] = 0;
     System.out.println("Letter Sort Tests");
 
-    assertTest(testCount, "should return 'ehllo' for input 'hello'", () -> {
-        String output = FCProblems.letterSort("hello");
+    assertTest(testCount, "should return 'ehllo' for input 'hello'", new Test() {
+      public boolean execute() {
+        String output = Problems.letterSort("hello");
         return output.equals("ehllo");
+      }
     });
 
-    assertTest(testCount, "should return 'abdehiortw' for input of 'whiteboard'", () -> {
-        String output = FCProblems.letterSort("whiteboard");
+    assertTest(testCount, "should return 'abdehiortw' for input of 'whiteboard'", new Test() {
+      public boolean execute() {
+        String output = Problems.letterSort("whiteboard");
         return output.equals("abdehiortw");
+      }
     });
 
-    assertTest(testCount, "should return 'eno' for input 'one'", () -> {
-        String output = FCProblems.letterSort("one");
+    assertTest(testCount, "should return 'eno' for input 'one'", new Test() {
+      public boolean execute() {
+        String output = Problems.letterSort("one");
         return output.equals("eno");
+      }
     });
 
 
@@ -611,19 +652,25 @@ class FreqCountTests {
     testCount[1] = 0;
     System.out.println("Character Mode Tests");
 
-    assertTest(testCount, "should return 'l' for input 'hello'", () -> {
-        String output = FCProblems.characterMode("hello");
+    assertTest(testCount, "should return 'l' for input 'hello'", new Test() {
+      public boolean execute() {
+        String output = Problems.characterMode("hello");
         return output.equals("l");
+      }
     });
 
-    assertTest(testCount, "should return 'a' when input is 'A walk in the park'", () -> {
-        String output = FCProblems.characterMode("A walk in the park");
+    assertTest(testCount, "should return 'a' when input is 'A walk in the park'", new Test() {
+      public boolean execute() {
+        String output = Problems.characterMode("A walk in the park");
         return output.equals("a");
+      }
     });
 
-    assertTest(testCount, "should return 'no' when input is 'noon'", () -> {
-        String output = FCProblems.characterMode("noon");
+    assertTest(testCount, "should return 'no' when input is 'noon'", new Test() {
+      public boolean execute() {
+        String output = Problems.characterMode("noon");
         return output.equals("no");
+      }
     });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -634,19 +681,25 @@ class FreqCountTests {
     testCount[1] = 0;
     System.out.println("Sort Digits Tests");
 
-    assertTest(testCount, "should return '789' when input is '8970'", () -> {
-        int output = FCProblems.sortDigits(8970);
+    assertTest(testCount, "should return '789' when input is '8970'", new Test() {
+      public boolean execute() {
+        int output = Problems.sortDigits(8970);
         return output == 789;
+      }
     });
 
-    assertTest(testCount, "should return '23445' when input is '32445'", () -> {
-        int output = FCProblems.sortDigits(32445);
+    assertTest(testCount, "should return '23445' when input is '32445'", new Test() {
+      public boolean execute() {
+        int output = Problems.sortDigits(32445);
         return output == 23445;
+      }
     });
 
-    assertTest(testCount, "should return '111' when input is '10101'", () -> {
-        int output = FCProblems.sortDigits(10101);
+    assertTest(testCount, "should return '111' when input is '10101'", new Test() {
+      public boolean execute() {
+        int output = Problems.sortDigits(10101);
         return output == 111;
+      }
     });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -656,16 +709,19 @@ class FreqCountTests {
     testCount[1] = 0;
     System.out.println("Get Duplicates Tests");
 
-    assertTest(testCount, "should return '[2]' when input is '[1, 2, 4, 2]'", () -> {
-        ArrayList<Integer> output = FCProblems.getDuplicates(new int[] {1, 2, 4, 2});
+    assertTest(testCount, "should return '[2]' when input is '[1, 2, 4, 2]'", new Test() {
+      public boolean execute() {
+        ArrayList<Integer> output = Problems.getDuplicates(new int[] {1, 2, 4, 2});
         ArrayList<Integer> test = new ArrayList<Integer>() {{
           add(2);
         }};
         return arrayListsEqual(output, test);
+      }
     });
 
-    assertTest(testCount, "should return '[3, 2]' or '[2, 3]' when input is '[3, 2, 3, 2, 3, 3, 4]'", () -> {
-        ArrayList<Integer> output = FCProblems.getDuplicates(new int[] {3, 2, 3, 2, 3, 3, 4});
+    assertTest(testCount, "should return '[3, 2]' or '[2, 3]' when input is '[3, 2, 3, 2, 3, 3, 4]'", new Test() {
+      public boolean execute() {
+        ArrayList<Integer> output = Problems.getDuplicates(new int[] {3, 2, 3, 2, 3, 3, 4});
         ArrayList<Integer> test1 = new ArrayList<Integer>() {{
           add(2);
           add(3);
@@ -676,11 +732,14 @@ class FreqCountTests {
           add(2);
         }};
         return arrayListsEqual(output, test1) || arrayListsEqual(output, test2);
+      }
     });
 
-    assertTest(testCount, "should return '[]' when input is '[1, 2, 3, 4]'", () -> {
-        ArrayList<Integer> output = FCProblems.getDuplicates(new int[] {1, 2, 3, 4});
+    assertTest(testCount, "should return '[]' when input is '[1, 2, 3, 4]'", new Test() {
+      public boolean execute() {
+        ArrayList<Integer> output = Problems.getDuplicates(new int[] {1, 2, 3, 4});
         return output.size() == 0;
+      }
     });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -691,14 +750,23 @@ class FreqCountTests {
     testCount[1] = 0;
     System.out.println("Anagram Pair Tests");
 
-    assertTest(testCount, "should return true when input is 'cat, act'", () ->
-            FCProblems.anagramPair("cat", "act"));
+    assertTest(testCount, "should return true when input is 'cat, act'", new Test() {
+      public boolean execute() {
+        return Problems.anagramPair("cat", "act");
+      }
+    });
 
-    assertTest(testCount, "should return false when input is 'cat, dog'", () ->
-            !FCProblems.anagramPair("cat", "dog"));
+    assertTest(testCount, "should return false when input is 'cat, dog'", new Test() {
+      public boolean execute() {
+        return !Problems.anagramPair("cat", "dog");
+      }
+    });
 
-    assertTest(testCount, "should return false when input is 'racecar, aaccrres'", () ->
-            !FCProblems.anagramPair("racecar", "aaccrres"));
+    assertTest(testCount, "should return false when input is 'racecar, aaccrres'", new Test() {
+      public boolean execute() {
+        return !Problems.anagramPair("racecar", "aaccrres");
+      }
+    });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
 
@@ -708,11 +776,17 @@ class FreqCountTests {
     testCount[1] = 0;
     System.out.println("Anagram Palindrome Tests");
 
-    assertTest(testCount, "should return true when input is 'carrace'", () ->
-            FCProblems.anagramPalindrome("carrace"));
+    assertTest(testCount, "should return true when input is 'carrace'", new Test() {
+      public boolean execute() {
+        return Problems.anagramPalindrome("carrace");
+      }
+    });
 
-    assertTest(testCount, "should return false when input is 'cat'", () ->
-            !FCProblems.anagramPalindrome("cat"));
+    assertTest(testCount, "should return false when input is 'cat'", new Test() {
+      public boolean execute() {
+        return !Problems.anagramPalindrome("cat");
+      }
+    });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
   }
@@ -723,7 +797,7 @@ class FreqCountTests {
     }
 
     for(int i = 0; i < arr1.size(); i++) {
-      if(!arr1.get(i).equals(arr2.get(i))) {
+      if(arr1.get(i) != arr2.get(i)) {
         return false;
       }
     }
@@ -731,7 +805,39 @@ class FreqCountTests {
   }
 
 
-  // do not edit below, this is to wrap the test and check for exceptions
+  // function for checking if arrays are equal
+  private static boolean arraysEqual(int[] arr1, int[] arr2) {
+    if (arr1.length != arr2.length) {
+      return false;
+    }
+
+    for (int i = 0 ; i < arr1.length ; i++) {
+      if (arr1[i] != arr2[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  // checks if array is sorted in linear time
+  private static boolean isSorted(int[] input) {
+    if (input.length < 2) {
+      return true;
+    }
+
+    for (int i = 1 ; i < input.length ; i++) {
+      if (input[i-1] > input[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+
+
+// do not edit below, this is to wrap the test and check for exceptions
   private static void assertTest(int[] count, String name, Test test) {
     String pass = "false";
     count[1]++;
@@ -741,7 +847,7 @@ class FreqCountTests {
         pass = " true";
         count[0]++;
       }
-    } catch(Exception ignored) {}
+    } catch(Exception e) {}
     String result = "  " + (count[1] + ")   ").substring(0, 5) + pass + " : " + name;
     System.out.println(result);
   }
