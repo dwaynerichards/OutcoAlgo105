@@ -1,9 +1,5 @@
 /**
-<<<<<<< HEAD
  *  Homework - Dynamic Programming
-=======
- *  Homework 05 - Dynamic Programming
->>>>>>> f1d7873 (adds new files)
  *
  *
  *  Instructions: Dynamic programming takes a lot of practice to recognize as
@@ -90,11 +86,7 @@ int latticePaths(int m, int n) {
     }
     work[i] = 2*temp;
   }
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> f1d7873 (adds new files)
   return work[smaller];
 }
 

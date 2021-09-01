@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 #    Homework - Dynamic Programming: Memoization & Tabulation
-=======
-#    Homework 05 - Dynamic Programming: Memoization & Tabulation
->>>>>>> f1d7873 (adds new files)
 #
 #
 #    Instructions: Dynammic programming takes a lot of practice to recognize as

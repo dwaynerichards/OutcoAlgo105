@@ -1,9 +1,5 @@
 ﻿/*
-<<<<<<< HEAD
  *  Target Practice - Recursion
-=======
- *  Target Practice 01 - Recursion
->>>>>>> f1d7873 (adds new files)
  *
  *  Problem 1:  Powerset - Helper Method Recursion
  *
@@ -18,7 +14,6 @@
  *  Notes:     The input string will not contain duplicate characters
  *            The letters in the subset string must be in the same order
  *            as the original input.
-<<<<<<< HEAD
  *
  *  Hints:
  *
@@ -37,8 +32,6 @@
  *  #373. You can also do this by mapping each subset to a binary number. The i th bit could
  *  represent a "boolean" flag for whether an element is in the set.
  *
-=======
->>>>>>> f1d7873 (adds new files)
  */
 
 using System;
@@ -131,13 +124,8 @@ class Test{
     Console.WriteLine("Power Set Tests");
     runTest(powerSetTest1, "should work on example input", testCount);
     runTest(powerSetTest2, "should work on empty input", testCount);
-<<<<<<< HEAD
     runTest(powerSetTest3, "should work on two-letter input", testCount);
     runTest(powerSetTest4, "should work on longer input", testCount);
-=======
-    runTest(powerSetTest3, "should work on two-letter input", testCount);  
-    runTest(powerSetTest4, "should work on longer input", testCount);  
->>>>>>> f1d7873 (adds new files)
     printTestsPassed(testCount);
   }
 
@@ -224,17 +212,9 @@ class Test{
       } catch {}
       string result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testName;
       Console.WriteLine(result);
-<<<<<<< HEAD
   }
-=======
-  } 
->>>>>>> f1d7873 (adds new files)
   // this is to print the number of test cases passed for a test suite function
   private static void printTestsPassed(int[] testCount) {
     Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> f1d7873 (adds new files)

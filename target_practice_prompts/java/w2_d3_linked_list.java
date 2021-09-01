@@ -1,11 +1,10 @@
-/**
- *  Target Practice 06 - Linked List
+/*
+ *  Target Practice - Linked List
  *
  *  Solve the following problems involving linked lists.
  */
 
 import java.io.*;
-import java.util.*;
 
 
 // DO NOT EDIT
@@ -20,7 +19,7 @@ class ListNode {
 }
 
 
-class Problems {
+class LLProblems {
 
   // DO NOT EDIT
   // Generate a linked list from an array
@@ -115,7 +114,7 @@ class Problems {
  * Output: {ListNode}
  *
  * Example:
- * ListNode head = Problems.generateList({1, 5, 7, 10});
+ * ListNode head = LLProblems.generateList({1, 5, 7, 10});
  * head = swap(head, 5, 10);
  *
  *          (1) --> (5) --> (7) --> (10)
@@ -152,12 +151,10 @@ class Problems {
 ////////////////////////////////////////////////////////////
 
 // use main class to run the test cases
-class Main {
-  private int[] testCount;
-
+class LLTests {
   // an interface to perform tests
   public interface Test {
-    public boolean execute();
+    boolean execute();
   }
 
   public static void main(String[] args) {
@@ -167,13 +164,11 @@ class Main {
     System.out.println("linked list instantiation tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "able to create a linked list instance", new Test() {
-      public boolean execute() {
-        int[] arr = {1, 5, 7, 10};
-        ListNode test = Problems.generateList(arr);
-        return test instanceof ListNode && test.value == 1 &&
-          test.next.next.next.value == 10;
-      }
+    assertTest(testCount, "able to create a linked list instance", () -> {
+      int[] arr = {1, 5, 7, 10};
+      ListNode test = LLProblems.generateList(arr);
+      return test != null && test.value == 1 &&
+        test.next.next.next.value == 10;
     });
 
     // print the result of tests passed for a module
@@ -186,81 +181,75 @@ class Main {
     testCount[1] = 0;
     System.out.println("printForward tests");
 
-    assertTest(testCount, "should be able to print forward 1 --> 5 --> 7 --> 10", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should be able to print forward 1 --> 5 --> 7 --> 10", () -> {
 
-        int[] arr = {1, 5, 7, 10};
-        ListNode test = Problems.generateList(arr);
+      int[] arr = {1, 5, 7, 10};
+      ListNode test = LLProblems.generateList(arr);
 
-        // Create a stream to hold the output
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
-        // Tell Java to use your special stream
-        System.setOut(ps);
+      // Create a stream to hold the output
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      PrintStream ps = new PrintStream(baos);
+      // IMPORTANT: Save the old System.out!
+      PrintStream old = System.out;
+      // Tell Java to use your special stream
+      System.setOut(ps);
 
-        // Print some output: goes to your special stream
-        Problems.printForward(test);
+      // Print some output: goes to your special stream
+      LLProblems.printForward(test);
 
-        // Put things back
-        System.out.flush();
-        System.setOut(old);
+      // Put things back
+      System.out.flush();
+      System.setOut(old);
 
-        return baos.toString().equals("1\n5\n7\n10\n");
+      return baos.toString().equals("1\n5\n7\n10\n");
 
-      }
     });
 
-    assertTest(testCount, "should be able to print forward with single element", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should be able to print forward with single element", () -> {
 
-        int[] arr = {1};
-        ListNode test = Problems.generateList(arr);
+      int[] arr = {1};
+      ListNode test = LLProblems.generateList(arr);
 
-        // Create a stream to hold the output
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
-        // Tell Java to use your special stream
-        System.setOut(ps);
+      // Create a stream to hold the output
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      PrintStream ps = new PrintStream(baos);
+      // IMPORTANT: Save the old System.out!
+      PrintStream old = System.out;
+      // Tell Java to use your special stream
+      System.setOut(ps);
 
-        // Print some output: goes to your special stream
-        Problems.printForward(test);
+      // Print some output: goes to your special stream
+      LLProblems.printForward(test);
 
-        // Put things back
-        System.out.flush();
-        System.setOut(old);
+      // Put things back
+      System.out.flush();
+      System.setOut(old);
 
-        return baos.toString().equals("1\n");
+      return baos.toString().equals("1\n");
 
-      }
     });
-    assertTest(testCount, "should print nothing for empty list node", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should print nothing for empty list node", () -> {
 
-        int[] arr = {};
-        ListNode test = Problems.generateList(arr);
+      int[] arr = {};
+      ListNode test = LLProblems.generateList(arr);
 
-        // Create a stream to hold the output
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
-        // Tell Java to use your special stream
-        System.setOut(ps);
+      // Create a stream to hold the output
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      PrintStream ps = new PrintStream(baos);
+      // IMPORTANT: Save the old System.out!
+      PrintStream old = System.out;
+      // Tell Java to use your special stream
+      System.setOut(ps);
 
-        // Print some output: goes to your special stream
-        Problems.printForward(test);
+      // Print some output: goes to your special stream
+      LLProblems.printForward(test);
 
-        // Put things back
-        System.out.flush();
-        System.setOut(old);
+      // Put things back
+      System.out.flush();
+      System.setOut(old);
 
-        return baos.toString().equals("");
+      return baos.toString().equals("");
 
-      }
     });
 
     // print the result of tests passed for a module
@@ -273,82 +262,76 @@ class Main {
     testCount[1] = 0;
     System.out.println("printBackward tests");
 
-    assertTest(testCount, "should be able to print backward elements of linked list 1 --> 5 --> 7 --> 10", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should be able to print backward elements of linked list 1 --> 5 --> 7 --> 10", () -> {
 
-        int[] arr = {1, 5, 7, 10};
-        ListNode test = Problems.generateList(arr);
+      int[] arr = {1, 5, 7, 10};
+      ListNode test = LLProblems.generateList(arr);
 
-        // Create a stream to hold the output
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
-        // Tell Java to use your special stream
-        System.setOut(ps);
+      // Create a stream to hold the output
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      PrintStream ps = new PrintStream(baos);
+      // IMPORTANT: Save the old System.out!
+      PrintStream old = System.out;
+      // Tell Java to use your special stream
+      System.setOut(ps);
 
-        // Print some output: goes to your special stream
-        Problems.printBackward(test);
+      // Print some output: goes to your special stream
+      LLProblems.printBackward(test);
 
-        // Put things back
-        System.out.flush();
-        System.setOut(old);
+      // Put things back
+      System.out.flush();
+      System.setOut(old);
 
-        return baos.toString().equals("10\n7\n5\n1\n");
+      return baos.toString().equals("10\n7\n5\n1\n");
 
-      }
     });
 
-    assertTest(testCount, "should be able to print backward with single element linked list 1", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should be able to print backward with single element linked list 1", () -> {
 
-        int[] arr = {1};
-        ListNode test = Problems.generateList(arr);
+      int[] arr = {1};
+      ListNode test = LLProblems.generateList(arr);
 
-        // Create a stream to hold the output
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
-        // Tell Java to use your special stream
-        System.setOut(ps);
+      // Create a stream to hold the output
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      PrintStream ps = new PrintStream(baos);
+      // IMPORTANT: Save the old System.out!
+      PrintStream old = System.out;
+      // Tell Java to use your special stream
+      System.setOut(ps);
 
-        // Print some output: goes to your special stream
-        Problems.printBackward(test);
+      // Print some output: goes to your special stream
+      LLProblems.printBackward(test);
 
-        // Put things back
-        System.out.flush();
-        System.setOut(old);
+      // Put things back
+      System.out.flush();
+      System.setOut(old);
 
-        return baos.toString().equals("1\n");
+      return baos.toString().equals("1\n");
 
-      }
     });
 
-    assertTest(testCount, "should print nothing for empty linked list", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should print nothing for empty linked list", () -> {
 
-        int[] arr = {};
-        ListNode test = Problems.generateList(arr);
+      int[] arr = {};
+      ListNode test = LLProblems.generateList(arr);
 
-        // Create a stream to hold the output
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
-        // Tell Java to use your special stream
-        System.setOut(ps);
+      // Create a stream to hold the output
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      PrintStream ps = new PrintStream(baos);
+      // IMPORTANT: Save the old System.out!
+      PrintStream old = System.out;
+      // Tell Java to use your special stream
+      System.setOut(ps);
 
-        // Print some output: goes to your special stream
-        Problems.printBackward(test);
+      // Print some output: goes to your special stream
+      LLProblems.printBackward(test);
 
-        // Put things back
-        System.out.flush();
-        System.setOut(old);
+      // Put things back
+      System.out.flush();
+      System.setOut(old);
 
-        return baos.toString().equals("");
+      return baos.toString().equals("");
 
-      }
     });
 
     // print the result of tests passed for a module
@@ -360,31 +343,27 @@ class Main {
     testCount[1] = 0;
     System.out.println("reverse tests");
 
-    assertTest(testCount, "should be able to reverse 1 --> 5 --> 7 --> 10 to be 10 --> 7 --> 5 --> 1", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should be able to reverse 1 --> 5 --> 7 --> 10 to be 10 --> 7 --> 5 --> 1", () -> {
 
-        int[] arr = {1, 5, 7, 10};
-        ListNode test = Problems.generateList(arr);
-        test = Problems.reverse(test);
+      int[] arr = {1, 5, 7, 10};
+      ListNode test = LLProblems.generateList(arr);
+      test = LLProblems.reverse(test);
 
-        return test.value == 10 &&
-          test.next.value == 7 &&
-          test.next.next.value == 5 &&
-          test.next.next.next.value == 1;
+      return test != null && test.value == 10 &&
+        test.next.value == 7 &&
+        test.next.next.value == 5 &&
+        test.next.next.next.value == 1;
 
-      }
     });
 
-    assertTest(testCount, "should be able to handle single element linked lists", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should be able to handle single element linked lists", () -> {
 
-        int[] arr = {10};
-        ListNode test = Problems.generateList(arr);
-        test = Problems.reverse(test);
+      int[] arr = {10};
+      ListNode test = LLProblems.generateList(arr);
+      test = LLProblems.reverse(test);
 
-        return test.value == 10;
+      return test != null && test.value == 10;
 
-      }
     });
 
     // print the result of tests passed for a module
@@ -396,62 +375,54 @@ class Main {
     testCount[1] = 0;
     System.out.println("swap tests");
 
-    assertTest(testCount, "should be able to swap 1 and 5 to change 1 --> 5 --> 7 --> 10 linked list to look like 5 --> 1 --> 7 --> 10", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should be able to swap 1 and 5 to change 1 --> 5 --> 7 --> 10 linked list to look like 5 --> 1 --> 7 --> 10", () -> {
 
-        int[] arr = {1, 5, 7, 10};
-        ListNode test = Problems.generateList(arr);
-        test = Problems.swap(test, 1, 5);
+      int[] arr = {1, 5, 7, 10};
+      ListNode test = LLProblems.generateList(arr);
+      test = LLProblems.swap(test, 1, 5);
 
-        return test.value == 5 &&
-          test.next.value == 1 &&
-          test.next.next.value == 7 &&
-          test.next.next.next.value == 10;
+      return test != null && test.value == 5 &&
+        test.next.value == 1 &&
+        test.next.next.value == 7 &&
+        test.next.next.next.value == 10;
 
-      }
     });
 
-    assertTest(testCount, "should be able to swap 1 and 7 to change 1 --> 5 --> 7 --> 10 linked list to look like 7 --> 5 --> 1 --> 10", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should be able to swap 1 and 7 to change 1 --> 5 --> 7 --> 10 linked list to look like 7 --> 5 --> 1 --> 10", () -> {
 
-        int[] arr = {1, 5, 7, 10};
-        ListNode test = Problems.generateList(arr);
-        test = Problems.swap(test, 1, 7);
+      int[] arr = {1, 5, 7, 10};
+      ListNode test = LLProblems.generateList(arr);
+      test = LLProblems.swap(test, 1, 7);
 
-        return test.value == 7 &&
-          test.next.value == 5 &&
-          test.next.next.value == 1 &&
-          test.next.next.next.value == 10;
+      return test != null && test.value == 7 &&
+        test.next.value == 5 &&
+        test.next.next.value == 1 &&
+        test.next.next.next.value == 10;
 
-      }
     });
 
-    assertTest(testCount, "should be able to swap 1 and 10 to change 1 --> 5 --> 7 --> 10 linked list to look like 10 --> 5 --> 7 --> 1", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should be able to swap 1 and 10 to change 1 --> 5 --> 7 --> 10 linked list to look like 10 --> 5 --> 7 --> 1", () -> {
 
-        int[] arr = {1, 5, 7, 10};
-        ListNode test = Problems.generateList(arr);
-        test = Problems.swap(test, 1, 10);
+      int[] arr = {1, 5, 7, 10};
+      ListNode test = LLProblems.generateList(arr);
+      test = LLProblems.swap(test, 1, 10);
 
-        return test.value == 10 &&
-          test.next.value == 5 &&
-          test.next.next.value == 7 &&
-          test.next.next.next.value == 1;
-      }
+      return test != null && test.value == 10 &&
+        test.next.value == 5 &&
+        test.next.next.value == 7 &&
+        test.next.next.next.value == 1;
     });
 
-    assertTest(testCount, "should be able to swap 5 and 10 to change 1 --> 5 --> 7 --> 10 linked list to look like 1 --> 10 --> 7 --> 5", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should be able to swap 5 and 10 to change 1 --> 5 --> 7 --> 10 linked list to look like 1 --> 10 --> 7 --> 5", () -> {
 
-        int[] arr = {1, 5, 7, 10};
-        ListNode test = Problems.generateList(arr);
-        test = Problems.swap(test, 5, 10);
+      int[] arr = {1, 5, 7, 10};
+      ListNode test = LLProblems.generateList(arr);
+      test = LLProblems.swap(test, 5, 10);
 
-        return test.value == 1 &&
-          test.next.value == 10 &&
-          test.next.next.value == 7 &&
-          test.next.next.next.value == 5;
-      }
+      return test != null && test.value == 1 &&
+        test.next.value == 10 &&
+        test.next.next.value == 7 &&
+        test.next.next.next.value == 5;
     });
 
     // print the result of tests passed for a module
@@ -464,45 +435,41 @@ class Main {
     System.out.println("isCircular tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "should return true for circular linked list", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should return true for circular linked list", () -> {
 
-        // setup of node in a circular linkedList
-        ListNode work;
+      // setup of node in a circular linkedList
+      ListNode work;
 
-        ListNode node = new ListNode((int)(Math.random() * 10000));
-        work = node;
-        int circleSize = 100 + (int)(Math.random() * ((10000 - 100) + 1));
+      ListNode node = new ListNode((int)(Math.random() * 10000));
+      work = node;
+      int circleSize = 100 + (int)(Math.random() * ((10000 - 100) + 1));
 
-        for (int i = 0; i < circleSize; i++){
-          work.next = new ListNode((int)(Math.random() * 10000));
-          work = work.next;
-          if (i == (circleSize - 1)){
-            // connects the last node to the original nodeA
-            work.next = node;
-          }
+      for (int i = 0; i < circleSize; i++){
+        work.next = new ListNode((int)(Math.random() * 10000));
+        work = work.next;
+        if (i == (circleSize - 1)){
+          // connects the last node to the original nodeA
+          work.next = node;
         }
-
-        return Problems.isCircular(node);
       }
+
+      return LLProblems.isCircular(node);
     });
 
-    assertTest(testCount, "should return false for terminal linked list", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should return false for terminal linked list", () -> {
 
-        // setup of a node in a linkedList that terminates
-        ListNode work;
-        ListNode node = new ListNode((int)(Math.random() * 10000));
-        work = node;
-        int listSize = 100 + (int)(Math.random() * ((10000 - 100) + 1));
+      // setup of a node in a linkedList that terminates
+      ListNode work;
+      ListNode node = new ListNode((int)(Math.random() * 10000));
+      work = node;
+      int listSize = 100 + (int)(Math.random() * ((10000 - 100) + 1));
 
-        for (int i = 0; i < listSize; i++){
-          work.next = new ListNode((int)(Math.random() * 10000));
-          work = work.next;
-        }
-
-        return Problems.isCircular(node) == false;
+      for (int i = 0; i < listSize; i++){
+        work.next = new ListNode((int)(Math.random() * 10000));
+        work = work.next;
       }
+
+      return !LLProblems.isCircular(node);
     });
 
     // print the result of tests passed for a module
@@ -519,7 +486,7 @@ class Main {
         pass = " true";
         count[0]++;
       }
-    } catch(Exception e) {}
+    } catch(Exception ignored) {}
     String result = "  " + (count[1] + ")   ").substring(0, 5) + pass + " : " + name;
     System.out.println(result);
   }

@@ -1,11 +1,10 @@
-import java.io.*;
-import java.util.*;
-
 /*
- *  Target Practice 03 - Dynamic Programming pt. 2
+ *  Target Practice - Dynamic Programming pt. 2 / Sliding Window
  */
 
-class Problems {
+import java.util.*;
+
+class DPProblems2 {
 
   /*
    * Minimum Window Substring (Sliding Window)
@@ -53,7 +52,7 @@ class Problems {
   // Auxiliary Space Complexity: O(N)
    public static String minimumWindowSubstring(String str, String targets) {
      int[] result = new int[]{0, Integer.MAX_VALUE};
-     HashMap<Character, Integer> counts = new HashMap<Character, Integer>();
+     HashMap<Character, Integer> counts = new HashMap<>();
      int missingCharacters = targets.length();
 
      for (int i = 0; i < targets.length(); i++) {
@@ -178,12 +177,10 @@ class Problems {
  ////////////////////////////////////////////////////////////
 
  // use the Main class to run the test cases
- class Main {
-   private int[] testCount;
-
+ class DPProblems2Tests {
    // an interface to perform tests
    public interface Test {
-     public boolean execute();
+     boolean execute();
    }
 
    public static void main(String[] args) {
@@ -191,17 +188,11 @@ class Problems {
      int[] testCount = {0, 0};
      System.out.println("Minimum Window Substring Tests");
 
-     assertTest(testCount, "should work on first example case", new Test() {
-       public boolean execute() {
-         return Problems.minimumWindowSubstring("ADOBECODEBANC", "ABC").equals("BANC");
-       }
-     });
+     assertTest(testCount, "should work on first example case", () ->
+             DPProblems2.minimumWindowSubstring("ADOBECODEBANC", "ABC").equals("BANC"));
 
-     assertTest(testCount, "should work on second example case", new Test() {
-       public boolean execute() {
-         return Problems.minimumWindowSubstring("HELLO WORLD", "FOO").equals("");
-       }
-     });
+     assertTest(testCount, "should work on second example case", () ->
+             DPProblems2.minimumWindowSubstring("HELLO WORLD", "FOO").equals(""));
 
      // print the result of tests passed for a module
      System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -214,100 +205,78 @@ class Problems {
      System.out.println("Dungeon Escape Tests");
 
      // tests are in the form as shown
-     assertTest(testCount, "should work for first example case", new Test() {
-       public boolean execute() {
-         int[][] example = {{ -2, -5, 10},
-                            { -3,-10, 30},
-                            {  3,  1, -5}};
-         int test = Problems.escape(example);
-         return test == 7;
-       }
+     assertTest(testCount, "should work for first example case", () -> {
+       int[][] example = {{ -2, -5, 10},
+                          { -3,-10, 30},
+                          {  3,  1, -5}};
+       int test = DPProblems2.escape(example);
+       return test == 7;
      });
 
-     assertTest(testCount, "should work for dungeon filled solely with health potions", new Test() {
-       public boolean execute() {
-         int[][] example = {{  5,  1, 10},
-                            { 10,312, 30},
-                            {  3,  1,  7}};
-         int test = Problems.escape(example);
-         return test == 1;
-       }
+     assertTest(testCount, "should work for dungeon filled solely with health potions", () -> {
+       int[][] example = {{  5,  1, 10},
+                          { 10,312, 30},
+                          {  3,  1,  7}};
+       int test = DPProblems2.escape(example);
+       return test == 1;
      });
 
-     assertTest(testCount, "should work for an empty dungeon", new Test() {
-       public boolean execute() {
-         int[][] example = {{  0,  0,  0},
-                            {  0,  0,  0},
-                            {  0,  0,  0}};
-         int test = Problems.escape(example);
-         return test == 1;
-       }
+     assertTest(testCount, "should work for an empty dungeon", () -> {
+       int[][] example = {{  0,  0,  0},
+                          {  0,  0,  0},
+                          {  0,  0,  0}};
+       int test = DPProblems2.escape(example);
+       return test == 1;
      });
 
-     assertTest(testCount, "should work for a dungeon filled only with monsters", new Test() {
-       public boolean execute() {
-         int[][] example = {{ -3, -6,-13},
-                            {-12, -1, -7},
-                            { -5,-11, -2}};
-         int test = Problems.escape(example);
-         return test == 20;
-       }
+     assertTest(testCount, "should work for a dungeon filled only with monsters", () -> {
+       int[][] example = {{ -3, -6,-13},
+                          {-12, -1, -7},
+                          { -5,-11, -2}};
+       int test = DPProblems2.escape(example);
+       return test == 20;
      });
 
-     assertTest(testCount, "should work for a two-room dungeon starting with a monster", new Test() {
-       public boolean execute() {
-         int[][] example = {{-2, 5}};
-         int test = Problems.escape(example);
-         return test == 3;
-       }
+     assertTest(testCount, "should work for a two-room dungeon starting with a monster", () -> {
+       int[][] example = {{-2, 5}};
+       int test = DPProblems2.escape(example);
+       return test == 3;
      });
 
-     assertTest(testCount, "should work for a two-room dungeon starting with a strong monster", new Test() {
-       public boolean execute() {
-         int[][] example = {{-13, 5}};
-         int test = Problems.escape(example);
-         return test == 14;
-       }
+     assertTest(testCount, "should work for a two-room dungeon starting with a strong monster", () -> {
+       int[][] example = {{-13, 5}};
+       int test = DPProblems2.escape(example);
+       return test == 14;
      });
 
-     assertTest(testCount, "should work for a two-room dungeon starting with a health pot", new Test() {
-       public boolean execute() {
-         int[][] example = {{5, -2}};
-         int test = Problems.escape(example);
-         return test == 1;
-       }
+     assertTest(testCount, "should work for a two-room dungeon starting with a health pot", () -> {
+       int[][] example = {{5, -2}};
+       int test = DPProblems2.escape(example);
+       return test == 1;
      });
 
-     assertTest(testCount, "should work for a two-room dungeon ending in a strong monster", new Test() {
-       public boolean execute() {
-         int[][] example = {{5, -8}};
-         int test = Problems.escape(example);
-         return test == 4;
-       }
+     assertTest(testCount, "should work for a two-room dungeon ending in a strong monster", () -> {
+       int[][] example = {{5, -8}};
+       int test = DPProblems2.escape(example);
+       return test == 4;
      });
 
-     assertTest(testCount, "should work a dungeon with only a monster", new Test() {
-       public boolean execute() {
-         int[][] example = {{-14}};
-         int test = Problems.escape(example);
-         return test == 15;
-       }
+     assertTest(testCount, "should work a dungeon with only a monster", () -> {
+       int[][] example = {{-14}};
+       int test = DPProblems2.escape(example);
+       return test == 15;
      });
 
-     assertTest(testCount, "should work a dungeon with only a health pot", new Test() {
-       public boolean execute() {
-         int[][] example = {{6}};
-         int test = Problems.escape(example);
-         return test == 1;
-       }
+     assertTest(testCount, "should work a dungeon with only a health pot", () -> {
+       int[][] example = {{6}};
+       int test = DPProblems2.escape(example);
+       return test == 1;
      });
 
-     assertTest(testCount, "should work a dungeon with a single empty room", new Test() {
-       public boolean execute() {
-         int[][] example = {{0}};
-         int test = Problems.escape(example);
-         return test == 1;
-       }
+     assertTest(testCount, "should work a dungeon with a single empty room", () -> {
+       int[][] example = {{0}};
+       int test = DPProblems2.escape(example);
+       return test == 1;
      });
 
      // print the result of tests passed for a module
@@ -327,7 +296,7 @@ class Problems {
          pass = " true";
          count[0]++;
        }
-     } catch(Exception e) {}
+     } catch(Exception ignored) {}
      String result = "  " + (count[1] + ")   ").substring(0, 5) + pass + " : " + name;
      System.out.println(result);
    }

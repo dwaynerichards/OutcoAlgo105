@@ -1,5 +1,5 @@
 /*
-*  Homework 17 - Matrices
+*  Homework - Matrices
 *
 *  Prompt: Create a Matrix class
 *
@@ -233,7 +233,7 @@
 *
 *
 *         mulitply:   returns a new Matrix representing the matrix multiplication of original matrix
-*                     by the input matrix->
+*                     by the input matrix
 *
 *                     Link to Wikipedia:
 *                     NOTE: if the original matrix was M x N, the input one MUST be N x K

@@ -1,5 +1,5 @@
 /*
- *  Homework 02 - Frequency Count
+ *  Homework - Frequency Count
  */
 
 /*

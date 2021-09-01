@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
 *  Target Practice - Dynamic Programming - Tabulation/Memoization
-=======
-*  Target Practice 02 - Dynamic Programming - Tabulation/Memoization
->>>>>>> f1d7873 (adds new files)
 *
 *          Given an array of coins and a target total, return how many
 *          unique ways there are to use the coins to make up that total.

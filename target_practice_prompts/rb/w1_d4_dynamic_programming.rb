@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 #  Target Practice - Dynamic Programming
-=======
-#  Target Practice 02 - Dynamic Programming
->>>>>>> f1d7873 (adds new files)
 #
 #
 #  Instructions: Dynammic programming takes a lot of practice to recognize as

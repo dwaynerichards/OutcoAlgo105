@@ -1,9 +1,5 @@
  /**
-<<<<<<< HEAD
   *  Target Practice - Dynamic Programming
-=======
-  *  Target Practice 02 - Dynamic Programming
->>>>>>> f1d7873 (adds new files)
   *
   *
   *

@@ -1,4 +1,4 @@
-# Homework 04 - Helper Method Recursion
+# Homework - Helper Method Recursion
 #
 # Solve the following problems using helper method recursion.
 #

@@ -1,5 +1,5 @@
 /*
- *  Homework 09 - Linked List
+ *  Homework - Linked List
  */
 
 /*

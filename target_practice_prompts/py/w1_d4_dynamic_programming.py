@@ -1,9 +1,5 @@
 #
-<<<<<<< HEAD
 #  Target Practice - Dynamic Programming - Tabulation/Memoization
-=======
-#  Target Practice 02 - Dynamic Programming - Tabulation/Memoization
->>>>>>> f1d7873 (adds new files)
 #
 #  Problem: Coin Sum
 #

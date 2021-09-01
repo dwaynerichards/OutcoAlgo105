@@ -1,10 +1,6 @@
 # Why do you want to work for this company?
 
-<<<<<<< HEAD
  Before the interview, ask them to choose a company they'd want to work for. Once they have a company in mind, the question should take one minute; minute and a half at most.
-=======
-Should take one minute; minute and a half at most
->>>>>>> f1d7873 (adds new files)
 
 ##### Prompt
 
