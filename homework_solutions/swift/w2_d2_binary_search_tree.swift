@@ -77,17 +77,41 @@ class BinarySearchTree {
   var size: Int = 0
 
 
-  // Time Complexity:
-  // Auxiliary Space Complexity:
+  // Time Complexity: O(N) - assuming an imbalanced tree
+  // Auxiliary Space Complexity: O(1)
   func insert(_ value: Int) {
-    // YOUR WORK HERE
+    let newNode = Node(value)
+    if root == nil {
+      root = newNode;
+      size += 1
+      return
+    }
+
+    var parent : Node? = nil
+    var child : Node? = root
+    while child != nil {
+      parent = child
+      child = parent!.value > value ? parent?.left : parent?.right
+    }
+    if parent!.value > value {
+      parent?.left = newNode
+    } else {
+      parent?.right = newNode
+    }
+    size += 1
   }
 
 
-  // Time Complexity:
-  // Auxiliary Space Complexity:
+  // Time Complexity: O(N) - assuming an imbalanced tree
+  // Auxiliary Space Complexity: O(1)
   func search(_ value: Int) -> Bool {
-    // YOUR WORK HERE
+    var current: Node? = root
+    while current != nil {
+      if current?.value == value {
+        return true
+      }
+      current = current!.value > value ? current?.left : current?.right
+    }
     return false
   }
 }

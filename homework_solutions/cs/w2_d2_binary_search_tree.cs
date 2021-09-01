@@ -55,7 +55,9 @@ class TreeNode {
   public TreeNode right;
 
   public TreeNode(int value) {
-    // YOUR WORK HERE
+    this.value = value;
+    this.left = null;
+    this.right = null;
   }
 
 }
@@ -65,21 +67,46 @@ class BinarySearchTree {
     public int size;
     
     public BinarySearchTree() {
-        // YOUR WORK HERE
+        this.root = null;
+        this.size = 0;
     }
 
 
-    // Time Complexity:
-    // Auxiliary Space Complexity:
+    // Time Complexity: O(log(N))
+    // Auxiliary Space Complexity: O(1)
     public void insert(int value) {
-        // YOUR WORK HERE
+        TreeNode newNode = new TreeNode(value);
+        if(this.root == null){
+            this.root = newNode;
+            size++;
+            return;
+        }
+
+        TreeNode parent = null;
+        TreeNode child = this.root;
+        while (child != null) {
+            parent = child;
+            child = parent.value > value ? parent.left : parent.right;
+        }
+        if (parent.value > value) {
+            parent.left = newNode;
+        } else {
+            parent.right = newNode;
+        }
+        size++;
     }
 
 
-    // Time Complexity:
-    // Auxiliary Space Complexity:
+    // Time Complexity: O(log(N))
+    // Auxiliary Space Complexity: O(1)
     public bool search(int value) {
-        // YOUR WORK HERE
+        TreeNode current = this.root;
+        while (current != null) {
+            if (current.value == value) {
+                return true;
+            }
+            current = current.value > value ? current.left : current.right;
+        }
         return false;
     }
 

@@ -56,26 +56,54 @@
 
 class TreeNode {
   constructor(value) {
-    // YOUR WORK HERE
+    this.value = value === undefined? null : value;
+    this.left = null;
+    this.right = null;
   }
 }
 
 class BinarySearchTree {
   constructor() {
-    // YOUR WORK HERE
+    this.root = null;
+    this.size = 0;
   }
 
-  // Time Complexity:
-  // Auxiliary Space Complexity:
+  // Time Complexity: O(N) - assuming an imbalanced tree
+  // Auxiliary Space Complexity: O(1)
   insert(value) {
-    // YOUR WORK HERE
+    let newNode = new TreeNode(value);
+    if (this.root === null) {
+      this.root = newNode;
+      this.size++;
+      return;
+    }
+
+    let parent = null;
+    let child = this.root;
+    while (child !== null) {
+      parent = child;
+      child = parent.value > value ? parent.left : parent.right;
+    }
+    if (parent.value > value) {
+      parent.left = newNode;
+    } else {
+      parent.right = newNode;
+    }
+    this.size++;
   }
 
 
-  // Time Complexity:
-  // Auxiliary Space Complexity:
+  // Time Complexity: O(N) - assuming an imbalanced tree
+  // Auxiliary Space Complexity: O(1)
   search(value) {
-    // YOUR WORK HERE
+    let current = this.root;
+    while (current !== null) {
+      if (current.value === value) {
+        return true;
+      }
+      current = current.value > value ? current.left : current.right;
+    }
+    return false;
   }
 }
 

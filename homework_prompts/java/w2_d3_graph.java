@@ -1,5 +1,5 @@
-/*
- *  Homework - Graph
+/**
+ *  Homework 12 - Graph
  *
  *  Problem: Graph
  *
@@ -73,11 +73,7 @@ import java.util.*;
 
 class Graph {
 
-  public Map<Integer, List<Integer>> storage;
-
-  public Graph() {
-    storage = new HashMap<>();
-  }
+  public Map<Integer, List<Integer>> storage = new HashMap<>();
 
   //   Time Complexity:
   //   Auxiliary Space Complexity:
@@ -127,10 +123,12 @@ class Graph {
 ////////////////////////////////////////////////////////////
 
 // use the Main class to run the test cases
-class GraphTests {
+class Main {
+  private int[] testCount;
+
   // an interface to perform tests
   public interface Test {
-    boolean execute();
+    public boolean execute();
   }
 
   public static void main(String[] args) {
@@ -138,35 +136,48 @@ class GraphTests {
     int[] testCount = {0, 0};
     System.out.println("Graph Class");
 
-    assertTest(testCount, "has storage field", () -> {
-      try {
+    assertTest(testCount, "able to create an instance", new Test() {
+      public boolean execute() {
         Graph graph = new Graph();
-        graph.getClass().getDeclaredField("storage");
-        return true;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+        return graph instanceof Graph;
       }
     });
 
-    assertTest(testCount, "storage property initialized to a hash map", () -> {
-      try {
-        Graph graph = new Graph();
-        return graph.getClass().getDeclaredField("storage").getType().isAssignableFrom(Map.class) ||
-               graph.getClass().getDeclaredField("storage").getType().isAssignableFrom(HashMap.class);
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "has storage field", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.getClass().getDeclaredField("storage");
+          return true;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "storage property initialized as empty", () -> {
-      try {
-        Graph graph = new Graph();
-        return graph.storage.size() == 0;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "storage property initialized to a hash map", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          return graph.getClass().getDeclaredField("storage").getType().isAssignableFrom(Map.class) ||
+                 graph.getClass().getDeclaredField("storage").getType().isAssignableFrom(HashMap.class);
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
+      }
+    });
+
+    assertTest(testCount, "storage property initialized as empty", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          return graph.storage.size() == 0;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
@@ -177,63 +188,73 @@ class GraphTests {
     testCount[1] = 0;
     System.out.println("Graph addVertex method");
 
-    assertTest(testCount, "has addVertex method", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.getClass().getMethod("addVertex", Integer.class);
-        return true;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "has addVertex method", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.getClass().getMethod("addVertex", new Class[] { Integer.class });
+          return true;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "is able to add a vertex", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        return graph.storage.size() == 1;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "is able to add a vertex", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          return graph.storage.size() == 1;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "vertices store a list or set of connections", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        return graph.storage.get(5) != null ||
-               graph.storage.get(5) instanceof ArrayList;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "vertices store an list or set of connections", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          return graph.storage.get(5) instanceof List ||
+                 graph.storage.get(5) instanceof ArrayList;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "is able to add two vertices", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        graph.addVertex(10);
-        return graph.storage.size() == 2 &&
-                graph.storage.get(10) != null ||
-               graph.storage.get(10) instanceof ArrayList;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "is able to add two vertices", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          graph.addVertex(10);
+          return graph.storage.size() == 2 &&
+                 graph.storage.get(10) instanceof List ||
+                 graph.storage.get(10) instanceof ArrayList;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "does not add in duplicate vertex", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        graph.addVertex(5);
-        return graph.storage.size() == 1 && graph.storage.get(5).size() == 0;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "does not add in duplicate vertex", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          graph.addVertex(5);
+          return graph.storage.size() == 1 && graph.storage.get(5).size() == 0;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
@@ -244,29 +265,35 @@ class GraphTests {
     testCount[1] = 0;
     System.out.println("Graph removeVertex method");
 
-    assertTest(testCount, "has removeVertex method", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.getClass().getMethod("removeVertex", Integer.class);
-        return true;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "has removeVertex method", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.getClass().getMethod("removeVertex", new Class[] { Integer.class });
+          return true;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "able to remove a vertex within graph", () -> {
-      Graph graph = new Graph();
-      graph.addVertex(5);
-      graph.removeVertex(5);
-      return graph.storage.size() == 0;
+    assertTest(testCount, "able to remove a vertex within graph", new Test() {
+      public boolean execute() {
+        Graph graph = new Graph();
+        graph.addVertex(5);
+        graph.removeVertex(5);
+        return graph.storage.size() == 0 && graph.storage.get(5) == null;
+      }
     });
 
-    assertTest(testCount, "does not remove vertex that does not exist", () -> {
-      Graph graph = new Graph();
-      graph.addVertex(5);
-      graph.removeVertex(10);
-      return graph.storage.size() == 1 && graph.storage.get(5) != null;
+    assertTest(testCount, "does not remove vertex that does not exist", new Test() {
+      public boolean execute() {
+        Graph graph = new Graph();
+        graph.addVertex(5);
+        boolean result = graph.removeVertex(10);
+        return graph.storage.size() == 1 && graph.storage.get(5) != null;
+      }
     });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -276,48 +303,56 @@ class GraphTests {
     testCount[1] = 0;
     System.out.println("Graph addEdge method");
 
-    assertTest(testCount, "has addEdge method", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.getClass().getMethod("addEdge", Integer.class, Integer.class);
-        return true;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "has addEdge method", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.getClass().getMethod("addEdge", new Class[] { Integer.class, Integer.class });
+          return true;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "able to create an edge between two vertices that exist", () -> {
-      try {
+    assertTest(testCount, "able to create an edge between two vertices that exist", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          graph.addVertex(10);
+          graph.addEdge(5, 10);
+          return graph.storage.get(5).size() == 1 &&
+                 graph.storage.get(10).size() == 0;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
+      }
+    });
+
+    assertTest(testCount, "addVertex returns true if vertices are added", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          graph.addVertex(10);
+          return graph.addEdge(5, 10) == true;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
+      }
+    });
+
+    assertTest(testCount, "does not create an edge when one of the vertices does not exist", new Test() {
+      public boolean execute() {
         Graph graph = new Graph();
         graph.addVertex(5);
-        graph.addVertex(10);
-        graph.addEdge(5, 10);
-        return graph.storage.get(5).size() == 1 &&
-               graph.storage.get(10).size() == 0;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+        boolean result = graph.addEdge(5, 10);
+        return graph.storage.get(5).size() == 0 && result == false;
       }
-    });
-
-    assertTest(testCount, "addVertex returns true if vertices are added", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        graph.addVertex(10);
-        return graph.addEdge(5, 10);
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
-      }
-    });
-
-    assertTest(testCount, "does not create an edge when one of the vertices does not exist", () -> {
-      Graph graph = new Graph();
-      graph.addVertex(5);
-      boolean result = graph.addEdge(5, 10);
-      return graph.storage.get(5).size() == 0 && !result;
     });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -327,68 +362,78 @@ class GraphTests {
     testCount[1] = 0;
     System.out.println("Graph removeEdge method");
 
-    assertTest(testCount, "has removeEdge method", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.getClass().getMethod("removeEdge", Integer.class, Integer.class);
-        return true;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "has removeEdge method", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.getClass().getMethod("removeEdge", new Class[] { Integer.class, Integer.class });
+          return true;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "able to remove an edge between two vertices", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        graph.addVertex(10);
-        graph.addEdge(5, 10);
-        graph.removeEdge(5, 10);
-        return graph.storage.get(5).size() == 0 && graph.storage.size() == 2;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "able to remove an edge between two vertices", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          graph.addVertex(10);
+          graph.addEdge(5, 10);
+          graph.removeEdge(5, 10);
+          return graph.storage.get(5).size() == 0 && graph.storage.size() == 2;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "returns true if able to remove an edge", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        graph.addVertex(10);
-        graph.addEdge(5, 10);
-        return graph.removeEdge(5, 10);
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "returns true if able to remove an edge", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          graph.addVertex(10);
+          graph.addEdge(5, 10);
+          return graph.removeEdge(5, 10) == true;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "does not remove edge when edge does not exist", () -> {
-      try{
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        graph.addVertex(10);
-        graph.addEdge(5, 10);
-        graph.removeEdge(6, 10);
-        return graph.storage.get(5) != null && graph.storage.get(5).size() == 1;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "does not remove edge when edge does not exist", new Test() {
+      public boolean execute() {
+        try{
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          graph.addVertex(10);
+          graph.addEdge(5, 10);
+          graph.removeEdge(6, 10);
+          return graph.storage.get(5) != null && graph.storage.get(5).size() == 1;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "returns false if edge does not exist", () -> {
-      try{
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        graph.addVertex(10);
-        graph.addEdge(5, 10);
-        return !graph.removeEdge(6, 10);
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "returns false if edge does not exist", new Test() {
+      public boolean execute() {
+        try{
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          graph.addVertex(10);
+          graph.addEdge(5, 10);
+          return graph.removeEdge(6, 10) == false;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
@@ -399,37 +444,43 @@ class GraphTests {
     testCount[1] = 0;
     System.out.println("Graph isVertex method");
 
-    assertTest(testCount, "has isVertex method", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.getClass().getMethod("isVertex", Integer.class);
-        return true;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "has isVertex method", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.getClass().getMethod("isVertex", new Class[] { Integer.class });
+          return true;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "returns true when a vertex exists", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        graph.isVertex(5);
-        return graph.isVertex(5);
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "returns true when a vertex exists", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          graph.isVertex(5);
+          return graph.isVertex(5) == true;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "returns false when a vertex does not exist'", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        return !graph.isVertex(10);
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "returns false when a vertex does not exist'", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          return graph.isVertex(10) == false;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
@@ -440,58 +491,85 @@ class GraphTests {
     testCount[1] = 0;
     System.out.println("Graph neighbors method");
 
-    assertTest(testCount, "has neighbors method", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.getClass().getMethod("neighbors", Integer.class);
-        return true;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "has neighbors method", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.getClass().getMethod("neighbors", new Class[] { Integer.class });
+          return true;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "returns null if the vertex does not exist", () -> {
-      try {
-        Graph graph = new Graph();
-        return graph.neighbors(5) == null;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "returns null if the vertex does not exist", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          return graph.neighbors(5) == null;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "returns an empty array if vertex has no edges", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        return graph.neighbors(5).size() == 0;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "returns an empty array if vertex has no edges", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          return graph.neighbors(5).size() == 0;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
-    assertTest(testCount, "returns neighbors if edges exist for a vertex", () -> {
-      try {
-        Graph graph = new Graph();
-        graph.addVertex(5);
-        graph.addVertex(10);
-        graph.addVertex(15);
-        graph.addVertex(20);
-        graph.addEdge(5, 10);
-        graph.addEdge(5, 15);
-        graph.addEdge(5, 20);
-        return graph.neighbors(5).size() == 3;
-      } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+    assertTest(testCount, "returns neighbors if edges exist for a vertex", new Test() {
+      public boolean execute() {
+        try {
+          Graph graph = new Graph();
+          graph.addVertex(5);
+          graph.addVertex(10);
+          graph.addVertex(15);
+          graph.addVertex(20);
+          graph.addEdge(5, 10);
+          graph.addEdge(5, 15);
+          graph.addEdge(5, 20);
+          return graph.neighbors(5).size() == 3;
+        } catch (Exception e) {
+          e.printStackTrace();
+          return false;
+        }
       }
     });
 
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
   }
 
+
+  // function for checking if arrays contain same elements
+  // (do not need to be in the same order)
+  private static boolean arraysMatching(Integer[] arr1, Integer[] arr2) {
+    if (arr1.length != arr2.length) {
+      return false;
+    } else {
+      Arrays.sort(arr1);
+      Arrays.sort(arr2);
+
+      for (int i = 0 ; i < arr1.length ; i++) {
+        if (arr1[i] != arr2[i]) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  }
 
   // do not edit below, this is to wrap the test and check for exceptions
   private static void assertTest(int[] count, String name, Test test) {
@@ -503,7 +581,7 @@ class GraphTests {
         pass = " true";
         count[0]++;
       }
-    } catch(Exception ignored) {}
+    } catch(Exception e) {}
     String result = "  " + (count[1] + ")   ").substring(0, 5) + pass + " : " + name;
     System.out.println(result);
   }

@@ -56,27 +56,71 @@
 
 class Node
   def initialize(value = nil)
-    # YOUR WORK HERE
+    @value = value
+    @left_child = nil
+    @right_child = nil
   end
-  # YOUR WORK HERE
+  attr_accessor :value
+  attr_accessor :left_child
+  attr_accessor :right_child
 end
 
 class BinarySearchTree
   def initialize
-    # YOUR WORK HERE
+    @root = nil
+    @size = 0
   end
 
+  attr_accessor :root
+  attr_accessor :size
 
-  # Time Complexity:
-  # Auxiliary Space Complexity:
+  # Time Complexity: O(log(N))
+  # Auxiliary Space Complexity: O(1)
   def insert(value)
-    # YOUR WORK HERE
+    new_node = Node.new(value)
+    if @root == nil
+      @root = new_node
+      @size += 1
+      return
+    end
+
+    parent = nil
+    child = @root
+    while child != nil
+      parent = child
+      if parent.value > value
+        child = parent.left_child
+      else
+        child = parent.right_child
+      end
+    end
+
+    if parent.value > value
+      parent.left_child = new_node
+    else
+      parent.right_child = new_node
+    end
+
+    @size += 1
+    return
   end
 
-  # Time Complexity:
-  # Auxiliary Space Complexity:
+  # Time Complexity: O(log(N))
+  # Auxiliary Space Complexity: O(1)
   def search(value)
-    # YOUR WORK HERE
+    current = @root
+    while(current != nil)
+      if(current.value == value)
+        return true
+      end
+
+      if(current.value > value)
+        current = current.left_child
+      else
+        current = current.right_child
+      end
+    end
+    false
   end
 
 end

@@ -53,26 +53,52 @@
 
 class TreeNode:
     def __init__(self, value=None):
-        # YOUR WORK HERE
-        pass
+        self.value = value
+        self.left = None
+        self.right = None
 
 
 class BinarySearchTree:
     def __init__(self):
-        # YOUR WORK HERE
-        pass
+        self.root = None
+        self.size = 0
 
-    # Time Complexity:
-    # Auxiliary Space Complexity:
+    # Time Complexity: O(log(N))
+    # Auxiliary Space Complexity: O(1)
     def insert(self, value):
-        # YOUR WORK HERE
-        pass
+        new_node = TreeNode(value)
+        if (self.root is None):
+            self.root = new_node
+            self.size += 1
+            return
 
-    # Time Complexity:
-    # Auxiliary Space Complexity:
+        parent = None
+        child = self.root
+        while (child is not None):
+            parent = child
+            if(parent.value > value):
+                child = parent.left
+            else:
+                child = parent.right
+
+        if (parent.value > value):
+            parent.left = new_node
+        else:
+            parent.right = new_node
+        self.size += 1
+
+    # Time Complexity: O(log(N))
+    # Auxiliary Space Complexity: O(1)
     def search(self, value):
-        # YOUR WORK HERE
-        pass
+        current = self.root
+        while (current is not None):
+            if (current.value == value):
+                return True
+            if (current.value > value):
+                current = current.left
+            else:
+                current = current.right
+        return False
 
 
 # ###########################################################

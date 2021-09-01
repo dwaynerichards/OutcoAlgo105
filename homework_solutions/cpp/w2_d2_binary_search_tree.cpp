@@ -57,7 +57,9 @@ class TreeNode {
     TreeNode *right;
 
     TreeNode(int val) {
-      // YOUR WORK HERE
+      value = val;
+      left = NULL;
+      right = NULL;
     }
 };
 
@@ -68,21 +70,46 @@ class BinarySearchTree {
     int size;
 
     BinarySearchTree() {
-      // YOUR WORK HERE
+      root = NULL;
+      size = 0;
     }
 
 
-    // Time Complexity:
-    // Auxiliary Space Complexity:
+    // Time Complexity: O(log(N))
+    // Auxiliary Space Complexity: O(1)
     void insert(int value) {
-        // YOUR WORK HERE
+        TreeNode *newNode = new TreeNode(value);
+        if(root == NULL){
+            root = newNode;
+            size++;
+            return;
+        }
+
+        TreeNode *parent = NULL;
+        TreeNode *child = root;
+        while (child != NULL) {
+            parent = child;
+            child = parent->value > value ? parent->left : parent->right;
+        }
+        if (parent->value > value) {
+            parent->left = newNode;
+        } else {
+            parent->right = newNode;
+        }
+        size++;
     }
 
 
-    // Time Complexity:
-    // Auxiliary Space Complexity:
+    // Time Complexity: O(log(N))
+    // Auxiliary Space Complexity: O(1)
     bool search(int value) {
-        // YOUR WORK HERE
+        TreeNode *current = root;
+        while (current != NULL) {
+            if (current->value == value) {
+                return true;
+            }
+            current = current->value > value ? current->left : current->right;
+        }
         return false;
     }
 
