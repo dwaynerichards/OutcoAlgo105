@@ -1,37 +1,37 @@
 /*
- *  Homework 04 - Helper Method Recursion
+ *  Homework - Helper Method Recursion
  *
  *  Instructions: Using the Helper Method Recursive Pattern work through the
  *  following problems.
  *
  */
 
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 
-/**
+/*
  * 1a. What is the term when the recursive call invokes itself more than once.
  *
  *
  */
 
 
-/**
+/*
  * 1b. List the steps involved to build a Helper Method Recursion algorithm.
  *
  *
  */
 
 
-/**
+/*
  * 1c. Should the recursive case or base case typically be tackled first?
  *
  *
  */
 
 
-/**
+/*
  *  2a. Print each integer in an array in order using Helper Method Recursion
  *
  *  Input:   arr {Array}
@@ -196,12 +196,11 @@ class Merge {
 ////////////////////////////////////////////////////////////
 
 // use the Main class to run the test cases
-class Main {
-  private int[] testCount;
+class HelperMethodRecursionTests {
 
   // an interface to perform tests
   public interface Test {
-    public boolean execute();
+    boolean execute();
   }
 
   public static void main(String[] args) {
@@ -211,11 +210,7 @@ class Main {
     System.out.println("PrintArray tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "able to print the elements of [1,2,3] forwards", new Test() {
-      public boolean execute() {
-
-        PrintArray printArray = new PrintArray();
-
+    assertTest(testCount, "able to print the elements of [1,2,3] forwards", () -> {
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
@@ -226,7 +221,7 @@ class Main {
 
         // Print some output: goes to your special stream
         int[] input = {1,2,3};
-        printArray.compute(input);
+        PrintArray.compute(input);
 
         // Put things back
         System.out.flush();
@@ -235,14 +230,9 @@ class Main {
         //System.out.println("Here: " + baos.toString());
 
         return baos.toString().equals("1\n2\n3\n");
-      }
     });
 
-    assertTest(testCount, "does not print for an empty array", new Test() {
-      public boolean execute() {
-
-        PrintArray printArray = new PrintArray();
-
+    assertTest(testCount, "does not print for an empty array", () -> {
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
@@ -253,7 +243,7 @@ class Main {
 
         // Print some output: goes to your special stream
         int[] input = {};
-        printArray.compute(input);
+        PrintArray.compute(input);
 
         // Put things back
         System.out.flush();
@@ -262,14 +252,9 @@ class Main {
         //System.out.println("Here: " + baos.toString());
 
         return baos.toString().equals("");
-      }
     });
 
-    assertTest(testCount, "able to print a single element array [5]", new Test() {
-      public boolean execute() {
-
-        PrintArray printArray = new PrintArray();
-
+    assertTest(testCount, "able to print a single element array [5]", () -> {
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
@@ -280,7 +265,7 @@ class Main {
 
         // Print some output: goes to your special stream
         int[] input = {5};
-        printArray.compute(input);
+        PrintArray.compute(input);
 
         // Put things back
         System.out.flush();
@@ -289,7 +274,6 @@ class Main {
         //System.out.println("Here: " + baos.toString());
 
         return baos.toString().equals("5\n");
-      }
     });
 
 
@@ -305,11 +289,7 @@ class Main {
     System.out.println("PrintReverse tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "able to print the elements of [1,2,3] backwards", new Test() {
-      public boolean execute() {
-
-        PrintReverse printReverse = new PrintReverse();
-
+    assertTest(testCount, "able to print the elements of [1,2,3] backwards", () -> {
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
@@ -320,7 +300,7 @@ class Main {
 
         // Print some output: goes to your special stream
         int[] input = {1,2,3};
-        printReverse.compute(input);
+        PrintReverse.compute(input);
 
         // Put things back
         System.out.flush();
@@ -329,15 +309,10 @@ class Main {
         //System.out.println("Here: " + baos.toString());
 
         return baos.toString().equals("3\n2\n1\n");
-      }
     });
 
-    assertTest(testCount, "does not print for an empty array", new Test() {
-      public boolean execute() {
-
-        PrintReverse printReverse = new PrintReverse();
-
-        // Create a stream to hold the output
+    assertTest(testCount, "does not print for an empty array", () -> {
+       // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         // IMPORTANT: Save the old System.out!
@@ -347,7 +322,7 @@ class Main {
 
         // Print some output: goes to your special stream
         int[] input = {};
-        printReverse.compute(input);
+        PrintReverse.compute(input);
 
         // Put things back
         System.out.flush();
@@ -356,14 +331,9 @@ class Main {
         //System.out.println("Here: " + baos.toString());
 
         return baos.toString().equals("");
-      }
     });
 
-    assertTest(testCount, "able to print a single element array [5]", new Test() {
-      public boolean execute() {
-
-        PrintReverse printReverse = new PrintReverse();
-
+    assertTest(testCount, "able to print a single element array [5]", () -> {
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
@@ -374,7 +344,7 @@ class Main {
 
         // Print some output: goes to your special stream
         int[] input = {5};
-        printReverse.compute(input);
+        PrintReverse.compute(input);
 
         // Put things back
         System.out.flush();
@@ -383,7 +353,6 @@ class Main {
         //System.out.println("Here: " + baos.toString());
 
         return baos.toString().equals("5\n");
-      }
     });
 
 
@@ -398,34 +367,16 @@ class Main {
     System.out.println("ReverseString tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "able to reverse string 'hello'", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "able to reverse string 'hello'", () ->
+      ReverseString.compute("hello").equals("olleh"));
 
-        ReverseString reverseString = new ReverseString();
 
-        return reverseString.compute("'hello'").equals("'olleh'");
+    assertTest(testCount, "able to return an empty string for empty string input", () ->
+      ReverseString.compute("").equals(""));
 
-      }
-    });
 
-    assertTest(testCount, "able to return an empty string for empty string input", new Test() {
-      public boolean execute() {
-
-        ReverseString reverseString = new ReverseString();
-
-        return reverseString.compute("").equals("");
-
-      }
-    });
-
-    assertTest(testCount, "able to return the same character for a single-character input string", new Test() {
-      public boolean execute() {
-
-        ReverseString reverseString = new ReverseString();
-
-        return reverseString.compute("b").equals("b");
-      }
-    });
+    assertTest(testCount, "able to return the same character for a single-character input string", () ->
+        ReverseString.compute("b").equals("b"));
 
 
     // print the result of tests passed for a module
@@ -439,49 +390,37 @@ class Main {
     System.out.println("ArrayPairs tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "should return [[1,2],[3,4],[5,6]] output for [1,2,3,4,5,6] input", new Test() {
-      public boolean execute() {
-
-        ArrayPairs arrayPairs = new ArrayPairs();
+    assertTest(testCount, "should return [[1,2],[3,4],[5,6]] output for [1,2,3,4,5,6] input", () -> {
 
         int[] input = {1,2,3,4,5,6};
-        int[][] output = arrayPairs.compute(input);
+        int[][] output = ArrayPairs.compute(input);
 
         return output.length == 3 &&
                   output[0][0] == 1 && output[0][1] == 2 &&
                   output[1][0] == 3 && output[1][1] == 4 &&
                   output[2][0] == 5 && output[2][1] == 6;
 
-      }
     });
 
-    assertTest(testCount, "should return [[1,2],[3,4],[5,-1]] output for [1,2,3,4,5] input", new Test() {
-      public boolean execute() {
-
-        ArrayPairs arrayPairs = new ArrayPairs();
+    assertTest(testCount, "should return [[1,2],[3,4],[5,-1]] output for [1,2,3,4,5] input", () -> {
 
         int[] input = {1,2,3,4,5};
-        int[][] output = arrayPairs.compute(input);
+        int[][] output = ArrayPairs.compute(input);
 
         return output.length == 3 &&
                   output[0][0] == 1 && output[0][1] == 2 &&
                   output[1][0] == 3 && output[1][1] == 4 &&
                   output[2][0] == 5 && output[2][1] == -1;
 
-      }
     });
 
-    assertTest(testCount, "should return [] output for [] input", new Test() {
-      public boolean execute() {
-
-        ArrayPairs arrayPairs = new ArrayPairs();
+    assertTest(testCount, "should return [] output for [] input", () -> {
 
         int[] input = {};
-        int[][] output = arrayPairs.compute(input);
+        int[][] output = ArrayPairs.compute(input);
 
         return output.length == 0;
 
-      }
     });
 
 
@@ -497,13 +436,10 @@ class Main {
     System.out.println("Flatten tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "should return [1,2,3,4,5,6,7,8,9] output for [[1, 2, 3],[4, 5, 6],[7, 8, 9]] input", new Test() {
-      public boolean execute() {
-
-        Flatten flatten = new Flatten();
+    assertTest(testCount, "should return [1,2,3,4,5,6,7,8,9] output for [[1, 2, 3],[4, 5, 6],[7, 8, 9]] input", () -> {
 
         int[][] input = {{1, 2, 3} ,{4, 5, 6}, {7, 8, 9}};
-        int[] output = flatten.compute(input);
+        int[] output = Flatten.compute(input);
 
         return output.length == 9 &&
                   output[0] == 1 && output[1] == 2 &&
@@ -512,19 +448,14 @@ class Main {
                   output[6] == 7 && output[7] == 8 &&
                   output[8] == 9;
 
-      }
     });
 
-    assertTest(testCount, "should return [] output for [] input", new Test() {
-      public boolean execute() {
-
-        Flatten flatten = new Flatten();
+    assertTest(testCount, "should return [] output for [] input", () -> {
 
         int[][] input = {};
-        int[] output = flatten.compute(input);
+        int[] output = Flatten.compute(input);
         return output.length == 0;
 
-      }
     });
 
     // print the result of tests passed for a module
@@ -537,35 +468,15 @@ class Main {
     System.out.println("Power tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "should return 81 for 3 to the 4th power", new Test() {
-      public boolean execute() {
+    assertTest(testCount, "should return 81 for 3 to the 4th power", () ->
+      Power.compute(3,4) == 81);
 
-        Power power = new Power();
 
-        return power.compute(3,4) == 81;
+    assertTest(testCount, "should return 1 for 5 to the 0th power", () ->
+      Power.compute(5,0) == 1);
 
-      }
-    });
-
-    assertTest(testCount, "should return 1 for 5 to the 0th power", new Test() {
-      public boolean execute() {
-
-        Power power = new Power();
-
-        return power.compute(5,0) == 1;
-
-      }
-    });
-
-    assertTest(testCount, "should return 1 for 1 to the 100th power", new Test() {
-      public boolean execute() {
-
-        Power power = new Power();
-
-        return power.compute(1,100) == 1;
-
-      }
-    });
+    assertTest(testCount, "should return 1 for 1 to the 100th power", () ->
+      Power.compute(1,100) == 1);
 
     // print the result of tests passed for a module
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -577,15 +488,12 @@ class Main {
     System.out.println("Merge tests");
 
     // tests are in the form as shown
-    assertTest(testCount, "should return [1, 2, 3, 4, 6, 7, 9] when merging [1, 4, 7] and [2, 3, 6, 9]", new Test() {
-      public boolean execute() {
-
-        Merge merge = new Merge();
+    assertTest(testCount, "should return [1, 2, 3, 4, 6, 7, 9] when merging [1, 4, 7] and [2, 3, 6, 9]", () -> {
 
         int[] input1 = {1,4,7};
         int[] input2 = {2,3,6,9};
 
-        int[] output = merge.compute(input1, input2);
+        int[] output = Merge.compute(input1, input2);
 
         return output.length == 7 &&
                   output[0] == 1 &&
@@ -596,18 +504,14 @@ class Main {
                   output[5] == 7 &&
                   output[6] == 9;
 
-      }
     });
 
-    assertTest(testCount, "should handle inputs when left argument is empty array", new Test() {
-      public boolean execute() {
-
-        Merge merge = new Merge();
+    assertTest(testCount, "should handle inputs when left argument is empty array", () -> {
 
         int[] input1 = {};
         int[] input2 = {2,3,6,9};
 
-        int[] output = merge.compute(input1, input2);
+        int[] output = Merge.compute(input1, input2);
 
         return output.length == 4 &&
                   output[0] == 2 &&
@@ -615,40 +519,31 @@ class Main {
                   output[2] == 6 &&
                   output[3] == 9;
 
-      }
     });
 
-    assertTest(testCount, "should handle inputs when right argument is empty array", new Test() {
-      public boolean execute() {
-
-        Merge merge = new Merge();
+    assertTest(testCount, "should handle inputs when right argument is empty array", () -> {
 
         int[] input1 = {1,4,7};
         int[] input2 = {};
 
-        int[] output = merge.compute(input1, input2);
+        int[] output = Merge.compute(input1, input2);
 
         return output.length == 3 &&
                   output[0] == 1 &&
                   output[1] == 4 &&
                   output[2] == 7;
 
-      }
     });
 
-    assertTest(testCount, "should handle two empty arrays as inputs", new Test() {
-      public boolean execute() {
-
-        Merge merge = new Merge();
+    assertTest(testCount, "should handle two empty arrays as inputs", () -> {
 
         int[] input1 = {};
         int[] input2 = {};
 
-        int[] output = merge.compute(input1, input2);
+        int[] output = Merge.compute(input1, input2);
 
         return output.length == 0;
 
-      }
     });
 
     // print the result of tests passed for a module
@@ -667,7 +562,7 @@ class Main {
         pass = " true";
         count[0]++;
       }
-    } catch(Exception e) {}
+    } catch(Exception ignored) {}
     String result = "  " + (count[1] + ")   ").substring(0, 5) + pass + " : " + name;
     System.out.println(result);
   }

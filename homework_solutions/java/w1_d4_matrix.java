@@ -1,5 +1,5 @@
 /*
- *  Homework 17 - Matrices
+ *  Homework - Matrices
  *
  *  Prompt: Create a Matrix class
  *
@@ -295,23 +295,16 @@ class Matrix {
             }
             System.out.println();
         }
-    /*
-    // YOUR WORK HERE
     }
 
     public boolean isValid(int i, int j) {
-        if(i < 0 || j < 0 || i >= this.m || j >= this.n) {
-            return false;
-        }
-        return true;
+        return i >= 0 && j >= 0 && i < this.m && j < this.n;
     }
 
     public void initialize(int[][] arrayOfArrays) {
         this.storage = arrayOfArrays;
         this.m = arrayOfArrays.length;
         if(this.m > 0) this.n = arrayOfArrays[0].length;
-    /*
-    // YOUR WORK HERE
     }
 
     public boolean insert(int i, int j, int val) {
@@ -414,7 +407,7 @@ class Matrix {
 ////////////////////////////////////////////////////////////
 
 // use the Main class to run the test cases
-class Main{
+class MatrixTests {
 
     public static void main(String[] args) {
          isValidTests();
@@ -638,9 +631,8 @@ class Main{
      matrix.initialize(new int[][]{{0, 1, 2}, {3, 4, 5}, {6, 7, 8}});
      Matrix newMatrix = matrix.slice(new int[]{0,2}, new int[]{0,2});
      int[][] newMatrixStorage = newMatrix.getStorage();
-     return newMatrix != null && newMatrix.getM() == 2 && newMatrix.getN() == 2 &&
-           newMatrixStorage[0][0] == 0 && newMatrixStorage[0][1] == 1 &&
-           newMatrixStorage[1][0] == 3 && newMatrixStorage[1][1] == 4;
+     return newMatrix.getM() == 2 && newMatrix.getN() == 2 && newMatrixStorage[0][0] == 0 &&
+             newMatrixStorage[0][1] == 1 && newMatrixStorage[1][0] == 3 && newMatrixStorage[1][1] == 4;
    }
 
    private static boolean sliceTest2() {
@@ -648,9 +640,8 @@ class Main{
      matrix.initialize(new int[][]{{0, 1, 2}, {3, 4, 5}, {6, 7, 8}});
      Matrix newMatrix = matrix.slice(new int[]{1,3}, new int[]{1,3});
      int[][] newMatrixStorage = newMatrix.getStorage();
-     return newMatrix != null && newMatrix.getM() == 2 && newMatrix.getN() == 2 &&
-           newMatrixStorage[0][0] == 4 && newMatrixStorage[0][1] == 5 &&
-           newMatrixStorage[1][0] == 7 && newMatrixStorage[1][1] == 8;
+     return newMatrix.getM() == 2 && newMatrix.getN() == 2 && newMatrixStorage[0][0] == 4 &&
+             newMatrixStorage[0][1] == 5 && newMatrixStorage[1][0] == 7 && newMatrixStorage[1][1] == 8;
    }
 
    private static boolean sliceTest3() {
@@ -675,9 +666,8 @@ class Main{
      matrix.initialize(new int[][]{{0, 1}, {2, 3}});
      Matrix newMatrix = matrix.transpose();
      int[][] storage = newMatrix.getStorage();
-     return newMatrix != null && newMatrix.getM() == 2 && newMatrix.getN() == 2 &&
-           storage[0][0] == 0 && storage[0][1] == 2 &&
-           storage[1][0] == 1 && storage[1][1] == 3;
+     return newMatrix.getM() == 2 && newMatrix.getN() == 2 && storage[0][0] == 0 && storage[0][1] == 2 &&
+             storage[1][0] == 1 && storage[1][1] == 3;
    }
 
    private static boolean transposeTest3() {
@@ -685,10 +675,9 @@ class Main{
      matrix.initialize(new int[][]{{0, 1}, {3, 4}, {6, 7}});
      Matrix newMatrix = matrix.transpose();
      int[][] storage = newMatrix.getStorage();
-     return newMatrix != null && newMatrix.getM() == 2 && newMatrix.getN() == 3 &&
-           storage[0][0] == 0 && storage[0][1] == 3 &&
-           storage[0][2] == 6 && storage[1][0] == 1 &&
-           storage[1][1] == 4 && storage[1][2] == 7;
+     return newMatrix.getM() == 2 && newMatrix.getN() == 3 && storage[0][0] == 0 &&
+             storage[0][1] == 3 && storage[0][2] == 6 && storage[1][0] == 1 &&
+             storage[1][1] == 4 && storage[1][2] == 7;
    }
 
    private static boolean transposeTest4() {
@@ -696,10 +685,9 @@ class Main{
      matrix.initialize(new int[][]{{0, 1, 3}, {4, 6, 7}});
      Matrix newMatrix = matrix.transpose();
      int[][] storage = newMatrix.getStorage();
-     return newMatrix != null && newMatrix.getM() == 3 && newMatrix.getN() == 2 &&
-           storage[0][0] == 0 && storage[0][1] == 4 &&
-           storage[1][0] == 1 && storage[1][1] == 6 &&
-           storage[2][0] == 3 && storage[2][1] == 7;
+     return newMatrix.getM() == 3 && newMatrix.getN() == 2 && storage[0][0] == 0 &&
+             storage[0][1] == 4 && storage[1][0] == 1 && storage[1][1] == 6 &&
+             storage[2][0] == 3 && storage[2][1] == 7;
    }
 
 
@@ -713,9 +701,8 @@ class Main{
                                    {0, 6}});
      Matrix newMatrix = matrix1.multiply(matrix2);
      int[][] newMatrixstorage = newMatrix.getStorage();
-     return newMatrix != null && newMatrix.getM() == 2 && newMatrix.getN() == 2 &&
-           newMatrixstorage[0][0] == 39 && newMatrixstorage[0][1] == 64 &&
-           newMatrixstorage[1][0] == 38 && newMatrixstorage[1][1] == 77;
+     return newMatrix.getM() == 2 && newMatrix.getN() == 2 && newMatrixstorage[0][0] == 39 &&
+             newMatrixstorage[0][1] == 64 && newMatrixstorage[1][0] == 38 && newMatrixstorage[1][1] == 77;
    }
 
    private static boolean multiplyTest2() {
@@ -736,8 +723,7 @@ class Main{
      matrix2.initialize(new int[][]{{8}, {1}, {2}});
      Matrix newMatrix = matrix1.multiply(matrix2);
      int[][] newMatrixstorage = newMatrix.getStorage();
-     return newMatrix != null && newMatrix.getM()== 2 && newMatrix.getN() == 1 &&
-          newMatrixstorage[0][0] == 39 && newMatrixstorage[1][0] == 36;
+     return newMatrix.getM() == 2 && newMatrix.getN() == 1 && newMatrixstorage[0][0] == 39 && newMatrixstorage[1][0] == 36;
    }
 
    private static boolean multiplyTest4() {
@@ -748,9 +734,8 @@ class Main{
      matrix2.initialize(new int[][]{{3, 5}});
      Matrix newMatrix = matrix2.multiply(matrix1);
      int[][] newMatrixstorage = newMatrix.getStorage();
-     return newMatrix != null && newMatrix.getM() == 1 && newMatrix.getN() == 3 &&
-          newMatrixstorage[0][0] == 27 && newMatrixstorage[0][1] == 13 &&
-          newMatrixstorage[0][2] == 34;
+     return newMatrix.getM() == 1 && newMatrix.getN() == 3 && newMatrixstorage[0][0] == 27 &&
+             newMatrixstorage[0][1] == 13 && newMatrixstorage[0][2] == 34;
    }
 
 
@@ -780,10 +765,10 @@ class Main{
         boolean testPassed = false;
         // Attempt to run test and suppress exceptions on failure
         try {
-            Method method = Main.class.getDeclaredMethod(testName);
-            testPassed = (boolean) method.invoke(new Main()); //test();
+            Method method = MatrixTests.class.getDeclaredMethod(testName);
+            testPassed = (boolean) method.invoke(new MatrixTests()); //test();
             if(testPassed) testCount[0]++;
-        } catch (Exception e){}
+        } catch (Exception ignored){}
         String result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testDesc;
         System.out.println(result);
     }

@@ -1,5 +1,5 @@
 /**
- *  Target Practice 05 - Linked List
+ *  Target Practice - Linked List
  *
  *  Solve the following problems involving linked lists.
  */

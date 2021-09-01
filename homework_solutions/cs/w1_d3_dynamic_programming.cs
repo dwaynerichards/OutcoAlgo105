@@ -1,5 +1,5 @@
 ﻿/**
- *  Homework 05 - Dynamic Programming
+ *  Homework - Dynamic Programming
  *
  *
  *  Instructions: Dynamic programming takes a lot of practice to recognize as
@@ -101,13 +101,13 @@ class Test{
     public static void Main() {
         int[] testCount = {0, 0};
         Console.WriteLine("Lattice Paths Tests");
-        
+
         runTest(latticPathTest1, "should work on a 2 x 3 lattice", testCount);
         runTest(latticPathTest2, "should return the same for a 3 x 2 lattice", testCount);
         runTest(latticPathTest3, "should return the same for a 0 x 0 lattice", testCount);
         runTest(latticPathTest4, "should work for a 10 x 10 lattice (square input)", testCount);
         runTest(latticPathTest5, "should work for a 17 x 14 lattice (large input)", testCount);
-        
+
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
 	}
 
@@ -141,5 +141,5 @@ class Test{
         } catch {}
         string result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testName;
         Console.WriteLine(result);
-    } 
+    }
 }

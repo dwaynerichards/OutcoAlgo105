@@ -1,5 +1,5 @@
 /**
- *  Homework 05 - Dynamic Programming
+ *  Homework - Dynamic Programming
  *
  *
  *  Instructions: Dynamic programming takes a lot of practice to recognize as
@@ -86,7 +86,7 @@ int latticePaths(int m, int n) {
     }
     work[i] = 2*temp;
   }
-  
+
   return work[smaller];
 }
 

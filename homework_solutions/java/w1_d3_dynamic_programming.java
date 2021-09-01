@@ -1,26 +1,24 @@
-/**
- *  Homework 05 - Dynamic Programming
+/*
+ *  Homework - Dynamic Programming
  *
  *
  *  Instructions: Dynamic programming takes a lot of practice to recognize as
  *                well as develop algorithms. Thus we will be working on a few
- *                different problems using dynammic programming.
+ *                different DPProblems using dynammic programming.
  *
  *                As a reminder, here are the two dynamic programing approaches:
  *
- *      			(1) Overlapping subproblems - Memoization
- *      				  Recursion sometimes call subproblems repeatedly. These repeated
+ *      			(1) Overlapping subDPProblems - Memoization
+ *      				  Recursion sometimes call subDPProblems repeatedly. These repeated
  *                calls lead to inefficient computations and an exponential time
  *                complexity.
  *
  *      			(2) Optimal substructure - Tabulation
  *      					The solution of a larger problem can be solved using
- *      					solutions of its subproblems.
+ *      					solutions of its subDPProblems.
  */
 
-import java.util.*;
-
-class Problems {
+class DPProblems {
 
   /*
    *  Problem: Lattice Paths (Dynamic Programming Approach)
@@ -33,7 +31,7 @@ class Problems {
    *  Input:     An integer N (which is the width of the lattice)
    *             An integer M (which is the height of the lattice)
    *
-   *  Output:    An interger (which represents the number of unique paths)
+   *  Output:    An integer (which represents the number of unique paths)
    *
    *  Example:   input: 2
    *
@@ -69,23 +67,26 @@ class Problems {
 
   // Time Complexity: O(max(M, N)^2)
   // Auxiliary Space Complexity: O(max(M,N))
-   public static int latticePaths(int m, int n) {
-     int larger = Math.max(m, n);
-     int smaller = Math.min(m, n);
+  public static int latticePaths(int m, int n) {
+    // Init 2D matrix for tabulation solution
+    int[][] matrix = new int[m+1][n+1];
 
-     int[] work = new int[larger+1];
-     work[0] = 1;
+    // Fill in top row, left col
+    for(int row = 0; row < matrix.length; row++) {
+      matrix[row][0] = 1;
+    }
 
-     for (int i = 1 ; i < larger+1 ; i++) {
-       int temp = 1;
-       for (int j = 1 ; j < i+1 ; j++) {
-         temp = temp + work[j];
-         work[j] = temp;
-       }
-       work[i] = 2*temp;
-     }
+    for(int col = 0; col < matrix[m].length; col++) {
+      matrix[0][col] = 1;
+    }
 
-     return work[smaller];
+    // Fill in table with look backs row by row, col by col
+    for(int row = 1; row < matrix.length; row++) {
+      for(int col = 1; col < matrix[m].length; col++) {
+        matrix[row][col] = matrix[row-1][col] + matrix[row][col-1];
+      }
+    }
+    return matrix[m][n];
    }
 
 }
@@ -95,12 +96,10 @@ class Problems {
 ////////////////////////////////////////////////////////////
 
 // use the Main class to run the test cases
-class Main {
-  private int[] testCount;
-
+class DPTests {
   // an interface to perform tests
   public interface Test {
-    public boolean execute();
+    boolean execute();
   }
 
   public static void main(String[] args) {
@@ -108,35 +107,15 @@ class Main {
     int[] testCount = {0, 0};
     System.out.println("Lattice Paths Tests");
 
-    assertTest(testCount, "should work on a 2 x 3 lattice", new Test() {
-      public boolean execute() {
-        return Problems.latticePaths(2, 3) == 10;
-      }
-    });
+    assertTest(testCount, "should work on a 2 x 3 lattice", () -> DPProblems.latticePaths(2, 3) == 10);
 
-    assertTest(testCount, "should return the same for a 3 x 2 lattice", new Test() {
-      public boolean execute() {
-        return Problems.latticePaths(3, 2) == 10;
-      }
-    });
+    assertTest(testCount, "should return the same for a 3 x 2 lattice", () -> DPProblems.latticePaths(3, 2) == 10);
 
-    assertTest(testCount, "should return the same for a 0 x 0 lattice", new Test() {
-      public boolean execute() {
-        return Problems.latticePaths(0, 0) == 1;
-      }
-    });
+    assertTest(testCount, "should return the same for a 0 x 0 lattice", () -> DPProblems.latticePaths(0, 0) == 1);
 
-    assertTest(testCount, "should work for a 10 x 10 lattice (square input)", new Test() {
-      public boolean execute() {
-        return Problems.latticePaths(10, 10) == 184756;
-      }
-    });
+    assertTest(testCount, "should work for a 10 x 10 lattice (square input)", () -> DPProblems.latticePaths(10, 10) == 184756);
 
-    assertTest(testCount, "should work for a 17 x 14 lattice (large input)", new Test() {
-      public boolean execute() {
-        return Problems.latticePaths(17, 14) == 265182525;
-      }
-    });
+    assertTest(testCount, "should work for a 17 x 14 lattice (large input)", () -> DPProblems.latticePaths(17, 14) == 265182525);
 
     // print the result of tests passed for a module
     System.out.println("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
@@ -155,7 +134,7 @@ class Main {
         pass = " true";
         count[0]++;
       }
-    } catch(Exception e) {}
+    } catch(Exception ignored) {}
     String result = "  " + (count[1] + ")   ").substring(0, 5) + pass + " : " + name;
     System.out.println(result);
   }

@@ -1,5 +1,5 @@
  /**
-  *  Target Practice 02 - Dynamic Programming
+  *  Target Practice - Dynamic Programming
   *
   *
   *

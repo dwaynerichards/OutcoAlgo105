@@ -1,3 +1,18 @@
+# Last project
+
+#### Prompt
+
+Say: "Tell me about the last project you worked on."
+
+- *Identify*: Does the interviewee discuss their competencies based on what you have asked them? Competencies include:
+   - Technical Skills (libraries, languages, etc.)
+   - Interpersonal Skills  
+
+
+- *Prove*: Does the interviewee provide a _specific_ example (past experience or hypothetical scenario)  to showcase competencies and/or fit? Is it presented in the form of a story (punchline, beginning, middle, positive end)?
+
+
+- *Close*: Does the interviewee showcase why the company should hire them and how their skills/experience/values will add value to and align with the team/company? Does the interviewee showcase what they have learned in "Prove" and how they will apply it to the new role?
 
 # 222 - Consecutive Subarray Sum
 

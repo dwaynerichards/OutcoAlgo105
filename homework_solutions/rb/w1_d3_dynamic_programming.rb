@@ -1,4 +1,4 @@
-#    Homework 05 - Dynamic Programming: Memoization & Tabulation
+#    Homework - Dynamic Programming: Memoization & Tabulation
 #
 #
 #    Instructions: Dynammic programming takes a lot of practice to recognize as

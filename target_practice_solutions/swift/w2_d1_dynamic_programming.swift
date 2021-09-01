@@ -1,5 +1,5 @@
 /*
- *  Target Practice 03 - Dynamic Programming pt. 2
+ *  Target Practice - Dynamic Programming pt. 2
  */
 
 /*
@@ -53,7 +53,7 @@
    var counts: [Character: Int] = [:]
    var missingCharacters: Int = chars.count
 
-   var arr: [Character] = Array(str);
+   let arr: [Character] = Array(str);
 
    for i in chars.indices {//   Create the counts hash table
      counts[chars[i]] = 0

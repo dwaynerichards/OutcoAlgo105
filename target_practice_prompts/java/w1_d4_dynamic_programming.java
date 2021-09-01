@@ -1,5 +1,5 @@
 /*
-*  Target Practice 02 - Dynamic Programming - Tabulation/Memoization
+*  Target Practice - Dynamic Programming - Tabulation/Memoization
 *
 *          Given an array of coins and a target total, return how many
 *          unique ways there are to use the coins to make up that total.
@@ -34,10 +34,8 @@
 *
 */
 
-import java.io.*;
-import java.util.*;
 
-class Problems {
+class DPProblems {
 
    // Time Complexity:
    // Auxiliary Space Complexity:
@@ -53,12 +51,10 @@ class Problems {
  ////////////////////////////////////////////////////////////
 
  // use the Main class to run the test cases
- class Main {
-   private int[] testCount;
-
+ class DPTests {
    // an interface to perform tests
    public interface Test {
-     public boolean execute();
+     boolean execute();
    }
 
    public static void main(String[] args) {
@@ -68,25 +64,19 @@ class Problems {
      System.out.println("Coin Sum Tests");
 
      // tests are in the form as shown
-     assertTest(testCount, "should work for first example case", new Test() {
-       public boolean execute() {
-         int output = Problems.coinSum(new int[]{1,2,3}, 4);
-         return output == 4;
-       }
+     assertTest(testCount, "should work for first example case", () -> {
+       int output = DPProblems.coinSum(new int[]{1,2,3}, 4);
+       return output == 4;
      });
 
-     assertTest(testCount, "should work for second example case", new Test() {
-       public boolean execute() {
-         int output = Problems.coinSum(new int[]{2,5,3,6}, 10);
-         return output == 5;
-       }
+     assertTest(testCount, "should work for second example case", () -> {
+       int output = DPProblems.coinSum(new int[]{2,5,3,6}, 10);
+       return output == 5;
      });
 
-     assertTest(testCount, "should work for a single coin", new Test() {
-       public boolean execute() {
-         int output = Problems.coinSum(new int[]{2}, 10);
-         return output == 1;
-       }
+     assertTest(testCount, "should work for a single coin", () -> {
+       int output = DPProblems.coinSum(new int[]{2}, 10);
+       return output == 1;
      });
 
 
@@ -105,7 +95,7 @@ class Problems {
          pass = " true";
          count[0]++;
        }
-     } catch(Exception e) {}
+     } catch(Exception ignored) {}
      String result = "  " + (count[1] + ")   ").substring(0, 5) + pass + " : " + name;
      System.out.println(result);
    }

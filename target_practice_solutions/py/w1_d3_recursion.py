@@ -1,5 +1,5 @@
 #
-# Target Practice 01 - Recursion
+# Target Practice - Recursion
 #
 # Problem 1: Power Set
 #
@@ -14,6 +14,40 @@
 # Note:     The input string will not contain duplicate characters
 #           The letters in the subset string must be in the same order
 #           as the original input.
+#
+#  Hints:
+#
+#  From Cracking the Coding Interview, by Gayle Laakmann McDowell. 8.4: Powerset
+#
+#  #273. How can you build all subsets of {a , b, c} from the subsets of {a , b}?
+#
+#  #290. Anything that is a subset of {a , b} is also a subset of {a , b , c}. Which sets are
+#  subsets of {a , b , c} but not {a , b}?
+#
+#  #338. Subsets that contain c will be subsets {a , b , c} but not {a , b}. Can you build these
+#  subsets from the subsets of (a , b}?
+#
+#  #354. You can build the remaining subsets by adding c to all the subsets of {a , b).
+#
+#  #373. You can also do this by mapping each subset to a binary number. The i th bit could
+#  represent a "boolean" flag for whether an element is in the set.
+
+
+def powerset(input):
+    results = []
+
+    def traverse(build, depth):
+        if (depth == len(input)):
+            results.append(build)
+            return
+
+        traverse(build, depth + 1)
+        traverse(build + input[depth], depth + 1)
+
+    traverse('', 0)
+    return results
+
+
 
 # Problem 2: Lattice Paths
 #
@@ -39,22 +73,6 @@
 # Resource: https://projecteuler.net/problem=15
 #
 #
-
-
-def powerset(input):
-    results = []
-
-    def traverse(build, depth):
-        if (depth == len(input)):
-            results.append(build)
-            return
-
-        traverse(build, depth + 1)
-        traverse(build + input[depth], depth + 1)
-
-    traverse('', 0)
-    return results
-
 
 
 # Time Complexity: O(2^(M+N))

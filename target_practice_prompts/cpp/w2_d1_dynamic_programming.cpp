@@ -1,5 +1,5 @@
 /*
- *  Target Practice 03 - Dynamic Programming pt. 2
+ *  Target Practice - Sliding Window / Dynamic Programming 2
  */
 
 #include <climits>

@@ -1,5 +1,5 @@
 ﻿/**
- *  Homework 12 - Graph
+ *  Homework - Graph
  *
  *  Problem: Graph
  *

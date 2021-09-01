@@ -1,6 +1,6 @@
 # Why do you want to work for this company?
 
-Should take one minute; minute and a half at most
+Before the interview, ask them to choose a company they'd want to work for. Once they have a company in mind, the question should take one minute; minute and a half at most.
 
 ##### Prompt
 
@@ -93,6 +93,88 @@ function knapsack(weights, values, capacity) {
 }
 
 console.log(knapsack([10,20,30], [60,100,120], 50));
+```
+### Top Down Dynamic Programic with a Memoized Approach
+
+```python
+def knapsack(weights, value, capacity):
+  
+  dp = [[-1 for _ in range(capacity+1)] for _ in range(len(weights))]
+  
+  
+  def recursive(dp, weights, value, capacity, index):
+    
+    #Base Case
+    if capacity<=0 or index>=len(weights):
+      return 0
+    
+    #Recursive Case 
+    value1 = 0 
+    
+    if weights[index] <= capacity:
+        value1 =  value[index] + recursive(dp, weights, value, capacity-weights[index], index+1)
+        
+    value2 = recursive(dp, weights, value, capacity, index+1)
+    
+    dp[index][capacity] = max(value1,value2)
+    
+    return dp[index][capacity]
+  
+  return recursive(dp, weights, value, capacity, 0)
+  
+print(knapsack([10, 20, 30], [60, 100, 120], 50))
+```
+
+
+### Top Down Dynamic Programic with a Memoized Approach
+```python
+### Top Down Dynamic Programic with a Memoized Approach
+
+```python
+'''
+Input: weights = [2,3,4,5]
+        value =  [1,2,5,6]
+        capacity = 8
+
+
+          DP TABLE
+          
+       0  1   2   3    4    5    6    7    8
+     |  -------------------------------------
+    2|  0  0   1   1    1    1    1    1    1 
+    
+    3|  0  0   1   2    2    3    3    3    3 
+    
+    4|  0  0   1   2    5    5    6    7    7
+    
+    5|  0  0   1   2    5    6    6    7    8
+ '''
+def knapsack(weights, value, capacity):
+  
+  dp = [[-1 for _ in range(capacity+1)] for _ in range(len(weights))]
+  
+  
+  def recursive(dp, weights, value, capacity, index):
+    
+    #Base Case
+    if capacity<=0 or index>=len(weights):
+      return 0
+    
+    #Recursive Case 
+    value1 = 0 
+    
+    if weights[index] <= capacity:
+        value1 =  value[index] + recursive(dp, weights, value, capacity-weights[index], index+1)
+        
+    value2 = recursive(dp, weights, value, capacity, index+1)
+    
+    dp[index][capacity] = max(value1,value2)
+    
+    return dp[index][capacity]
+  
+  return recursive(dp, weights, value, capacity, 0)
+  
+print(knapsack([2,3,4,5], [1,2,5,6], 8))
 ```
 
 # Resources

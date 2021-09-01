@@ -1,5 +1,5 @@
 /*
-*  Homework 17 - Matrices
+*  Homework - Matrices
 *
 *  Prompt: Create a Matrix class
 *

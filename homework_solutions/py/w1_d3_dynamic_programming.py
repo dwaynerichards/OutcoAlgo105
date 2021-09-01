@@ -1,5 +1,5 @@
 #
-#  Homework 05 - Dynamic Programming
+#  Homework - Dynamic Programming
 #
 #  Problem:   Lattice Paths (Dynamic Programming Approach)
 #
