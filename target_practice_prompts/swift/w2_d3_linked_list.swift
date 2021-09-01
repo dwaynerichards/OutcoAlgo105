@@ -1,5 +1,5 @@
 /**
- *  Target Practice - Linked List
+ *  Target Practice 06 - Linked List
  *
  *  Solve the following problems involving linked lists.
  */
@@ -179,7 +179,7 @@ for i in 0..<size {
 var terminalNode = ListNode(Int(arc4random()))
 current = terminalNode
 size = Int(arc4random_uniform(10000)) + 100
-for _ in 0..<size {
+for i in 0..<size {
   current.next = ListNode(Int(arc4random()))
   current = current.next!
 }

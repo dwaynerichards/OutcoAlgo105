@@ -1,5 +1,5 @@
 /**
- *  Homework - Binary Search Tree
+ *  Homework 10 - Binary Search Tree
  *
  *  TreeNode class
  *
