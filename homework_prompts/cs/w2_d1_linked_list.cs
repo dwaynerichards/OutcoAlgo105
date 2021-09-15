@@ -1,5 +1,5 @@
 ﻿/**
- *  Homework - Linked List
+ *  Homework 09 - Linked List
  *
  *  Problem 1: ListNode class
  *

@@ -3,7 +3,7 @@ const { log } = console;
 const { red, yellow, blue, green } = chalk;
 
 /*
- *  Homework - Binary Heap
+ *  Homework 12 - Binary Heap
  *
  *  Prompt: Create a Binary Heap class
  *

@@ -1,5 +1,5 @@
 /**
- *  Target Practice - Linked List
+ *  Target Practice 06 - Linked List
  *
  *  Solve the following problems involving linked lists.
  */
@@ -158,8 +158,8 @@ func swap(_ head: ListNode?, _ a: Int, _ b: Int) -> ListNode? {
     return [nil, nil]
   }
 
-  let location1: [ListNode?] = locate(head, a)
-  let location2: [ListNode?] = locate(head, b)
+  var location1: [ListNode?] = locate(head, a)
+  var location2: [ListNode?] = locate(head, b)
 
   if location1[1] == nil || location2[1] == nil {
     return head
@@ -247,7 +247,7 @@ for i in 0..<size {
 var terminalNode = ListNode(Int(arc4random()))
 current = terminalNode
 size = Int(arc4random_uniform(10000)) + 100
-for _ in 0..<size {
+for i in 0..<size {
   current.next = ListNode(Int(arc4random()))
   current = current.next!
 }

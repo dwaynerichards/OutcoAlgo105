@@ -1,5 +1,5 @@
 /*
- *  Target Practice - Heapsort
+ *  Target Practice 09 - Heapsort
  */
 
 'use strict';

@@ -1,4 +1,4 @@
-#  Target Practice - HeapSort
+#  Target Practice 09 - HeapSort
 #
 #  Prompt: Implement heapsort in-place.
 #

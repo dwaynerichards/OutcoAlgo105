@@ -1,5 +1,5 @@
 /**
- *  Target Practice - Graph Traversal
+ *  Target Practice 08 - Graph Traversal
  *
  *  Instructions: Solve the following graph traversal problems.
  */

@@ -1,5 +1,5 @@
 /**
- *  Target Practice - Heapsort
+ *  Target Practice 09 - Heapsort
  *
  *  NOTE: In-place means to manipulate the input array rather than create a
  *        new array.
@@ -10,6 +10,8 @@
  *  Example: heapsort([4, 15, 16, 50, 8, 23, 42, 108])
  *           //[4, 8, 15, 16, 23, 42, 50, 108]
  */
+
+import Darwin
 
 // Worse Time Complexity: O(Nlog(N))
 // Worse Auxiliary Space Complexity: O(1)
@@ -131,8 +133,8 @@ assert(&testCount, "should sort single-element input",  {
 
 assert(&testCount, "should sort moderate-sized input",  {
   var arr = [Int]()
-  for _ in 1..<1000 {
-    arr.append(Int.random(in: 0..<1000))
+  for i in 1..<1000 {
+    arr.append(Int(arc4random_uniform(1000)))
   }
   var arr2 = arr
   let test = heapsort(&arr2)
@@ -141,8 +143,8 @@ assert(&testCount, "should sort moderate-sized input",  {
 
 assert(&testCount, "should sort large input",  {
   var arr = [Int]()
-  for _ in 1..<1000000 {
-    arr.append(Int.random(in: 0..<1000000))
+  for i in 1..<1000000 {
+    arr.append(Int(arc4random_uniform(1000000)))
   }
   var arr2 = arr
   let test = heapsort(&arr2)

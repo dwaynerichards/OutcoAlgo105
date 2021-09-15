@@ -1,5 +1,5 @@
 /*
- *  Target Practice - Linked List
+ *  Target Practice 06 - Linked List
  */
 
 'use strict';

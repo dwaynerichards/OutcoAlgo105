@@ -1,4 +1,4 @@
-#  Target Practice - Dynamic Programming
+#  Target Practice 02 - Dynamic Programming
 #
 #
 #  Instructions: Dynammic programming takes a lot of practice to recognize as

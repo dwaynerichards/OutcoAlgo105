@@ -1,6 +1,6 @@
 /*
 
-  Homework - LRU Cache
+  Homework 15 - LRU Cache
 
   Problem: LRU Cache
 
@@ -26,10 +26,10 @@
               Create a Node class
 
               The Node class should contain the following properties:
-              key: {String}
-              value: {String}
-              previous: {Node*} (initially NULL)
-              next: {Node*} (initially NULL)
+              key: {Integer}
+              value: {Integer}
+              previous: {Node} (initially NULL)
+              next: {Node} (initially NULL)
 
          II.  LRUCache Class
               Create an LRUCache class
@@ -39,13 +39,13 @@
               count: {Integer} (initially 0)
               cache: {Hash Table} The keys represent unique ids of each node, and the values represent the node objects
                                 that possess those keys.
-              head: {Node*}
-              tail: {Node*}
+              head: {Node}
+              tail: {Node}
 
      Your LRU cache should have the following methods:
 
       get(key): Retreives a value from the cache (will always be positive) at
-                the key if the key exists in the cache, otherwise returns empty string.
+                the key if the key exists in the cache, otherwise returns -1.
 
       set(key,value): Inserts the value at the key or creates a new key:value entry
                 if key is not present. When the cache reaches its capacity, it
@@ -63,7 +63,7 @@
 
      lruCache->get('doc'); => 'david'
      lruCache->set('swe', 'ron');
-     lruCache->get('cpo'); => ''
+     lruCache->get('cpo'); => -1
 
 
 */

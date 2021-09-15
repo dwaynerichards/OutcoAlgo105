@@ -1,5 +1,5 @@
 #
-#  Homework - Trie
+#  Homework 11 - Trie
 #
 #  Problem 1: TrieNode class
 #

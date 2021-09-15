@@ -1,5 +1,5 @@
 ﻿/**
- *  Target Practice - Binary Tree Traversal
+ *  Target Practice 07 - Binary Tree Traversal
  *
  *  Solve the following problems involving binary tree traversals.
  */
@@ -255,7 +255,7 @@ class Test{
     return Problems.dfsPost(emptyTreeExample).Count == 0;
   }
 
-
+  
   // DO NOT TOUCH FUNCTIONS BELOW
 
   // Custom runTest function to handle tests
@@ -274,7 +274,7 @@ class Test{
       } catch {}
       string result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testName;
       Console.WriteLine(result);
-  }
+  } 
   // this is to print the number of test cases passed for a test suite function
   private static void printTestsPassed(int[] testCount) {
     Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");

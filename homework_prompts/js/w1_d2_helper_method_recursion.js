@@ -1,5 +1,5 @@
 /*
- *  Homework - Helper Method Recursion
+ *  Homework 04 - Helper Method Recursion
  *
  *  Solve the following problems using helper method recursion.
  */
