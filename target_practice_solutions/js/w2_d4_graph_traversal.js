@@ -1,5 +1,5 @@
 /*
- *  Target Practice - Graph Traversal
+ *  Target Practice 08 - Graph Traversal
  */
 
 'use strict';

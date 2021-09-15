@@ -1,5 +1,5 @@
 #
-#  Homework - Complexity
+#  Complexity
 #
 #
 #  For the following functions, write the expected Time and Auxiliary Space

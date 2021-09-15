@@ -1,5 +1,5 @@
 /**
- *  Target Practice - BST Traversal
+ *  Target Practice 07 - BST Traversal
  *
  *  Solve the following problems involving binary tree traversals.
  */

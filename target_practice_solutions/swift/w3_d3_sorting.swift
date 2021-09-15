@@ -1,5 +1,5 @@
 /*
-*  Target Practice - Sorting
+*  Target Practice 04 - Sorting
 *
 *  Problem 1: Quicksort
 *
@@ -14,6 +14,8 @@
 *  Example:   input = [3,9,1,4,7] , output = [1,3,4,7,9]
 *
 */
+
+import Darwin
 
 
 // Worse Time Complexity: O(N^2)
@@ -100,7 +102,7 @@ assert(&testCount, "should sort single-element input",  {
 assert(&testCount, "should sort moderate-sized input",  {
   var arr = [Int]()
   for _ in 1..<1000 {
-    arr.append(Int.random(in: 0..<1000))
+    arr.append(Int(arc4random_uniform(1000)))
   }
   var arr2 = arr
   let test = quicksort(&arr2)
@@ -110,7 +112,7 @@ assert(&testCount, "should sort moderate-sized input",  {
 assert(&testCount, "should sort large input",  {
   var arr = [Int]()
   for _ in 1..<1000000 {
-    arr.append(Int.random(in: 0..<1000000))
+    arr.append(Int(arc4random_uniform(1000000)))
   }
   var arr2 = arr
   let test = quicksort(&arr2)

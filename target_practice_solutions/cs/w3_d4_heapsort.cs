@@ -1,5 +1,5 @@
 ﻿/**
- *  Target Practice - Heapsort
+ *  Target Practice 09 - Heapsort
  *
  *  Problem 1: Implement Heapsort in-place.
  *
@@ -97,7 +97,7 @@ class Test{
     runTest(sortTest2, "should return empty array for empty input", testCount);
     runTest(sortTest3, "should sort single-element input", testCount);
     runTest(sortTest4, "should sort moderate-sized input", testCount);
-    runTest(sortTest5, "should sort large-sized input", testCount);
+    runTest(sortTest5, "should sort large-sized input", testCount);  
     printTestsPassed(testCount);
 	}
 
@@ -153,7 +153,7 @@ class Test{
       }
       return true;
   }
-
+  
   // DO NOT TOUCH FUNCTIONS BELOW
 
   // Custom runTest function to handle tests
@@ -174,7 +174,7 @@ class Test{
       }
       string result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testName;
       Console.WriteLine(result);
-  }
+  } 
   // this is to print the number of test cases passed for a test suite function
   private static void printTestsPassed(int[] testCount) {
     Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");

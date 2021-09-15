@@ -1,5 +1,5 @@
 #
-#  Target Practice - Linked List
+#  Target Practice 06 - Linked List
 #
 #  Using the LinkedList class from your homework, add the
 #                following methods to your LinkedList.

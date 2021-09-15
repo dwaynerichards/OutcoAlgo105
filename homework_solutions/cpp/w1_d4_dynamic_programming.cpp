@@ -1,5 +1,5 @@
 /*
- *  Homework - Dynamic Programming - Moving Window
+ *  Homework 06 - Dynamic Programming - Moving Window
  *
  */
 

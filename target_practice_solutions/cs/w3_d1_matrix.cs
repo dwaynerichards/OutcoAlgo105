@@ -1,5 +1,5 @@
 ﻿/*
- * Target Practice - Matrices
+ * Target Practice 12 - Matrices
  *
  *  Problem 1:  Robot Paths
  *
@@ -184,7 +184,7 @@ class Test{
     int[,] matrix = {{0,0,0,0,0,0}};
     return Problems.robotPaths(matrix) == 1;
   }
-
+  
   private static bool robotPathsTest5() {
     int[,] matrix = {{0},
                           {0},
@@ -203,7 +203,7 @@ class Test{
     Console.WriteLine("  Please be patient, test 6 may take longer to run");
     return Problems.robotPaths(matrix) == 7110272;
   }
-
+  
 
   private static bool matrixSpiralTest1() {
     int[,] matrix = {{}};
@@ -265,7 +265,7 @@ class Test{
     return test.SequenceEqual(expected);
   }
 
-
+  
   // DO NOT TOUCH FUNCTIONS BELOW
 
   // Custom runTest function to handle tests
@@ -286,7 +286,7 @@ class Test{
       }
       string result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testName;
       Console.WriteLine(result);
-  }
+  } 
   // this is to print the number of test cases passed for a test suite function
   private static void printTestsPassed(int[] testCount) {
     Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");

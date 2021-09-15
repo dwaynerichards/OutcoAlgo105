@@ -1,5 +1,5 @@
 /*
- * Homework - LRU Cache
+ * Homework 15 - LRU Cache
  */
 
 /*
@@ -29,8 +29,8 @@
  *              Create a Node class
  *
  *              The Node class should contain the following properties:
- *              key: {String}
- *              value: {String}
+ *              key: {Integer}
+ *              value: {Integer}
  *              previous: {Node} (initially None)
  *              next: {Node} (initially None)
  *
@@ -119,6 +119,36 @@ class LRUCache {
   };
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,5 +1,5 @@
 /*
- * Homework - Decrease and Conquer
+ * Homework 03 - Decrease and Conquer
  * Utilize the decrease and conquer pattern to solve these problems.
  */
 
@@ -282,7 +282,7 @@ public static int multiplicationRussianPeasant(int a, int b) {
 
 // use the Main class to run the test cases
 class DecreaseAndConquerTests {
-
+  
   // an interface to perform tests
   public interface Test {
     boolean execute();

@@ -1,5 +1,5 @@
 /*
- *  Target Practice - Sorting
+ *  Target Practice 04 - Sorting
  */
 
 'use strict';

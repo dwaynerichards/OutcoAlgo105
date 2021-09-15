@@ -1,5 +1,5 @@
 /*
-  * Homework - Heap
+  * Homework 13 - Heap
   *
   *
   *  Prompt: Create a Heap class/constructor

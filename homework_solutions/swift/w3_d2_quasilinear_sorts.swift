@@ -1,5 +1,5 @@
 /*
-*  Homework - Quasilinear Sorts
+*  Homework 08 - Quasilinear Sorts
 *
 *  Problem 1: Mergesort
 *

@@ -1,5 +1,5 @@
 /**
- *  Homework - Binary Heap
+ *  Homework 12 - Binary Heap
  *
  *  Prompt: Create a Binary Heap class
  *

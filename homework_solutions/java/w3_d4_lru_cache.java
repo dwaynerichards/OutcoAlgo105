@@ -25,8 +25,8 @@
 //              Create a Node class
 //
 //              The Node class should contain the following properties:
-//              key: {String}
-//              value: {String}
+//              key: {Integer}
+//              value: {Integer}
 //              previous: {Node} (initially None)
 //              next: {Node} (initially None)
 //
@@ -44,7 +44,7 @@
 //     Your LRU cache should have the following methods:
 //
 //      get(key): Retreives a value from the cache (will always be positive) at
-//                the key if the key exists in the cache, otherwise returns null.
+//                the key if the key exists in the cache, otherwise returns -1.
 //
 // set(key,value): Inserts the value at the key or creates a new key:value entry
 //                if key is not present. When the cache reaches its capacity, it
@@ -62,7 +62,7 @@
 //
 //     lruCache.get('doc'); => 'david'
 //     lruCache.set('swe', 'ron');
-//     lruCache.get('cpo'); => null
+//     lruCache.get('cpo'); => -1
 //
 //
 

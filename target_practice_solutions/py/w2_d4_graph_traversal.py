@@ -1,5 +1,5 @@
 #
-#  Target Practice - Graph Traversal
+#  Target Practice 08 - Graph Traversal
 #
 #  Instructions: One of the most fundamental components of working with trees
 #                and graphs is traversals.  We will focus primarily on this

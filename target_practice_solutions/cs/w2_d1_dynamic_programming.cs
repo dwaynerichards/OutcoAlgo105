@@ -1,5 +1,5 @@
 ﻿/*
- *  Target Practice - Sliding Window / Dynamic Programming 2
+ *  Target Practice 03 - Dynamic Programming pt. 2
  */
 
 using System;
@@ -291,7 +291,7 @@ class Test{
     return test == 1;
   }
 
-
+  
   // DO NOT TOUCH FUNCTIONS BELOW
 
   // Custom runTest function to handle tests
@@ -310,7 +310,7 @@ class Test{
       } catch {}
       string result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testName;
       Console.WriteLine(result);
-  }
+  } 
   // this is to print the number of test cases passed for a test suite function
   private static void printTestsPassed(int[] testCount) {
     Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
