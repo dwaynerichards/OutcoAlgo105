@@ -43,17 +43,18 @@
 "use strict";
 
 class TreeNode {
-  public left?: TreeNode;
-  public right?: TreeNode;
-  constructor(public value?: number) {}
+  public left: TreeNode | null = null;
+  public right: TreeNode | null = null;
+  public value: null | number = null;
+  constructor() {}
 }
 
 class PatriciaMerkleTree {
-  public size: number;
-  constructor(public root?: TreeNode) {
+  public size: number = 0;
+  public root: TreeNode | null = null;
+  constructor() {
     // create root node with constructor
     //root node will be tree nide
-    this.size = root ? 1 : 0;
   }
 
   // Time Complexity:
@@ -66,15 +67,16 @@ class PatriciaMerkleTree {
    * the left child on the parent node, otherwise the node is placed as the right child of the parent node.
    */
   insert(value: number) {
-    const node = new TreeNode(value);
+    const node = new TreeNode();
+    node.value = value;
     if (!this.root) {
       this.root = node;
       this.size++;
       return;
     } else {
-      let prev: undefined | TreeNode;
-      let current: undefined | TreeNode = this.root;
-      while (current != undefined) {
+      let prev: null | TreeNode;
+      let current: null | TreeNode = this.root;
+      while (current != null) {
         prev = current;
         node.value! > current.value! ? (current = node.left) : (current = node.right);
       }
@@ -91,9 +93,9 @@ class PatriciaMerkleTree {
     const { root } = this;
     if (!root) return false;
     //instantiate current = root.val
-    let current: TreeNode | undefined = root;
+    let current: TreeNode | null = root;
     //stepo though tree until current = undefined
-    while (current != undefined) {
+    while (current != null) {
       if (current.value === value) return true;
       value > current.value! ? (current = current!.left) : (current = current.right);
     }
