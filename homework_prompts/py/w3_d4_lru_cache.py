@@ -1,5 +1,9 @@
 #
+<<<<<<< HEAD
+#  Homework - LRU Cache
+=======
 #  Homework 15 - LRU Cache
+>>>>>>> a63a631 (yuck)
 #
 #  Problem: LRU Cache Class
 #
@@ -25,8 +29,13 @@
 #              Create a Node class
 #
 #              The Node class should contain the following properties:
+<<<<<<< HEAD
+#              key: {String}
+#              value: {String}
+=======
 #              key: {Integer}
 #              value: {Integer}
+>>>>>>> a63a631 (yuck)
 #              previous: {Node} (initially None)
 #              next: {Node} (initially None)
 #

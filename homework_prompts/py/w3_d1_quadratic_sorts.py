@@ -1,5 +1,9 @@
 #
+<<<<<<< HEAD
+#  Homework - Quadratic Sorts
+=======
 #  Homework 07 - Quadratic Sorts
+>>>>>>> a63a631 (yuck)
 #
 #  Problem 1: Insertion Sort
 #

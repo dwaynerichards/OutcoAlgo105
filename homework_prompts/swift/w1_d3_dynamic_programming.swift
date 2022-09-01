@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
+ *  Homework - Dynamic Programming
+=======
  *  Homework 05 - Dynamic Programming
+>>>>>>> a63a631 (yuck)
  *
  *
  *  Instructions: Dynamic programming takes a lot of practice to recognize as

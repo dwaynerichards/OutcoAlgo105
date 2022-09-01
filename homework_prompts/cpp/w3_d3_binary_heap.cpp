@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
+  * Homework - Heap
+=======
   * Homework 13 - Heap
+>>>>>>> a63a631 (yuck)
   *
   *
   *  Prompt: Create a Heap class/constructor

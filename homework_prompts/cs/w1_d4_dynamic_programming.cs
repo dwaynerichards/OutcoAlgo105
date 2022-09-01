@@ -1,5 +1,9 @@
 ﻿/*
+<<<<<<< HEAD
+ *  Homework - Sliding Window
+=======
  *  Homework 06 - Dynamic Programming - Moving Window
+>>>>>>> a63a631 (yuck)
  *
  */
 
@@ -71,8 +75,13 @@ class Test{
         Console.WriteLine("maxConsecutiveSum Tests");
         runTest(maxConsecutiveSumTest1, "should work on example input", testCount);
         runTest(maxConsecutiveSumTest2, "should work on single-element input", testCount);
+<<<<<<< HEAD
+        runTest(maxConsecutiveSumTest3, "should return 0 for empty input", testCount);
+        runTest(maxConsecutiveSumTest4, "should work on longer input", testCount);
+=======
         runTest(maxConsecutiveSumTest3, "should return 0 for empty input", testCount);  
         runTest(maxConsecutiveSumTest4, "should work on longer input", testCount);  
+>>>>>>> a63a631 (yuck)
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -81,7 +90,11 @@ class Test{
         Console.WriteLine("Bit Flip Tests");
         runTest(bitFlipTest1, "should handle example case", testCount);
         runTest(bitFlipTest2, "should handle smaller edge case where flip is allowed", testCount);
+<<<<<<< HEAD
+        runTest(bitFlipTest3, "should handle smaller edge case where flip is not allowed", testCount);
+=======
         runTest(bitFlipTest3, "should handle smaller edge case where flip is not allowed", testCount);  
+>>>>>>> a63a631 (yuck)
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -120,7 +133,11 @@ class Test{
         return output == 0;
     }
 
+<<<<<<< HEAD
+
+=======
    
+>>>>>>> a63a631 (yuck)
 
     private static void runTest(Func<bool> test, string testName, int[] testCount){
         testCount[1]++;
@@ -132,5 +149,10 @@ class Test{
         } catch {}
         string result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testName;
         Console.WriteLine(result);
+<<<<<<< HEAD
+    }
+}
+=======
     } 
 }
+>>>>>>> a63a631 (yuck)

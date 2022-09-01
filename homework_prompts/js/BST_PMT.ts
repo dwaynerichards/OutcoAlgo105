@@ -43,9 +43,11 @@
 "use strict";
 
 class TreeNode {
-  public left?: TreeNode;
-  public right?: TreeNode;
-  constructor(public value?: number) {}
+  constructor(
+    public value?: number,
+    public left?: number,
+    public right?: number
+  ) {}
 }
 
 class PatriciaMerkleTree {
@@ -58,46 +60,27 @@ class PatriciaMerkleTree {
 
   // Time Complexity:
   // Auxiliary Space Complexity:
-  /**
-   * @dev Inserts a TreeNode into the Tree. Insertion location is based on the value stored
-   * in the parent node. If the Tree has no root, the inserted Node is placed at the root.
-   * If a Root exists, a search is implemented though tree until a node with no children is found.
-   * If the value of the node is greater than the parent node's value, the new node is placed as
-   * the left child on the parent node, otherwise the node is placed as the right child of the parent node.
-   */
-  insert(value: number) {
-    const node = new TreeNode(value);
+  insert(value) {
+    // create new tree node with input value
+    //const node = new TreeNode(value);
+    //search tree
+    //if no root, this bst's root will be the new tree node //return
+    const newTree = new TreeNode(value);
     if (!this.root) {
-      this.root = node;
+      this.root = newTree;
       this.size++;
       return;
-    } else {
-      let prev: undefined | TreeNode;
-      let current: undefined | TreeNode = this.root;
-      while (current != undefined) {
-        prev = current;
-        node.value! > current.value! ? (current = node.left) : (current = node.right);
-      }
-      node.value! > prev!.value! ? (prev!.left = node) : (prev!.right = node);
-      this.size++;
     }
+
+    //if root
+    //if value greater than root, check if root's right has no root// root.left becomes a new treenode
+    //if less than root, check if root left has no root
   }
 
   // Time Complexity:
   // Auxiliary Space Complexity:
-  search(value: number): boolean {
+  search(value) {
     // YOUR WORK HERE
-    //if no root return false
-    const { root } = this;
-    if (!root) return false;
-    //instantiate current = root.val
-    let current: TreeNode | undefined = root;
-    //stepo though tree until current = undefined
-    while (current != undefined) {
-      if (current.value === value) return true;
-      value > current.value! ? (current = current!.left) : (current = current.right);
-    }
-    return false;
   }
 }
 
@@ -201,38 +184,56 @@ assert(testCount, "has insert method", () => {
 assert(testCount, "able to insert a node into empty binary search tree", () => {
   let bst = new PatriciaMerkleTree();
   bst.insert(5);
-  return bst.size === 1 && bst.root!.value === 5;
+  return bst.size === 1 && bst.root.value === 5;
 });
 
 assert(testCount, "able to insert node to left of root node", () => {
   let bst = new PatriciaMerkleTree();
   bst.insert(5);
   bst.insert(3);
-  return bst.size === 2 && bst.root!.value === 5 && bst.root!.left!.value === 3;
+  return bst.size === 2 && bst.root.value === 5 && bst.root.left.value === 3;
 });
 
-assert(testCount, "able to insert node to right of node left of root node", () => {
-  let bst = new PatriciaMerkleTree();
-  bst.insert(5);
-  bst.insert(3);
-  bst.insert(4);
-  return bst.size === 3 && bst.root!.value === 5 && bst.root!.left!.value === 3 && bst.root!.left!.right!.value === 4;
-});
+assert(
+  testCount,
+  "able to insert node to right of node left of root node",
+  () => {
+    let bst = new PatriciaMerkleTree();
+    bst.insert(5);
+    bst.insert(3);
+    bst.insert(4);
+    return (
+      bst.size === 3 &&
+      bst.root.value === 5 &&
+      bst.root.left.value === 3 &&
+      bst.root.left.right.value === 4
+    );
+  }
+);
 
 assert(testCount, "able to insert node to right of root node", () => {
   let bst = new PatriciaMerkleTree();
   bst.insert(5);
   bst.insert(8);
-  return bst.size === 2 && bst.root!.value === 5 && bst.root!.right!.value === 8;
+  return bst.size === 2 && bst.root.value === 5 && bst.root.right.value === 8;
 });
 
-assert(testCount, "able to insert node to left of node right of root node", () => {
-  let bst = new PatriciaMerkleTree();
-  bst.insert(5);
-  bst.insert(8);
-  bst.insert(7);
-  return bst.size === 3 && bst.root!.value === 5 && bst.root!.right!.value === 8 && bst.root!.right!.left!.value === 7;
-});
+assert(
+  testCount,
+  "able to insert node to left of node right of root node",
+  () => {
+    let bst = new PatriciaMerkleTree();
+    bst.insert(5);
+    bst.insert(8);
+    bst.insert(7);
+    return (
+      bst.size === 3 &&
+      bst.root.value === 5 &&
+      bst.root.right.value === 8 &&
+      bst.root.right.left.value === 7
+    );
+  }
+);
 
 console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
 
@@ -244,25 +245,33 @@ assert(testCount, "has search method", () => {
   return Object.prototype.toString.apply(bst.search) === "[object Function]";
 });
 
-assert(testCount, "returns true when element exists in binary search tree", () => {
-  let bst = new PatriciaMerkleTree();
-  bst.insert(5);
-  bst.insert(3);
-  bst.insert(8);
-  bst.insert(4);
-  bst.insert(7);
-  return bst.search(4) === true;
-});
+assert(
+  testCount,
+  "returns true when element exists in binary search tree",
+  () => {
+    let bst = new PatriciaMerkleTree();
+    bst.insert(5);
+    bst.insert(3);
+    bst.insert(8);
+    bst.insert(4);
+    bst.insert(7);
+    return bst.search(4) === true;
+  }
+);
 
-assert(testCount, "returns false when element does not exist in binary search tree", () => {
-  let bst = new PatriciaMerkleTree();
-  bst.insert(5);
-  bst.insert(3);
-  bst.insert(8);
-  bst.insert(4);
-  bst.insert(7);
-  return bst.search(10) === false;
-});
+assert(
+  testCount,
+  "returns false when element does not exist in binary search tree",
+  () => {
+    let bst = new PatriciaMerkleTree();
+    bst.insert(5);
+    bst.insert(3);
+    bst.insert(8);
+    bst.insert(4);
+    bst.insert(7);
+    return bst.search(10) === false;
+  }
+);
 
 console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
 
@@ -281,14 +290,14 @@ function assert(count, name, test) {
   }
 
   let pass = "false";
-  let errMsg: Error | null = null;
+  let errMsg = null;
   try {
     if (test()) {
       pass = " true";
       count[0]++;
     }
   } catch (e) {
-    if (e instanceof Error) errMsg = e;
+    errMsg = e;
   }
   console.log("  " + (count[1] + ")   ").slice(0, 5) + pass + " : " + name);
   if (errMsg !== null) {

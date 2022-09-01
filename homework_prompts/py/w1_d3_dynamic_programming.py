@@ -1,5 +1,9 @@
 #
+<<<<<<< HEAD
+#  Homework - Dynamic Programming
+=======
 #  Homework 05 - Dynamic Programming
+>>>>>>> a63a631 (yuck)
 #
 #  Problem:   Lattice Paths (Dynamic Programming Approach)
 #

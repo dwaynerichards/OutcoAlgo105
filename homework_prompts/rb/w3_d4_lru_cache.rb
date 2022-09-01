@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+#  Homework - LRU Caceh
+=======
 #  Homework 15 - LRU Caceh
+>>>>>>> a63a631 (yuck)
 #
 #  Instructions: LRU Cache is a popular and challenging algorithm question
 #                commonly asked during whiteboarding and tech screen sessions.
@@ -25,8 +29,13 @@
 #              Create a Node class
 #
 #              The Node class should contain the following properties:
+<<<<<<< HEAD
+#              key: {String}
+#              value: {String}
+=======
 #              key: {Integer}
 #              value: {Integer}
+>>>>>>> a63a631 (yuck)
 #              previous: {Node} (initially None)
 #              next: {Node} (initially None)
 #

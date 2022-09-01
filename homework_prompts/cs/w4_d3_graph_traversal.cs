@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+/*
+ * Homework - Advanced Graph Traversals
+ *
+ * Instructions: We will be exploring further graph traversal problems in this
+ * homework file. You'll want to go through the corresponding learning material
+ * on the Data Structures and Algorithms course at
+ * https://outco.teachable.com/courses/438359/lectures/6721871
+ *
+ * You'll want to use the following classes in your code:
+ *     - Graph
+ *     - Stack
+ *     - Queue
+ **/
+=======
 //  Homework - Advanced Graph Traversals
 //
 //  Instructions: We will be exploring further graph traversal problems in this
@@ -7,6 +22,7 @@
 //       - Graph
 //       - Stack
 //       - Queue
+>>>>>>> a63a631 (yuck)
 
 using System;
 using System.Linq;

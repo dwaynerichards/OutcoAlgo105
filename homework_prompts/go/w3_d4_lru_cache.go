@@ -24,8 +24,13 @@
               Create a Node class
 
               The Node class should contain the following properties:
+<<<<<<< HEAD
+              key: {string}
+              value: {string}
+=======
               key: {Integer}
               value: {Integer}
+>>>>>>> a63a631 (yuck)
               previous: {*Node} (initially null)
               next: {*Node} (initially null)
 
@@ -64,7 +69,11 @@
 
      lruCache.get('doc'); => 'david'
      lruCache.set('swe', 'ron');
+<<<<<<< HEAD
+     lruCache.get('cpo'); => ''
+=======
      lruCache.get('cpo'); => -1
+>>>>>>> a63a631 (yuck)
 
 */
 

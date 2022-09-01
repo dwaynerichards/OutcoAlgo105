@@ -1,5 +1,9 @@
 #
+<<<<<<< HEAD
+#  Homework - Binary Heap
+=======
 #  Homework 12 - Binary Heap
+>>>>>>> a63a631 (yuck)
 #
 #  Problem: Binary Heap Class
 #

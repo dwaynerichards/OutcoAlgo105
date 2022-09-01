@@ -1,5 +1,9 @@
 ﻿/*
+<<<<<<< HEAD
+ * Homework - Decrease and Conquer
+=======
  * Homework 03 - Decrease and Conquer
+>>>>>>> a63a631 (yuck)
  * Utilize the decrease and conquer pattern to solve these problems.
  */
 

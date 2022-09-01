@@ -1,5 +1,9 @@
 ﻿/**
+<<<<<<< HEAD
+ *  Homework - Quasilinear Sorts
+=======
  *  Homework 08 - Quasilinear Sorts
+>>>>>>> a63a631 (yuck)
  *
  *
  *  Problem 1: Mergesort
@@ -48,7 +52,11 @@ class Test{
     runTest(sortTest2, "should return empty array for empty input", testCount);
     runTest(sortTest3, "should sort single-element input", testCount);
     runTest(sortTest4, "should sort moderate-sized input", testCount);
+<<<<<<< HEAD
+    runTest(sortTest5, "should sort large-sized input", testCount);
+=======
     runTest(sortTest5, "should sort large-sized input", testCount);  
+>>>>>>> a63a631 (yuck)
     Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
 	}
 
@@ -115,5 +123,10 @@ class Test{
       } catch {}
       string result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testName;
       Console.WriteLine(result);
+<<<<<<< HEAD
+  }
+}
+=======
   } 
 }
+>>>>>>> a63a631 (yuck)
