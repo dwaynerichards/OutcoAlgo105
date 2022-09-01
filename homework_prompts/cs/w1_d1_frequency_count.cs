@@ -1,5 +1,9 @@
 ﻿/*
+<<<<<<< HEAD
  * Homework - Frequency Count
+=======
+ * Homework 02 - Frequency Count
+>>>>>>> a63a631 (yuck)
  * Utilize the frequency count pattern to solve these problems.  Use a Hash Set
  * or an Array instead of a Hash Table where applicable.
  */

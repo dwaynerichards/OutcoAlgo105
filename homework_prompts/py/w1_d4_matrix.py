@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Homework - Matrices
+=======
+# Homework 17 - Matrices
+>>>>>>> a63a631 (yuck)
 #
 # Prompt: Create a Matrix class
 #

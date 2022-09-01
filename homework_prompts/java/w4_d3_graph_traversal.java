@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * Homework - Advanced Graph Traversals
  *
@@ -11,6 +12,17 @@
  *     - Stack
  *     - Queue
  **/
+=======
+//  Homework - Advanced Graph Traversals
+//
+//  Instructions: We will be exploring further graph traversal problems in this
+//  homework file.
+//
+//  You'll want to use the following classes in your code:
+//       - Graph
+//       - Stack
+//       - Queue
+>>>>>>> a63a631 (yuck)
 
 import java.util.*;
 

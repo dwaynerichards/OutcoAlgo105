@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  *  Homework - Dynamic Programming
+=======
+ *  Homework 06 - Dynamic Programming
+>>>>>>> a63a631 (yuck)
  *
  *
  *  Problem 1:  Max Consecutive Sum

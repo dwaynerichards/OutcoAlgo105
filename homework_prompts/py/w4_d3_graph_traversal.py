@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #
 # Homework - Advanced Graph Traversals
 #
@@ -11,6 +12,9 @@
 #     - Stack
 #     - Queue
 #
+=======
+#  Homework - Advanced Graph Traversals
+>>>>>>> a63a631 (yuck)
 
 import collections
 

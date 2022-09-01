@@ -13,3 +13,8 @@
 
 # environments
 *env/
+<<<<<<< HEAD
+=======
+
+node_modules
+>>>>>>> a63a631 (yuck)

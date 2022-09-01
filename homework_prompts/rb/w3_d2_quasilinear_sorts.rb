@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #  Homework - Quasilinear Sorts
+=======
+#  Homework 08 - Quasilinear Sorts
+>>>>>>> a63a631 (yuck)
 #
 #  Problem 1: Mergesort
 #

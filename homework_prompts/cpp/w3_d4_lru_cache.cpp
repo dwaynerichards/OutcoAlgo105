@@ -1,6 +1,10 @@
 /*
 
+<<<<<<< HEAD
   Homework - LRU Cache
+=======
+  Homework 15 - LRU Cache
+>>>>>>> a63a631 (yuck)
 
   Problem: LRU Cache
 
@@ -26,10 +30,17 @@
               Create a Node class
 
               The Node class should contain the following properties:
+<<<<<<< HEAD
               key: {String}
               value: {String}
               previous: {Node*} (initially NULL)
               next: {Node*} (initially NULL)
+=======
+              key: {Integer}
+              value: {Integer}
+              previous: {Node} (initially NULL)
+              next: {Node} (initially NULL)
+>>>>>>> a63a631 (yuck)
 
          II.  LRUCache Class
               Create an LRUCache class
@@ -39,13 +50,22 @@
               count: {Integer} (initially 0)
               cache: {Hash Table} The keys represent unique ids of each node, and the values represent the node objects
                                 that possess those keys.
+<<<<<<< HEAD
               head: {Node*}
               tail: {Node*}
+=======
+              head: {Node}
+              tail: {Node}
+>>>>>>> a63a631 (yuck)
 
      Your LRU cache should have the following methods:
 
       get(key): Retreives a value from the cache (will always be positive) at
+<<<<<<< HEAD
                 the key if the key exists in the cache, otherwise returns empty string.
+=======
+                the key if the key exists in the cache, otherwise returns -1.
+>>>>>>> a63a631 (yuck)
 
       set(key,value): Inserts the value at the key or creates a new key:value entry
                 if key is not present. When the cache reaches its capacity, it
@@ -63,7 +83,11 @@
 
      lruCache->get('doc'); => 'david'
      lruCache->set('swe', 'ron');
+<<<<<<< HEAD
      lruCache->get('cpo'); => ''
+=======
+     lruCache->get('cpo'); => -1
+>>>>>>> a63a631 (yuck)
 
 
 */
@@ -77,9 +101,12 @@ using namespace std;
 
 class Node {
   public:
+<<<<<<< HEAD
     string key;
     string value;
     Node *previous, *next;
+=======
+>>>>>>> a63a631 (yuck)
 };
 
 
@@ -91,7 +118,10 @@ class LRUCache {
     Node *head, *tail;
 
     LRUCache(int capacity) {
+<<<<<<< HEAD
       // YOUR WORK HERE
+=======
+>>>>>>> a63a631 (yuck)
     }
 
 
@@ -139,7 +169,11 @@ class LRUCache {
     */
     Node* removeFromTail() {
       // YOUR WORK HERE
+<<<<<<< HEAD
       return NULL;
+=======
+      return new Node(NULL, NULL);
+>>>>>>> a63a631 (yuck)
     }
 };
 

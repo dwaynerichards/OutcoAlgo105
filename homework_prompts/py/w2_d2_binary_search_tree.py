@@ -1,5 +1,9 @@
 #
+<<<<<<< HEAD
 #  Homework - Binary Search Tree
+=======
+#  Homework 10 - Binary Search Tree
+>>>>>>> a63a631 (yuck)
 #
 #  Problem 1: TreeNode class
 #

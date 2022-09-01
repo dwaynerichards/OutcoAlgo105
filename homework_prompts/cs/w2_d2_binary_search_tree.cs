@@ -1,5 +1,9 @@
 ﻿/**
+<<<<<<< HEAD
  *  Homework - Binary Search Tree
+=======
+ *  Homework 10 - Binary Search Tree
+>>>>>>> a63a631 (yuck)
  *
  *  Problem 1: TreeNode class
  *
@@ -63,7 +67,11 @@ class TreeNode {
 class BinarySearchTree {
     public TreeNode root;
     public int size;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> a63a631 (yuck)
     public BinarySearchTree() {
         // YOUR WORK HERE
     }
@@ -105,12 +113,21 @@ class Test{
         Console.WriteLine("TreeNode Class");
         runTest(treeNodeClassTest1, "able to create an instance", testCount);
         runTest(treeNodeClassTest2, "has value field", testCount);
+<<<<<<< HEAD
         runTest(treeNodeClassTest3, "has left field", testCount);
         runTest(treeNodeClassTest4, "has right field", testCount);
         runTest(treeNodeClassTest5, "able to assign a value upon instantiation", testCount);
         runTest(treeNodeClassTest6, "able to reassign a value", testCount);
         runTest(treeNodeClassTest7, "able to point to left child node", testCount);
         runTest(treeNodeClassTest8, "able to point to right child node", testCount);
+=======
+        runTest(treeNodeClassTest3, "has left field", testCount);  
+        runTest(treeNodeClassTest4, "has right field", testCount);  
+        runTest(treeNodeClassTest5, "able to assign a value upon instantiation", testCount);  
+        runTest(treeNodeClassTest6, "able to reassign a value", testCount);  
+        runTest(treeNodeClassTest7, "able to point to left child node", testCount);  
+        runTest(treeNodeClassTest8, "able to point to right child node", testCount);  
+>>>>>>> a63a631 (yuck)
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -119,9 +136,15 @@ class Test{
         Console.WriteLine("Binary Search Tree Class");
         runTest(binarySearchTreeClassTest1, "able to create an instance", testCount);
         runTest(binarySearchTreeClassTest2, "has root field", testCount);
+<<<<<<< HEAD
         runTest(binarySearchTreeClassTest3, "has size field", testCount);
         runTest(binarySearchTreeClassTest4, "default root set to null", testCount);
         runTest(binarySearchTreeClassTest5, "default size set to zero", testCount);
+=======
+        runTest(binarySearchTreeClassTest3, "has size field", testCount);  
+        runTest(binarySearchTreeClassTest4, "default root set to null", testCount);  
+        runTest(binarySearchTreeClassTest5, "default size set to zero", testCount);  
+>>>>>>> a63a631 (yuck)
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -130,10 +153,17 @@ class Test{
         Console.WriteLine("BinarySearchTree Insert Method");
         runTest(bstInsertMethodTest1, "has insert method", testCount);
         runTest(bstInsertMethodTest2, "able to insert a node into empty binary search tree", testCount);
+<<<<<<< HEAD
         runTest(bstInsertMethodTest3, "able to insert node to left of root node", testCount);
         runTest(bstInsertMethodTest4, "able to insert node to right of node left of root node", testCount);
         runTest(bstInsertMethodTest5, "able to insert node to right of root node", testCount);
         runTest(bstInsertMethodTest6, "able to insert node to left of node right of root node", testCount);
+=======
+        runTest(bstInsertMethodTest3, "able to insert node to left of root node", testCount);  
+        runTest(bstInsertMethodTest4, "able to insert node to right of node left of root node", testCount);  
+        runTest(bstInsertMethodTest5, "able to insert node to right of root node", testCount);  
+        runTest(bstInsertMethodTest6, "able to insert node to left of node right of root node", testCount);  
+>>>>>>> a63a631 (yuck)
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -142,7 +172,11 @@ class Test{
         Console.WriteLine("BinarySearchTree Search Method");
         runTest(bstSearchMethodTest1, "has search method", testCount);
         runTest(bstSearchMethodTest2, "returns true when element exists in binary search tree", testCount);
+<<<<<<< HEAD
         runTest(bstSearchMethodTest3, "returns true when element does not exist in binary search tree", testCount);
+=======
+        runTest(bstSearchMethodTest3, "returns true when element does not exist in binary search tree", testCount);  
+>>>>>>> a63a631 (yuck)
         Console.WriteLine("PASSED: " + testCount[0] + " / " + testCount[1] + "\n\n");
     }
 
@@ -166,7 +200,11 @@ class Test{
         TreeNode node = new TreeNode(0);
         return node.GetType().GetField("right") != null;
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> a63a631 (yuck)
     private static bool treeNodeClassTest5() {
         TreeNode node = new TreeNode(5);
         return node.value == 5;
@@ -300,5 +338,10 @@ class Test{
         } catch {}
         string result = "  " + (testCount[1] + ")   ") + testPassed + " : " + testName;
         Console.WriteLine(result);
+<<<<<<< HEAD
     }
 }
+=======
+    } 
+}
+>>>>>>> a63a631 (yuck)

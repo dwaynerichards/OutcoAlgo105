@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  *  Homework - Helper Method Recursion
+=======
+ *  Homework 04 - Helper Method Recursion
+>>>>>>> a63a631 (yuck)
  *
  *  Solve the following problems using helper method recursion.
  */

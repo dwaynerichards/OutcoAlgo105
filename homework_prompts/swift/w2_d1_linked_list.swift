@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  *  Homework - Linked List
+=======
+ *  Homework 09 - Linked List
+>>>>>>> a63a631 (yuck)
  *
  *  Problem 1: ListNode class
  *

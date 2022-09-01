@@ -1,0 +1,24 @@
+{
+    "name": "outco-class-105",
+    "version": "1.0.0",
+    "description": "coding away",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dwaynerichards/outco-class-105.git"
+    },
+    "author": "dw",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/dwaynerichards/outco-class-105/issues"
+    },
+    "homepage": "https://github.com/dwaynerichards/outco-class-105#readme",
+    "devDependencies": {
+        "chalk": "^5.0.0",
+        "prettier": "^2.5.1"
+    }
+}
