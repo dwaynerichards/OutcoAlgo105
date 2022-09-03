@@ -2,7 +2,7 @@
  *  Target Practice 01 - Recursion
  */
 
- 'use strict';
+'use strict';
 
 /*
  *  Problem:  Powerset
@@ -20,9 +20,8 @@
  *            as the original input.
  */
 
-
+/**
 Hints: 
-
 From Cracking the Coding Interview, by Gayle Laakmann McDowell. 8.4: Powerset
 
 #273. How can you build all subsets of {a , b, c} from the subsets of {a , b}? 
@@ -37,11 +36,12 @@ subsets from the subsets of (a , b}?
                              
 #373. You can also do this by mapping each subset to a binary number. The i th bit could
 represent a "boolean" flag for whether an element is in the set. 
+ */
 
-Solution:
+///Solution:
 
 function powerset(str) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
 }
 
 /*
@@ -70,13 +70,11 @@ function powerset(str) {
  *
  */
 
- // Time Complexity:
- // Auxiliary Space Complexity:
- function latticePaths(m, n) {
-   // YOUR WORK HERE
- }
-
-
+// Time Complexity:
+// Auxiliary Space Complexity:
+function latticePaths(m, n) {
+    // YOUR WORK HERE
+}
 
 ////////////////////////////////////////////////////////////
 ///////////////  DO NOT TOUCH TEST BELOW!!!  ///////////////
@@ -85,57 +83,182 @@ function powerset(str) {
 console.log('Powerset Tests');
 var testCount = [0, 0];
 
-assert(testCount, 'should work on example input', function(){
-  var example = powerset('abc');
-  return arraysMatching(example, ['','a','b','c','ab','bc','ac','abc']);
+assert(testCount, 'should work on example input', function () {
+    var example = powerset('abc');
+    return arraysMatching(example, [
+        '',
+        'a',
+        'b',
+        'c',
+        'ab',
+        'bc',
+        'ac',
+        'abc',
+    ]);
 });
 
-assert(testCount, 'should work on empty input', function(){
-  var example = powerset('');
-  return arraysMatching(example, ['']);
+assert(testCount, 'should work on empty input', function () {
+    var example = powerset('');
+    return arraysMatching(example, ['']);
 });
 
-assert(testCount, 'should work on two-letter input', function(){
-  var example = powerset('ab');
-  return arraysMatching(example, ['','a','b','ab']);
+assert(testCount, 'should work on two-letter input', function () {
+    var example = powerset('ab');
+    return arraysMatching(example, ['', 'a', 'b', 'ab']);
 });
 
-assert(testCount, 'should work on longer input', function(){
-  var example = powerset('abcdefg');
-  return arraysMatching(example, [ '','g','f','fg','e','eg','ef','efg','d',
-    'dg','df','dfg','de','deg','def','defg','c','cg','cf','cfg','ce','ceg',
-    'cef','cefg','cd','cdg','cdf','cdfg','cde','cdeg','cdef','cdefg','b','bg',
-    'bf','bfg','be','beg','bef','befg','bd','bdg','bdf','bdfg','bde','bdeg',
-    'bdef','bdefg','bc','bcg','bcf','bcfg','bce','bceg','bcef','bcefg','bcd',
-    'bcdg','bcdf','bcdfg','bcde','bcdeg','bcdef','bcdefg','a','ag','af','afg',
-    'ae','aeg','aef','aefg','ad','adg','adf','adfg','ade','adeg','adef',
-    'adefg','ac','acg','acf','acfg','ace','aceg','acef','acefg','acd','acdg',
-    'acdf','acdfg','acde','acdeg','acdef','acdefg','ab','abg','abf','abfg',
-    'abe','abeg','abef','abefg','abd','abdg','abdf','abdfg','abde','abdeg',
-    'abdef','abdefg','abc','abcg','abcf','abcfg','abce','abceg','abcef',
-    'abcefg','abcd','abcdg','abcdf','abcdfg','abcde','abcdeg','abcdef','abcdefg'
-  ]);
+assert(testCount, 'should work on longer input', function () {
+    var example = powerset('abcdefg');
+    return arraysMatching(example, [
+        '',
+        'g',
+        'f',
+        'fg',
+        'e',
+        'eg',
+        'ef',
+        'efg',
+        'd',
+        'dg',
+        'df',
+        'dfg',
+        'de',
+        'deg',
+        'def',
+        'defg',
+        'c',
+        'cg',
+        'cf',
+        'cfg',
+        'ce',
+        'ceg',
+        'cef',
+        'cefg',
+        'cd',
+        'cdg',
+        'cdf',
+        'cdfg',
+        'cde',
+        'cdeg',
+        'cdef',
+        'cdefg',
+        'b',
+        'bg',
+        'bf',
+        'bfg',
+        'be',
+        'beg',
+        'bef',
+        'befg',
+        'bd',
+        'bdg',
+        'bdf',
+        'bdfg',
+        'bde',
+        'bdeg',
+        'bdef',
+        'bdefg',
+        'bc',
+        'bcg',
+        'bcf',
+        'bcfg',
+        'bce',
+        'bceg',
+        'bcef',
+        'bcefg',
+        'bcd',
+        'bcdg',
+        'bcdf',
+        'bcdfg',
+        'bcde',
+        'bcdeg',
+        'bcdef',
+        'bcdefg',
+        'a',
+        'ag',
+        'af',
+        'afg',
+        'ae',
+        'aeg',
+        'aef',
+        'aefg',
+        'ad',
+        'adg',
+        'adf',
+        'adfg',
+        'ade',
+        'adeg',
+        'adef',
+        'adefg',
+        'ac',
+        'acg',
+        'acf',
+        'acfg',
+        'ace',
+        'aceg',
+        'acef',
+        'acefg',
+        'acd',
+        'acdg',
+        'acdf',
+        'acdfg',
+        'acde',
+        'acdeg',
+        'acdef',
+        'acdefg',
+        'ab',
+        'abg',
+        'abf',
+        'abfg',
+        'abe',
+        'abeg',
+        'abef',
+        'abefg',
+        'abd',
+        'abdg',
+        'abdf',
+        'abdfg',
+        'abde',
+        'abdeg',
+        'abdef',
+        'abdefg',
+        'abc',
+        'abcg',
+        'abcf',
+        'abcfg',
+        'abce',
+        'abceg',
+        'abcef',
+        'abcefg',
+        'abcd',
+        'abcdg',
+        'abcdf',
+        'abcdfg',
+        'abcde',
+        'abcdeg',
+        'abcdef',
+        'abcdefg',
+    ]);
 });
 
 console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-
 console.log('Lattice Paths Tests');
 testCount = [0, 0];
 
-assert(testCount, 'should work on example case', function(){
-  let example = latticePaths(2, 3);
-  return example === 10;
+assert(testCount, 'should work on example case', function () {
+    let example = latticePaths(2, 3);
+    return example === 10;
 });
 
-assert(testCount, 'should return 1 for 0 x 0 lattice', function(){
-  let example = latticePaths(0, 0);
-  return example === 1;
+assert(testCount, 'should return 1 for 0 x 0 lattice', function () {
+    let example = latticePaths(0, 0);
+    return example === 1;
 });
 
-assert(testCount, 'should return 2496144 for 13 x 11 lattice', function(){
-  let example = latticePaths(11, 13);
-  return example === 2496144;
+assert(testCount, 'should return 2496144 for 13 x 11 lattice', function () {
+    let example = latticePaths(11, 13);
+    return example === 2496144;
 });
 
 console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
@@ -143,24 +266,27 @@ console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 // function for checking if arrays contain same elements
 // (do not need to be in the same order)
 function arraysMatching(arr1, arr2) {
-  if (arr1.length !== arr2.length) { return false; }
-
-  let cache = {};
-  for (let i = 0; i < arr1.length; i++) {
-    if (cache[arr1[i]] === undefined) {
-      cache[arr1[i]] = 1;
-    } else {
-      cache[arr1[i]]++;
+    if (arr1.length !== arr2.length) {
+        return false;
     }
-  }
 
-  for (let j = 0; j < arr2.length; j++) {
-    if (cache[arr2[j]] === undefined || cache[arr2[j]] === 0) { return false; }
-    cache[arr2[j]]--;
-  }
-  return true;
+    let cache = {};
+    for (let i = 0; i < arr1.length; i++) {
+        if (cache[arr1[i]] === undefined) {
+            cache[arr1[i]] = 1;
+        } else {
+            cache[arr1[i]]++;
+        }
+    }
+
+    for (let j = 0; j < arr2.length; j++) {
+        if (cache[arr2[j]] === undefined || cache[arr2[j]] === 0) {
+            return false;
+        }
+        cache[arr2[j]]--;
+    }
+    return true;
 }
-
 
 // custom assert function to handle tests
 // input: count {Array} - keeps track out how many tests pass and how many total
@@ -170,24 +296,24 @@ function arraysMatching(arr1, arr2) {
 //        indicating if test passed
 // output: {undefined}
 function assert(count, name, test) {
-  if (!count || !Array.isArray(count) || count.length !== 2) {
-    count = [0, '*'];
-  } else {
-    count[1]++;
-  }
-
-  let pass = 'false';
-  let errMsg = null;
-  try {
-    if (test()) {
-      pass = ' true';
-      count[0]++;
+    if (!count || !Array.isArray(count) || count.length !== 2) {
+        count = [0, '*'];
+    } else {
+        count[1]++;
     }
-  } catch(e) {
-    errMsg = e;
-  }
-  console.log('  ' + (count[1] + ')   ').slice(0,5) + pass + ' : ' + name);
-  if (errMsg !== null) {
-    console.log('       ' + errMsg + '\n');
-  }
+
+    let pass = 'false';
+    let errMsg = null;
+    try {
+        if (test()) {
+            pass = ' true';
+            count[0]++;
+        }
+    } catch (e) {
+        errMsg = e;
+    }
+    console.log('  ' + (count[1] + ')   ').slice(0, 5) + pass + ' : ' + name);
+    if (errMsg !== null) {
+        console.log('       ' + errMsg + '\n');
+    }
 }
