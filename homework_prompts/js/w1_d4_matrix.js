@@ -268,538 +268,640 @@
  */
 
 class Matrix {
-  constructor(m, n) {
-    this.m = m;
-    this.n = n;
-    this.storage = [];
-    for (let i = 0; i < m; i++) {
-      this.storage.push(new Array(n).fill(0));
+    constructor(m, n) {
+        this.m = m;
+        this.n = n;
+        this.storage = [];
+        for (let i = 0; i < m; i++) {
+            this.storage.push(new Array(n).fill(0));
+        }
     }
-  }
 
-  print() {}
+    print() {}
 
-  isValid(i, j) {
-    //YOUR WORK HERE
-    return false;
-  }
+    isValid(i, j) {
+        //YOUR WORK HERE
+        //return if row, column exists
+        //if I less 0 or greater than m
+        //same for j
+        if (i < 0 || i > m) return false;
+        if (j < 0 || j > n) return false;
+        return true;
+    }
 
-  initialize(arrayOfArrays) {}
+    initialize(arrayOfArrays) {
+        //mutate storage
+        //m mutates to length orAofA
+        //n mutated to length of indice
+        this.storage = arrayOfArrays;
+        this.m = arrayOfArrays.length;
+        this.n = arrayOfArrays[0].length;
+    }
 
-  insert(i, j, val) {
-    //YOUR WORK HERE
-    return false;
-  }
+    insert(i, j, val) {
+        //YOUR WORK HERE
+        //insert in corresponding indices
+        //if possible- return true
+        if (!this.isValid(i, j) || this.storage[i][j] !== 0) {
+            return false;
+        } else {
+            this.storage[i][j] = val;
+            return true;
+        }
+    }
 
-  retrieve(i, j) {
-    //YOUR WORK HERE
-    return -Infinity;
-  }
+    retrieve(i, j) {
+        //YOUR WORK HERE
+        if (!this.isValid(i, j)) return -Infinity;
+        return this.storage[i][j];
+    }
 
-  scale(factor) {
-    //YOUR WORK HERE
-  }
+    scale(factor) {
+        this.storage = this.storage.map((row) =>
+            row.map((col) => col * factor)
+        );
+    }
 
-  fill(val) {
-    //YOUR WORK HERE
-  }
+    fill(val) {
+        this.storage = this.storage.map((row) => row.map((col) => (col = val)));
+    }
 
-  flatten() {
-    //YOUR WORK HERE
-    return [];
-  }
+    flatten() {
+        //YOUR WORK HERE
+        //step though arr concatonation each
+        this.storage = this.storage.map((row, i) => {
+            if (row[i + 1]) return row.concat(row[i + 1]);
+        });
+    }
 
-  slice(rowRange, colRange) {
-    //YOUR WORK HERE
-    return null;
-  }
+    slice(rowRange, colRange) {
+        //YOUR WORK HERE
+        //if either bound is over the size of storage return storage
+        //return ranges from first index to -1 second index
+        //outliers - ranges are each below
+        //step though array- slicing off each part plaing into arr to be returned
+        const rowInBounds = (a, b, c) => {
+            return a >= b && a < c;
+        };
+        //rowrange0 >= rr1, copy for cr0,1
+        if (
+            !rowInBounds(rowRange[0], m, rowRange[1]) ||
+            !rowInBounds(colRange[0], n, colRange[1])
+        )
+            return null;
+        return this.storage.reduce((accum, row, i) => {
+            if (rowInBounds(i, rowRange[0], rowRange[1]))
+                accum.push(row.slice(colRange[0], colRange[1]));
+            return accum;
+        }, []);
+    }
+    ///@TODO review slice solution
 
-  transpose() {
-    //YOUR WORK HERE
-    return null;
-  }
+    transpose() {
+        //YOUR WORK HERE
+        return null;
+    }
 
-  multiply(matrix) {
-    //YOUR WORK HERE
-    return null;
-  }
+    multiply(matrix) {
+        //YOUR WORK HERE
+        return null;
+    }
 }
 
 ////////////////////////////////////////////////////////////
 ///////////////  DO NOT TOUCH TEST BELOW!!!  ///////////////
 ////////////////////////////////////////////////////////////
 
-console.log("Matrix Tests");
+console.log('Matrix Tests');
 
 let testCount = [0, 0];
-console.log("IsValid Tests");
-
-assert(testCount, "should return true for a valid set of coordinates", function () {
-  let matrix = new Matrix(3, 4);
-  return matrix.isValid(1, 1) === true;
-});
-
-assert(testCount, "should return false for a set of coordinates off the matrix", function () {
-  let matrix = new Matrix(3, 4);
-  return matrix.isValid(5, 1) === false;
-});
-
-assert(testCount, "should return false for a negative set of coordinates", function () {
-  let matrix = new Matrix(3, 4);
-  return matrix.isValid(-4, 1) === false;
-});
-
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-testCount = [0, 0];
-console.log("Initialize Tests");
-
-assert(testCount, "should override m and n values in old matrix ", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [1, 2, 3],
-    [4, 5, 6],
-  ]);
-  return matrix.m === 2 && matrix.n === 3;
-});
-
-assert(testCount, "should override contents of old matrix ", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [1, 2],
-    [3, 4],
-  ]);
-  return (
-    matrix.storage !== undefined &&
-    matrix.storage[0] !== undefined &&
-    matrix.storage[1] !== undefined &&
-    matrix.storage[0][0] === 1 &&
-    matrix.storage[0][1] === 2 &&
-    matrix.storage[1][0] === 3 &&
-    matrix.storage[1][1] === 4
-  );
-});
-
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-testCount = [0, 0];
-console.log("Insert Tests");
-
-assert(testCount, "should return true if given valid coordinates", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [1, 2, 3],
-    [4, 5, 6],
-  ]);
-  return matrix.insert(1, 1, 50) === true;
-});
-
-assert(testCount, "should override old value in matrix given valid coordinates", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [1, 2, 3],
-    [4, 5, 6],
-  ]);
-  return matrix.insert(1, 1, 50) === true && matrix.storage[1][1] === 50;
-});
-
-assert(testCount, "should return false if given invalid coordinates", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [1, 2, 3],
-    [4, 5, 6],
-  ]);
-  return matrix.insert(5, 5, 10) === false;
-});
-
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-testCount = [0, 0];
-console.log("Retrieve Tests");
-
-assert(testCount, "should return correct value if given valid coordinates", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-  ]);
-  return matrix.retrieve(1, 1) === 4;
-});
-
-assert(testCount, "should return -Infinity if given invalid coordinates", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-  ]);
-  return matrix.retrieve(10, 10) === -Infinity;
-});
-
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-testCount = [0, 0];
-console.log("Scale Tests");
-
-assert(testCount, "should scale values in matrix by amount given", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [0, 1],
-    [3, 4],
-  ]);
-  matrix.scale(2);
-  return (
-    matrix.storage[0][0] === 0 && matrix.storage[0][1] === 2 && matrix.storage[1][0] === 6 && matrix.storage[1][1] == 8
-  );
-});
-
-assert(testCount, "should scale values in matrix by amount given", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [0, 1],
-    [3, 4],
-  ]);
-  matrix.scale(-3);
-  return (
-    matrix.storage[0][0] === 0 &&
-    matrix.storage[0][1] === -3 &&
-    matrix.storage[1][0] === -9 &&
-    matrix.storage[1][1] === -12
-  );
-});
-
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-testCount = [0, 0];
-console.log("Fill Tests");
-
-assert(testCount, "should set all values in the matrix to given amount", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [0, 1],
-    [3, 4],
-  ]);
-  matrix.fill(2);
-  return (
-    matrix.storage[0][0] === 2 && matrix.storage[0][1] === 2 && matrix.storage[1][0] === 2 && matrix.storage[1][1] == 2
-  );
-});
-
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-testCount = [0, 0];
-console.log("Flatten Tests");
-
-assert(testCount, "should work for a single column matrix", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([[0], [1], [3], [4]]);
-  return arraysEqual(matrix.flatten(), [0, 1, 3, 4]);
-});
-
-assert(testCount, "should work for a single row matrix", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([[0, 1, 3, 4]]);
-  return arraysEqual(matrix.flatten(), [0, 1, 3, 4]);
-});
-
-assert(testCount, "should work for example matrix", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-  ]);
-  return arraysEqual(matrix.flatten(), [0, 1, 2, 3, 4, 5, 6, 7, 8]);
-});
-
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-testCount = [0, 0];
-console.log("Slice Tests");
+console.log('IsValid Tests');
 
 assert(
-  testCount,
-  "should return 2x2 matrix slice from a 3x3 matrix when rowRange is [0,2] and colRange is [0,2]",
-  function () {
-    let matrix = new Matrix(1, 1);
-    matrix.initialize([
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-    ]);
-    let newMatrix = matrix.slice([0, 2], [0, 2]);
-
-    return (
-      newMatrix !== null &&
-      newMatrix.m === 2 &&
-      newMatrix.n === 2 &&
-      newMatrix.storage[0][0] === 0 &&
-      newMatrix.storage[0][1] === 1 &&
-      newMatrix.storage[1][0] === 3 &&
-      newMatrix.storage[1][1] === 4
-    );
-  }
+    testCount,
+    'should return true for a valid set of coordinates',
+    function () {
+        let matrix = new Matrix(3, 4);
+        return matrix.isValid(1, 1) === true;
+    }
 );
 
 assert(
-  testCount,
-  "should return 2x2 matrix slice from a 3x3 matrix when rowRange is [1,3] and colRange is [1,3]",
-  function () {
-    let matrix = new Matrix(1, 1);
-    matrix.initialize([
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-    ]);
-    let newMatrix = matrix.slice([1, 3], [1, 3]);
-
-    return (
-      newMatrix !== null &&
-      newMatrix.m === 2 &&
-      newMatrix.n === 2 &&
-      newMatrix.storage[0][0] === 4 &&
-      newMatrix.storage[0][1] === 5 &&
-      newMatrix.storage[1][0] === 7 &&
-      newMatrix.storage[1][1] === 8
-    );
-  }
+    testCount,
+    'should return false for a set of coordinates off the matrix',
+    function () {
+        let matrix = new Matrix(3, 4);
+        return matrix.isValid(5, 1) === false;
+    }
 );
 
 assert(
-  testCount,
-  "should return copy of original matrix if rowRange and colRange are larger than original",
-  function () {
-    let matrix = new Matrix(1, 1);
-    matrix.initialize([
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-    ]);
-    let newMatrix = matrix.slice([-5, 20], [-2, 6]);
-
-    return (
-      newMatrix !== null &&
-      newMatrix.m === 3 &&
-      newMatrix.n === 3 &&
-      newMatrix.storage[0][0] === 0 &&
-      newMatrix.storage[0][1] === 1 &&
-      newMatrix.storage[0][2] === 2 &&
-      newMatrix.storage[1][0] === 3 &&
-      newMatrix.storage[1][1] === 4 &&
-      newMatrix.storage[1][2] === 5 &&
-      newMatrix.storage[2][0] === 6 &&
-      newMatrix.storage[2][1] === 7 &&
-      newMatrix.storage[2][2] === 8
-    );
-  }
+    testCount,
+    'should return false for a negative set of coordinates',
+    function () {
+        let matrix = new Matrix(3, 4);
+        return matrix.isValid(-4, 1) === false;
+    }
 );
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
 testCount = [0, 0];
-console.log("Transpose Tests");
+console.log('Initialize Tests');
 
-assert(testCount, "should work correctly on a 1x1 matrix", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([[1]]);
-  let newMatrix = matrix.transpose();
-
-  return newMatrix !== null && newMatrix.m === 1 && newMatrix.n === 1 && newMatrix.storage[0][0] === 1;
+assert(testCount, 'should override m and n values in old matrix ', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([
+        [1, 2, 3],
+        [4, 5, 6],
+    ]);
+    return matrix.m === 2 && matrix.n === 3;
 });
 
-assert(testCount, "should work correctly on a 2x2 matrix", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [0, 1],
-    [2, 3],
-  ]);
-  let newMatrix = matrix.transpose();
-
-  return (
-    newMatrix !== null &&
-    newMatrix.m === 2 &&
-    newMatrix.n === 2 &&
-    newMatrix.storage[0][0] === 0 &&
-    newMatrix.storage[0][1] === 2 &&
-    newMatrix.storage[1][0] === 1 &&
-    newMatrix.storage[1][1] === 3
-  );
+assert(testCount, 'should override contents of old matrix ', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([
+        [1, 2],
+        [3, 4],
+    ]);
+    return (
+        matrix.storage !== undefined &&
+        matrix.storage[0] !== undefined &&
+        matrix.storage[1] !== undefined &&
+        matrix.storage[0][0] === 1 &&
+        matrix.storage[0][1] === 2 &&
+        matrix.storage[1][0] === 3 &&
+        matrix.storage[1][1] === 4
+    );
 });
 
-assert(testCount, "should work correctly on a 3x2 matrix", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [0, 1],
-    [3, 4],
-    [6, 7],
-  ]);
-  let newMatrix = matrix.transpose();
-
-  return (
-    newMatrix !== null &&
-    newMatrix.m === 2 &&
-    newMatrix.n === 3 &&
-    newMatrix.storage[0][0] === 0 &&
-    newMatrix.storage[0][1] === 3 &&
-    newMatrix.storage[0][2] === 6 &&
-    newMatrix.storage[1][0] === 1 &&
-    newMatrix.storage[1][1] === 4 &&
-    newMatrix.storage[1][2] === 7
-  );
-});
-
-assert(testCount, "should work correctly on a 2x3 matrix", function () {
-  let matrix = new Matrix(1, 1);
-  matrix.initialize([
-    [0, 1, 3],
-    [4, 6, 7],
-  ]);
-  let newMatrix = matrix.transpose();
-
-  return (
-    newMatrix !== null &&
-    newMatrix.m === 3 &&
-    newMatrix.n === 2 &&
-    newMatrix.storage[0][0] === 0 &&
-    newMatrix.storage[0][1] === 4 &&
-    newMatrix.storage[1][0] === 1 &&
-    newMatrix.storage[1][1] === 6 &&
-    newMatrix.storage[2][0] === 3 &&
-    newMatrix.storage[2][1] === 7
-  );
-});
-
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
 testCount = [0, 0];
-console.log("Multiply Tests");
+console.log('Insert Tests');
 
-assert(testCount, "should work correctly on example matrix with valid input", function () {
-  let matrix1 = new Matrix(1, 1);
-  let matrix2 = new Matrix(1, 1);
-
-  matrix1.initialize([
-    [4, 1, 3],
-    [3, 2, 5],
-  ]);
-
-  matrix2.initialize([
-    [8, 9],
-    [7, 10],
-    [0, 6],
-  ]);
-
-  let newMatrix = matrix1.multiply(matrix2);
-
-  return (
-    newMatrix !== null &&
-    newMatrix.m === 2 &&
-    newMatrix.n === 2 &&
-    newMatrix.storage[0][0] === 39 &&
-    newMatrix.storage[0][1] === 64 &&
-    newMatrix.storage[1][0] === 38 &&
-    newMatrix.storage[1][1] === 77
-  );
+assert(testCount, 'should return true if given valid coordinates', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([
+        [1, 2, 3],
+        [4, 5, 6],
+    ]);
+    return matrix.insert(1, 1, 50) === true;
 });
 
-assert(testCount, "should work correctly on example matrix with invalid input of wrong dimensions", function () {
-  let matrix1 = new Matrix(1, 1);
-  let matrix2 = new Matrix(1, 1);
+assert(
+    testCount,
+    'should override old value in matrix given valid coordinates',
+    function () {
+        let matrix = new Matrix(1, 1);
+        matrix.initialize([
+            [1, 2, 3],
+            [4, 5, 6],
+        ]);
+        return matrix.insert(1, 1, 50) === true && matrix.storage[1][1] === 50;
+    }
+);
 
-  matrix1.initialize([
-    [4, 1, 3],
-    [3, 2, 5],
-  ]);
+assert(
+    testCount,
+    'should return false if given invalid coordinates',
+    function () {
+        let matrix = new Matrix(1, 1);
+        matrix.initialize([
+            [1, 2, 3],
+            [4, 5, 6],
+        ]);
+        return matrix.insert(5, 5, 10) === false;
+    }
+);
 
-  matrix2.initialize([[8]]);
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-  let newMatrix = matrix1.multiply(matrix2);
+testCount = [0, 0];
+console.log('Retrieve Tests');
 
-  return newMatrix === null;
+assert(
+    testCount,
+    'should return correct value if given valid coordinates',
+    function () {
+        let matrix = new Matrix(1, 1);
+        matrix.initialize([
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+        ]);
+        return matrix.retrieve(1, 1) === 4;
+    }
+);
+
+assert(
+    testCount,
+    'should return -Infinity if given invalid coordinates',
+    function () {
+        let matrix = new Matrix(1, 1);
+        matrix.initialize([
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+        ]);
+        return matrix.retrieve(10, 10) === -Infinity;
+    }
+);
+
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
+
+testCount = [0, 0];
+console.log('Scale Tests');
+
+assert(testCount, 'should scale values in matrix by amount given', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([
+        [0, 1],
+        [3, 4],
+    ]);
+    matrix.scale(2);
+    return (
+        matrix.storage[0][0] === 0 &&
+        matrix.storage[0][1] === 2 &&
+        matrix.storage[1][0] === 6 &&
+        matrix.storage[1][1] == 8
+    );
 });
 
-assert(testCount, "should work correctly on example matrix when multiplied by 3x1 matrix", function () {
-  let matrix1 = new Matrix(1, 1);
-  let matrix2 = new Matrix(1, 1);
-
-  matrix1.initialize([
-    [4, 1, 3],
-    [3, 2, 5],
-  ]);
-
-  matrix2.initialize([[8], [1], [2]]);
-
-  let newMatrix = matrix1.multiply(matrix2);
-
-  return (
-    newMatrix !== null &&
-    newMatrix.m === 2 &&
-    newMatrix.n === 1 &&
-    newMatrix.storage[0][0] === 39 &&
-    newMatrix.storage[1][0] === 36
-  );
+assert(testCount, 'should scale values in matrix by amount given', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([
+        [0, 1],
+        [3, 4],
+    ]);
+    matrix.scale(-3);
+    return (
+        matrix.storage[0][0] === 0 &&
+        matrix.storage[0][1] === -3 &&
+        matrix.storage[1][0] === -9 &&
+        matrix.storage[1][1] === -12
+    );
 });
 
-assert(testCount, "should work correctly when 1x2 matrix is multiplied by example matrix", function () {
-  let matrix1 = new Matrix(1, 1);
-  let matrix2 = new Matrix(1, 1);
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-  matrix1.initialize([
-    [4, 1, 3],
-    [3, 2, 5],
-  ]);
+testCount = [0, 0];
+console.log('Fill Tests');
 
-  matrix2.initialize([[3, 5]]);
+assert(
+    testCount,
+    'should set all values in the matrix to given amount',
+    function () {
+        let matrix = new Matrix(1, 1);
+        matrix.initialize([
+            [0, 1],
+            [3, 4],
+        ]);
+        matrix.fill(2);
+        return (
+            matrix.storage[0][0] === 2 &&
+            matrix.storage[0][1] === 2 &&
+            matrix.storage[1][0] === 2 &&
+            matrix.storage[1][1] == 2
+        );
+    }
+);
 
-  let newMatrix = matrix2.multiply(matrix1);
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-  return (
-    newMatrix !== null &&
-    newMatrix.m === 1 &&
-    newMatrix.n === 3 &&
-    newMatrix.storage[0][0] === 27 &&
-    newMatrix.storage[0][1] === 13 &&
-    newMatrix.storage[0][2] === 34
-  );
+testCount = [0, 0];
+console.log('Flatten Tests');
+
+assert(testCount, 'should work for a single column matrix', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([[0], [1], [3], [4]]);
+    return arraysEqual(matrix.flatten(), [0, 1, 3, 4]);
 });
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+assert(testCount, 'should work for a single row matrix', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([[0, 1, 3, 4]]);
+    return arraysEqual(matrix.flatten(), [0, 1, 3, 4]);
+});
+
+assert(testCount, 'should work for example matrix', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+    ]);
+    return arraysEqual(matrix.flatten(), [0, 1, 2, 3, 4, 5, 6, 7, 8]);
+});
+
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
+
+testCount = [0, 0];
+console.log('Slice Tests');
+
+assert(
+    testCount,
+    'should return 2x2 matrix slice from a 3x3 matrix when rowRange is [0,2] and colRange is [0,2]',
+    function () {
+        let matrix = new Matrix(1, 1);
+        matrix.initialize([
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+        ]);
+        let newMatrix = matrix.slice([0, 2], [0, 2]);
+
+        return (
+            newMatrix !== null &&
+            newMatrix.m === 2 &&
+            newMatrix.n === 2 &&
+            newMatrix.storage[0][0] === 0 &&
+            newMatrix.storage[0][1] === 1 &&
+            newMatrix.storage[1][0] === 3 &&
+            newMatrix.storage[1][1] === 4
+        );
+    }
+);
+
+assert(
+    testCount,
+    'should return 2x2 matrix slice from a 3x3 matrix when rowRange is [1,3] and colRange is [1,3]',
+    function () {
+        let matrix = new Matrix(1, 1);
+        matrix.initialize([
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+        ]);
+        let newMatrix = matrix.slice([1, 3], [1, 3]);
+
+        return (
+            newMatrix !== null &&
+            newMatrix.m === 2 &&
+            newMatrix.n === 2 &&
+            newMatrix.storage[0][0] === 4 &&
+            newMatrix.storage[0][1] === 5 &&
+            newMatrix.storage[1][0] === 7 &&
+            newMatrix.storage[1][1] === 8
+        );
+    }
+);
+
+assert(
+    testCount,
+    'should return copy of original matrix if rowRange and colRange are larger than original',
+    function () {
+        let matrix = new Matrix(1, 1);
+        matrix.initialize([
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+        ]);
+        let newMatrix = matrix.slice([-5, 20], [-2, 6]);
+
+        return (
+            newMatrix !== null &&
+            newMatrix.m === 3 &&
+            newMatrix.n === 3 &&
+            newMatrix.storage[0][0] === 0 &&
+            newMatrix.storage[0][1] === 1 &&
+            newMatrix.storage[0][2] === 2 &&
+            newMatrix.storage[1][0] === 3 &&
+            newMatrix.storage[1][1] === 4 &&
+            newMatrix.storage[1][2] === 5 &&
+            newMatrix.storage[2][0] === 6 &&
+            newMatrix.storage[2][1] === 7 &&
+            newMatrix.storage[2][2] === 8
+        );
+    }
+);
+
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
+
+testCount = [0, 0];
+console.log('Transpose Tests');
+
+assert(testCount, 'should work correctly on a 1x1 matrix', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([[1]]);
+    let newMatrix = matrix.transpose();
+
+    return (
+        newMatrix !== null &&
+        newMatrix.m === 1 &&
+        newMatrix.n === 1 &&
+        newMatrix.storage[0][0] === 1
+    );
+});
+
+assert(testCount, 'should work correctly on a 2x2 matrix', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([
+        [0, 1],
+        [2, 3],
+    ]);
+    let newMatrix = matrix.transpose();
+
+    return (
+        newMatrix !== null &&
+        newMatrix.m === 2 &&
+        newMatrix.n === 2 &&
+        newMatrix.storage[0][0] === 0 &&
+        newMatrix.storage[0][1] === 2 &&
+        newMatrix.storage[1][0] === 1 &&
+        newMatrix.storage[1][1] === 3
+    );
+});
+
+assert(testCount, 'should work correctly on a 3x2 matrix', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([
+        [0, 1],
+        [3, 4],
+        [6, 7],
+    ]);
+    let newMatrix = matrix.transpose();
+
+    return (
+        newMatrix !== null &&
+        newMatrix.m === 2 &&
+        newMatrix.n === 3 &&
+        newMatrix.storage[0][0] === 0 &&
+        newMatrix.storage[0][1] === 3 &&
+        newMatrix.storage[0][2] === 6 &&
+        newMatrix.storage[1][0] === 1 &&
+        newMatrix.storage[1][1] === 4 &&
+        newMatrix.storage[1][2] === 7
+    );
+});
+
+assert(testCount, 'should work correctly on a 2x3 matrix', function () {
+    let matrix = new Matrix(1, 1);
+    matrix.initialize([
+        [0, 1, 3],
+        [4, 6, 7],
+    ]);
+    let newMatrix = matrix.transpose();
+
+    return (
+        newMatrix !== null &&
+        newMatrix.m === 3 &&
+        newMatrix.n === 2 &&
+        newMatrix.storage[0][0] === 0 &&
+        newMatrix.storage[0][1] === 4 &&
+        newMatrix.storage[1][0] === 1 &&
+        newMatrix.storage[1][1] === 6 &&
+        newMatrix.storage[2][0] === 3 &&
+        newMatrix.storage[2][1] === 7
+    );
+});
+
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
+
+testCount = [0, 0];
+console.log('Multiply Tests');
+
+assert(
+    testCount,
+    'should work correctly on example matrix with valid input',
+    function () {
+        let matrix1 = new Matrix(1, 1);
+        let matrix2 = new Matrix(1, 1);
+
+        matrix1.initialize([
+            [4, 1, 3],
+            [3, 2, 5],
+        ]);
+
+        matrix2.initialize([
+            [8, 9],
+            [7, 10],
+            [0, 6],
+        ]);
+
+        let newMatrix = matrix1.multiply(matrix2);
+
+        return (
+            newMatrix !== null &&
+            newMatrix.m === 2 &&
+            newMatrix.n === 2 &&
+            newMatrix.storage[0][0] === 39 &&
+            newMatrix.storage[0][1] === 64 &&
+            newMatrix.storage[1][0] === 38 &&
+            newMatrix.storage[1][1] === 77
+        );
+    }
+);
+
+assert(
+    testCount,
+    'should work correctly on example matrix with invalid input of wrong dimensions',
+    function () {
+        let matrix1 = new Matrix(1, 1);
+        let matrix2 = new Matrix(1, 1);
+
+        matrix1.initialize([
+            [4, 1, 3],
+            [3, 2, 5],
+        ]);
+
+        matrix2.initialize([[8]]);
+
+        let newMatrix = matrix1.multiply(matrix2);
+
+        return newMatrix === null;
+    }
+);
+
+assert(
+    testCount,
+    'should work correctly on example matrix when multiplied by 3x1 matrix',
+    function () {
+        let matrix1 = new Matrix(1, 1);
+        let matrix2 = new Matrix(1, 1);
+
+        matrix1.initialize([
+            [4, 1, 3],
+            [3, 2, 5],
+        ]);
+
+        matrix2.initialize([[8], [1], [2]]);
+
+        let newMatrix = matrix1.multiply(matrix2);
+
+        return (
+            newMatrix !== null &&
+            newMatrix.m === 2 &&
+            newMatrix.n === 1 &&
+            newMatrix.storage[0][0] === 39 &&
+            newMatrix.storage[1][0] === 36
+        );
+    }
+);
+
+assert(
+    testCount,
+    'should work correctly when 1x2 matrix is multiplied by example matrix',
+    function () {
+        let matrix1 = new Matrix(1, 1);
+        let matrix2 = new Matrix(1, 1);
+
+        matrix1.initialize([
+            [4, 1, 3],
+            [3, 2, 5],
+        ]);
+
+        matrix2.initialize([[3, 5]]);
+
+        let newMatrix = matrix2.multiply(matrix1);
+
+        return (
+            newMatrix !== null &&
+            newMatrix.m === 1 &&
+            newMatrix.n === 3 &&
+            newMatrix.storage[0][0] === 27 &&
+            newMatrix.storage[0][1] === 13 &&
+            newMatrix.storage[0][2] === 34
+        );
+    }
+);
+
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
 // DO NOT TOUCH FUNCTIONS BELOW
 
 // function for checking if arrays contain same elements
 // (do not need to be in the same order)
 function arraysMatching(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  }
-
-  let cache = {};
-  for (let i = 0; i < arr1.length; i++) {
-    if (cache[arr1[i]] === undefined) {
-      cache[arr1[i]] = 1;
-    } else {
-      cache[arr1[i]]++;
+    if (arr1.length !== arr2.length) {
+        return false;
     }
-  }
 
-  for (let j = 0; j < arr2.length; j++) {
-    if (cache[arr2[j]] === undefined || cache[arr2[j]] === 0) {
-      return false;
+    let cache = {};
+    for (let i = 0; i < arr1.length; i++) {
+        if (cache[arr1[i]] === undefined) {
+            cache[arr1[i]] = 1;
+        } else {
+            cache[arr1[i]]++;
+        }
     }
-    cache[arr2[j]]--;
-  }
-  return true;
+
+    for (let j = 0; j < arr2.length; j++) {
+        if (cache[arr2[j]] === undefined || cache[arr2[j]] === 0) {
+            return false;
+        }
+        cache[arr2[j]]--;
+    }
+    return true;
 }
 
 // function for checking if arrays are equal
 function arraysEqual(arr1, arr2) {
-  if (arr1.length !== arr2.length) return false;
-  for (var i = arr1.length; i--; ) {
-    if (arr1[i] !== arr2[i]) return false;
-  }
-  return true;
+    if (arr1.length !== arr2.length) return false;
+    for (var i = arr1.length; i--; ) {
+        if (arr1[i] !== arr2[i]) return false;
+    }
+    return true;
 }
 
 // custom assert function to handle tests
@@ -809,24 +911,24 @@ function arraysEqual(arr1, arr2) {
 // Function test : performs a set of operations and returns a boolean
 //   indicating if test passed
 function assert(count, name, test) {
-  if (!count || !Array.isArray(count) || count.length !== 2) {
-    count = [0, "*"];
-  } else {
-    count[1]++;
-  }
-
-  var pass = "false";
-  var errMsg = null;
-  try {
-    if (test()) {
-      pass = " true";
-      count[0]++;
+    if (!count || !Array.isArray(count) || count.length !== 2) {
+        count = [0, '*'];
+    } else {
+        count[1]++;
     }
-  } catch (e) {
-    errMsg = e;
-  }
-  console.log("  " + (count[1] + ")   ").slice(0, 5) + pass + " : " + name);
-  if (errMsg !== null) {
-    console.log("       " + errMsg + "\n");
-  }
+
+    var pass = 'false';
+    var errMsg = null;
+    try {
+        if (test()) {
+            pass = ' true';
+            count[0]++;
+        }
+    } catch (e) {
+        errMsg = e;
+    }
+    console.log('  ' + (count[1] + ')   ').slice(0, 5) + pass + ' : ' + name);
+    if (errMsg !== null) {
+        console.log('       ' + errMsg + '\n');
+    }
 }
