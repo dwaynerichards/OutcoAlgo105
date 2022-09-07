@@ -60,31 +60,17 @@ Reduce the following into it's Big-O order of magnitude.
  *     [9, 83, 74], 8 --> -1
  *     [6, 4, 7, 9, 7, 8, 2, 4, 3], 7 --> 2
  *
-<<<<<<< HEAD
  *     Time Complexity: O(N) Linear
  *     Auxiliary Space Complexity: Constant
  */
 
 function indexOf(arr, target) {
-	for (let i = 0; i < arr.length; i++) {
-		if (arr[i] === target) {
-			return i;
-		}
-	}
-	return -1;
-=======
- *     Time Complexity:
- *     Auxiliary Space Complexity:
- */
-
-function indexOf(arr, target) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === target) {
-      return i;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === target) {
+            return i;
+        }
     }
-  }
-  return -1;
->>>>>>> 02497ea (Initial commit)
+    return -1;
 }
 
 /*
@@ -101,33 +87,18 @@ function indexOf(arr, target) {
  *     [9, 83, 74] --> [74]
  *     [6, 4, 7, 9, 7, 8, 2, 4, 3] --> [6, 4, 8, 2, 4]
  *
-<<<<<<< HEAD
  *     Time Complexity: O(n) Linear
  *     Auxiliary Space Complexity: O(n) Linear
  */
 
 function evens(arr) {
-	var results = [];
-	for (let i = 0; i < arr.length; i++) {
-		if (arr[i] % 2 === 0) {
-			results.push(arr[i]);
-		}
-	}
-	return results;
-=======
- *     Time Complexity:
- *     Auxiliary Space Complexity:
- */
-
-function evens(arr) {
-  var results = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] % 2 === 0) {
-      results.push(arr[i]);
+    var results = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] % 2 === 0) {
+            results.push(arr[i]);
+        }
     }
-  }
-  return results;
->>>>>>> 02497ea (Initial commit)
+    return results;
 }
 
 /*
@@ -144,29 +115,16 @@ function evens(arr) {
  *    [0, 1, -1] --> 0
  *    [] --> 0
  *
-<<<<<<< HEAD
  *    Time Complexity: O(n) Linear
  *    Auxiliary Space Complexity: O(1) Constant
  */
 
 function sum(arr) {
-	let total = 0;
-	for (let i = 0; i < arr.length; i++) {
-		total += arr[i];
-	}
-	return total;
-=======
- *    Time Complexity:
- *    Auxiliary Space Complexity:
- */
-
-function sum(arr) {
-  let total = 0;
-  for (let i = 0; i < arr.length; i++) {
-    total += arr[i];
-  }
-  return total;
->>>>>>> 02497ea (Initial commit)
+    let total = 0;
+    for (let i = 0; i < arr.length; i++) {
+        total += arr[i];
+    }
+    return total;
 }
 
 /*
@@ -184,47 +142,25 @@ function sum(arr) {
  *   [12, 25, 40], [20, 37, 45] --> [12, 20, 25, 37, 40, 45]
  *   [10, 13, 24], [12, 35] --> [10, 12, 13, 24, 35]
  *
-<<<<<<< HEAD
  *   Time Complexity: Logarithmic
  *   Auxiliary Space Complexity: Linear
  */
 
 function merge(arr1, arr2) {
-	const totalElements = arr1.length + arr2.length;
-	let result = [];
-	let i = 0;
-	let j = 0;
-	while (i + j < totalElements) {
-		if (j >= arr2.length || (i < arr1.length && arr1[i] <= arr2[j])) {
-			result.push(arr1[i]);
-			i++;
-		} else {
-			result.push(arr2[j]);
-			j++;
-		}
-	}
-	return result;
-=======
- *   Time Complexity:
- *   Auxiliary Space Complexity:
- */
-
-function merge(arr1, arr2) {
-  const totalElements = arr1.length + arr2.length;
-  let result = [];
-  let i = 0;
-  let j = 0;
-  while (i + j < totalElements) {
-    if (j >= arr2.length || (i < arr1.length && arr1[i] <= arr2[j])) {
-      result.push(arr1[i]);
-      i++;
-    } else {
-      result.push(arr2[j]);
-      j++;
+    const totalElements = arr1.length + arr2.length;
+    let result = [];
+    let i = 0;
+    let j = 0;
+    while (i + j < totalElements) {
+        if (j >= arr2.length || (i < arr1.length && arr1[i] <= arr2[j])) {
+            result.push(arr1[i]);
+            i++;
+        } else {
+            result.push(arr2[j]);
+            j++;
+        }
     }
-  }
-  return result;
->>>>>>> 02497ea (Initial commit)
+    return result;
 }
 
 /*
@@ -243,45 +179,24 @@ function merge(arr1, arr2) {
  *    [5, 7, 10, 12, 14], 7 --> 1
  *    [2, 4, 8, 9, 15], 3 --> -1
  *
-<<<<<<< HEAD
  *   Time Complexity: Logarithmic
  *   Auxiliary Space Complexity: Constant
  */
 
 function binarySearch(arr, val) {
-	let low = 0;
-	let high = arr.length - 1;
-	while (low <= high) {
-		mid = parseInt((low + high) / 2);
-		if (arr[mid] > val) {
-			high = mid - 1;
-		} else if (arr[mid] < val) {
-			low = mid + 1;
-		} else {
-			return mid;
-		}
-	}
-	return -1;
-=======
- *   Time Complexity:
- *   Auxiliary Space Complexity:
- */
-
-function binarySearch(arr, val) {
-  let low = 0;
-  let high = arr.length - 1;
-  while (low <= high) {
-    mid = parseInt((low + high) / 2);
-    if (arr[mid] > val) {
-      high = mid - 1;
-    } else if (arr[mid] < val) {
-      low = mid + 1;
-    } else {
-      return mid;
+    let low = 0;
+    let high = arr.length - 1;
+    while (low <= high) {
+        mid = parseInt((low + high) / 2);
+        if (arr[mid] > val) {
+            high = mid - 1;
+        } else if (arr[mid] < val) {
+            low = mid + 1;
+        } else {
+            return mid;
+        }
     }
-  }
-  return -1;
->>>>>>> 02497ea (Initial commit)
+    return -1;
 }
 
 /*
@@ -298,266 +213,153 @@ function binarySearch(arr, val) {
  *    1 --> 1 (1)
  *    9 --> 362880 (9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1)
  *
-<<<<<<< HEAD
  *    Time Complexity: Exponential O(n!)
  *    Auxiliary Space Complexity: Constant O(1)
  */
 
 function factorial(n) {
-	if (n === 1) {
-		return 1;
-	}
-	return n * factorial(n - 1);
-=======
- *    Time Complexity:
- *    Auxiliary Space Complexity:
- */
-
-function factorial(n) {
-  if (n === 1) {
-    return 1;
-  }
-  return n * factorial(n - 1);
->>>>>>> 02497ea (Initial commit)
+    if (n === 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
 }
 
 /*
  *  First Times Last
  *
-<<<<<<< HEAD
  *  Time Complexity: Linear O(n)
  *  Auxiliary Space Complexity: Constant
  */
 
 function firstTimesLast(arr) {
-	let result = null;
-	if (arr.length < 2) {
-		return result;
-	}
-	result = arr[0] * arr[arr.length - 1];
-	return result;
-=======
- *  Time Complexity:
- *  Auxiliary Space Complexity:
- */
-
-function firstTimesLast(arr) {
-  let result = null;
-  if (arr.length < 2) {
+    let result = null;
+    if (arr.length < 2) {
+        return result;
+    }
+    result = arr[0] * arr[arr.length - 1];
     return result;
-  }
-  result = arr[0] * arr[arr.length - 1];
-  return result;
->>>>>>> 02497ea (Initial commit)
 }
 
 /*
  *  Most Frequent Occurrence
  *  NOTE: The string only contains letters in it
  *
-<<<<<<< HEAD
  *  Time Complexity: O(n) Linear 3n+4
  *  Auxiliary Space Complexity: O(n)
  */
 
 function mostFrequentOccurrence(str) {
-	//n
-	const lowerString = str.toLowerCase(); //n
-	let letters = {}; //1
-	let mostFrequent; //1
+    //n
+    const lowerString = str.toLowerCase(); //n
+    let letters = {}; //1
+    let mostFrequent; //1
 
-	for (let i = 0; i < lowerString.length; i++) {
-		let char = str[i].toLowerCase(); //1
-		if (letters[char]) {
-			letters[char]++; //1
-		} else {
-			letters[char] = 1; //n
-		}
-	}
-
-	for (let key in letters) {
-		//1
-		if (!mostFrequent || letters[key] > mostFrequent[1]) {
-			mostFrequent = [ key, letters[key] ]; //n
-		}
-	}
-
-	return mostFrequent[0]; //1
-=======
- *  Time Complexity:
- *  Auxiliary Space Complexity:
- */
-
-function mostFrequentOccurrence(str) {
-  const lowerString = str.toLowerCase();
-  let letters = {};
-  let mostFrequent;
-
-  for (let i = 0; i < lowerString.length; i++) {
-    let char = str[i].toLowerCase();
-    if (letters[char]) {
-      letters[char]++;
-    } else {
-      letters[char] = 1;
+    for (let i = 0; i < lowerString.length; i++) {
+        let char = str[i].toLowerCase(); //1
+        if (letters[char]) {
+            letters[char]++; //1
+        } else {
+            letters[char] = 1; //n
+        }
     }
-  }
 
-  for (let key in letters) {
-    if (!mostFrequent || letters[key] > mostFrequent[1]) {
-      mostFrequent = [key, letters[key]];
+    for (let key in letters) {
+        //1
+        if (!mostFrequent || letters[key] > mostFrequent[1]) {
+            mostFrequent = [key, letters[key]]; //n
+        }
     }
-  }
 
-  return mostFrequent[0];
->>>>>>> 02497ea (Initial commit)
+    return mostFrequent[0]; //1
 }
 
 /*
  *  Print Unordered Pairs
  *
-<<<<<<< HEAD
  *  Time Complexity: O(n2)*1 Quadratic
  *  Auxiliary Space Complexity: O(1) Constant
  */
 
 function printUnorderedPairs(array) {
-	//n
-	for (let i = 0; i < array.length; i++) {
-		//n
-		for (let j = i + 1; j < array.length; j++) {
-			//n
-			console.log(array[i] + ',' + array[j]); //1
-		}
-	}
-=======
- *  Time Complexity:
- *  Auxiliary Space Complexity:
- */
+    //n
+    for (let i = 0; i < array.length; i++) {
+        //n
+        for (let j = i + 1; j < array.length; j++) {
+            //n
+            console.log(array[i] + ',' + array[j]); //1
+        }
+    }
+}
 
 function printUnorderedPairs(array) {
-  for (let i = 0; i < array.length; i++) {
-    for (let j = i + 1; j < array.length; j++) {
-      console.log(array[i] + "," + array[j]);
+    for (let i = 0; i < array.length; i++) {
+        for (let j = i + 1; j < array.length; j++) {
+            console.log(array[i] + ',' + array[j]);
+        }
     }
-  }
->>>>>>> 02497ea (Initial commit)
 }
 
 /*
  *  Make Combined Matrix
  *
-<<<<<<< HEAD
  *  Time Complexity: O(n2)
  *  Auxiliary Space Complexity: O(n)
  */
 
 function makeCombinedMatrix(arr1, arr2) {
-	let result = []; //1
-	let row; //1
+    let result = []; //1
+    let row; //1
 
-	for (let i = 0; i < arr1.length; i++) {
-		row = []; //1
-		for (let j = 0; j < arr2.length; j++) {
-			row.push(arr1[i] + arr2[j]); //n
-		}
-		result.push(row); //n
-	}
-	return result;
-=======
- *  Time Complexity:
- *  Auxiliary Space Complexity:
- */
-
-function makeCombinedMatrix(arr1, arr2) {
-  let result = [];
-  let row;
-
-  for (let i = 0; i < arr1.length; i++) {
-    row = [];
-    for (let j = 0; j < arr2.length; j++) {
-      row.push(arr1[i] + arr2[j]);
+    for (let i = 0; i < arr1.length; i++) {
+        row = []; //1
+        for (let j = 0; j < arr2.length; j++) {
+            row.push(arr1[i] + arr2[j]); //n
+        }
+        result.push(row); //n
     }
-    result.push(row);
-  }
-  return result;
->>>>>>> 02497ea (Initial commit)
+    return result;
 }
 
 /*
  *  Nth Fibonacci
  *
-<<<<<<< HEAD
  *  Time Complexity: 0(n)
  *  Auxiliary Space Complexity: O(n)
  */
 function nthFibonacci(n) {
-	let result = [ 0, 1 ]; //1
-	for (let i = 1; i < n; i++) {
-		//1
-		result[i + 1] = result[i] + result[i - 1]; //n
-	}
-	return result[n];
-=======
- *  Time Complexity:
- *  Auxiliary Space Complexity:
- */
-function nthFibonacci(n) {
-  let result = [0, 1];
-  for (let i = 1; i < n; i++) {
-    result[i + 1] = result[i] + result[i - 1];
-  }
-  return result[n];
->>>>>>> 02497ea (Initial commit)
+    let result = [0, 1]; //1
+    for (let i = 1; i < n; i++) {
+        //1
+        result[i + 1] = result[i] + result[i - 1]; //n
+    }
+    return result[n];
 }
 
 /*
  *  Nth Fibonacci - the return
  *
-<<<<<<< HEAD
  *  Time Complexity: Exponential O(Cn)
  *  Auxiliary Space Complexity: O(n)
  */
 
 function nthFibonacci(n) {
-	//t  /s
-	let cache = {}; // t =1; s = 1;
+    //t  /s
+    let cache = {}; // t =1; s = 1;
 
-	function searchFib(index) {
-		//t=1
-		if (cache[index]) {
-			//t=1
-			return cache[index]; //t=1 s=1
-		}
-		if (index < 2) {
-			//t1
-			return index; //t1
-		}
-		let result = searchFib(index - 1) + searchFib(index - 2); //n; s=1
-		cache[index] = result; //1; s=1
-		return cache[index]; //1; s=1
-	}
-
-	return searchFib(n); //Exponential s=n
-=======
- *  Time Complexity:
- *  Auxiliary Space Complexity:
- */
-
-function nthFibonacci(n) {
-  let cache = {};
-
-  function searchFib(index) {
-    if (cache[index]) {
-      return cache[index];
+    function searchFib(index) {
+        //t=1
+        if (cache[index]) {
+            //t=1
+            return cache[index]; //t=1 s=1
+        }
+        if (index < 2) {
+            //t1
+            return index; //t1
+        }
+        let result = searchFib(index - 1) + searchFib(index - 2); //n; s=1
+        cache[index] = result; //1; s=1
+        return cache[index]; //1; s=1
     }
-    if (index < 2) {
-      return index;
-    }
-    let result = searchFib(index - 1) + searchFib(index - 2);
-    cache[index] = result;
-    return cache[index];
-  }
 
-  return searchFib(n);
->>>>>>> 02497ea (Initial commit)
+    return searchFib(n); //Exponential s=n
 }
