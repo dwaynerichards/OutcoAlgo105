@@ -271,6 +271,23 @@ function sortDigits(n) {
 
 function getDuplicates(arr) {
     // YOUR WORK HERE
+    const count = {};
+    // step though arr, track existance  set: exists- if
+    const duplicates = [];
+    arr.forEach((num) => {
+        if (!count[num] === undefined) {
+            count[num] = 1;
+        } else {
+            if (count[num] === 1) duplicates.push(num);
+            count[num]++;
+        }
+    });
+    return duplicates;
+    //ifNot in count- add to count @ 1
+    //if in count
+    //if val is 1- add to duplicates
+    //then outside of ifStatement  , incremnent count
+    //return duplicates
 }
 
 /**
@@ -299,6 +316,18 @@ function getDuplicates(arr) {
 
 function anagramPair(string1, string2) {
     // YOUR WORK HERE
+    const chars = {};
+    for (const char in string1) {
+        chars[char] ? chars[char]++ : (chars[char] = 1);
+    }
+    for (const char in string2) {
+        if (chars[char]) {
+            chars[char]--;
+        } else {
+            return false;
+        }
+    }
+    return true;
 }
 
 /**
@@ -329,6 +358,21 @@ function anagramPair(string1, string2) {
 
 function anagramPalindrome(string) {
     // YOUR WORK HERE
+    //init  2 pointer iteration fromfont to rear
+    let i = 0;
+    let j = string.length - 1;
+    //iterate from front/rear to mid
+    while (i <= j) {
+        if (string[1] !== string[j]) return false;
+        i++;
+        j--;
+    }
+    //if pointers cross- with no errors- return true
+
+    //if odd number ofcharacters- should end with 1 item left
+    //if even should match all characters though iteration
+    //
+    return true;
 }
 
 ////////////////////////////////////////////////////////////
