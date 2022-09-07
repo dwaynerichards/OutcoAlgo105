@@ -24,9 +24,8 @@
  * [1, 1, 2, 2, 3, 3]' --> [1, 2, 3]
  * [1, 2, 3, 1, 2] --> [1, 2, 3]
  */
-
 'use strict';
-
+///@TODO testing- still untested
 function unique(arr) {
     const seen = {};
     const filtered = [];
@@ -39,9 +38,7 @@ function unique(arr) {
         }
     });
     return filtered;
-    // YOUR WORK HERE
 }
-
 /**
  * Word Count
  *
