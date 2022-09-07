@@ -25,10 +25,21 @@
  * [1, 2, 3, 1, 2] --> [1, 2, 3]
  */
 
-"use strict";
+'use strict';
 
 function unique(arr) {
-  // YOUR WORK HERE
+    const seen = {};
+    const filtered = [];
+    arr.forEach((e) => {
+        ///if not seen, add to seen, add to arr
+        //return filtered
+        if (!seen[e]) {
+            seen[e] = true;
+            filtered.push(e);
+        }
+    });
+    return filtered;
+    // YOUR WORK HERE
 }
 
 /**
@@ -57,7 +68,28 @@ function unique(arr) {
  */
 
 function wordCount(sentence) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
+    //create filted sentance
+    //set through sentance adding count to obj
+    //return obj
+    let wordCount = {};
+    if (sentence.length === 0) return wordCount;
+    let punctuations = new Set(['?', '!', '.', "'", ',']);
+    let unPunctuated = '';
+    let char = 0;
+    while (char < sentence.length) {
+        ///chk if char is punctuation
+        ///ifNot- add to filtered
+        if (!punctuations.has(sentence[char])) {
+            unPunctuated.concat(char);
+        }
+        char++; ///increemnet char
+    }
+    ///split string at space, add word to obj
+    unPunctuated.split(' ').forEach((word) => {
+        wordCount[word] ? wordCount[word]++ : (wordCount[word] = 1);
+    });
+    return wordCount;
 }
 
 /**
@@ -82,7 +114,26 @@ function wordCount(sentence) {
  */
 
 function rgb(string) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
+    // init hasmap of charCount
+    //return lowest char count
+    const charCount = {};
+    let i = 0;
+    while (i < string.length) {
+        charCount[string[i]]
+            ? charCount[string[i]]++
+            : (charCount[string[i]] = 1);
+        i++;
+    }
+    //less than 2 char, return 0
+    //it through char- return lowest num
+    if (Object.keys(charCount) < 3) return 0;
+    let setsPossible = Infinity;
+
+    Object.values(charCount).forEach((count) => {
+        if (count < setsPossible) setsPossible = count;
+    });
+    return setsPossible;
 }
 
 /**
@@ -107,7 +158,17 @@ function rgb(string) {
  */
 
 function missingNumber(n, arr) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
+    const inclusive = new Set();
+    const exclusive = [];
+    arr.forEach((num) => inclusive.add(num));
+    let i = 1;
+    while (i <= n) {
+        if (!inclusive.has(i)) {
+            exclusive.push[i];
+        }
+    }
+    return exclusive;
 }
 
 /**
@@ -130,7 +191,7 @@ function missingNumber(n, arr) {
  */
 
 function letterSort(string) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
 }
 
 /**
@@ -159,7 +220,7 @@ function letterSort(string) {
  */
 
 function characterMode(string) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
 }
 
 /**
@@ -185,7 +246,7 @@ function characterMode(string) {
  */
 
 function sortDigits(n) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
 }
 
 /**
@@ -209,7 +270,24 @@ function sortDigits(n) {
  */
 
 function getDuplicates(arr) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
+    const count = {};
+    // step though arr, track existance  set: exists- if
+    const duplicates = [];
+    arr.forEach((num) => {
+        if (!count[num] === undefined) {
+            count[num] = 1;
+        } else {
+            if (count[num] === 1) duplicates.push(num);
+            count[num]++;
+        }
+    });
+    return duplicates;
+    //ifNot in count- add to count @ 1
+    //if in count
+    //if val is 1- add to duplicates
+    //then outside of ifStatement  , incremnent count
+    //return duplicates
 }
 
 /**
@@ -237,7 +315,19 @@ function getDuplicates(arr) {
  */
 
 function anagramPair(string1, string2) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
+    const chars = {};
+    for (const char in string1) {
+        chars[char] ? chars[char]++ : (chars[char] = 1);
+    }
+    for (const char in string2) {
+        if (chars[char]) {
+            chars[char]--;
+        } else {
+            return false;
+        }
+    }
+    return true;
 }
 
 /**
@@ -267,7 +357,22 @@ function anagramPair(string1, string2) {
  */
 
 function anagramPalindrome(string) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
+    //init  2 pointer iteration fromfont to rear
+    let i = 0;
+    let j = string.length - 1;
+    //iterate from front/rear to mid
+    while (i <= j) {
+        if (string[1] !== string[j]) return false;
+        i++;
+        j--;
+    }
+    //if pointers cross- with no errors- return true
+
+    //if odd number ofcharacters- should end with 1 item left
+    //if even should match all characters though iteration
+    //
+    return true;
 }
 
 ////////////////////////////////////////////////////////////
@@ -276,239 +381,290 @@ function anagramPalindrome(string) {
 
 let testCount;
 
-console.log("Unique tests");
+console.log('Unique tests');
 testCount = [0, 0];
 
-assert(testCount, "should return unique values from sorted list with duplicates", () => {
-  let example = unique([1, 2, 4, 4, 5, 6]);
-  return (
-    example !== undefined &&
-    arraysEqual(
-      example.sort((a, b) => {
-        return a - b;
-      }),
-      [1, 2, 4, 5, 6]
-    )
-  );
+assert(
+    testCount,
+    'should return unique values from sorted list with duplicates',
+    () => {
+        let example = unique([1, 2, 4, 4, 5, 6]);
+        return (
+            example !== undefined &&
+            arraysEqual(
+                example.sort((a, b) => {
+                    return a - b;
+                }),
+                [1, 2, 4, 5, 6]
+            )
+        );
+    }
+);
+
+assert(
+    testCount,
+    'should return single value for list with all duplicates',
+    () => {
+        let example = unique([2, 2, 2, 2, 2, 2, 2]);
+        return example !== undefined && arraysEqual(example, [2]);
+    }
+);
+
+assert(
+    testCount,
+    'should return unique values from unsorted list with duplicates',
+    () => {
+        let example = unique([1, 2, 3, 1, 2]);
+        return (
+            example !== undefined &&
+            arraysEqual(
+                example.sort((a, b) => {
+                    return a - b;
+                }),
+                [1, 2, 3]
+            )
+        );
+    }
+);
+
+assert(testCount, 'should return an empty list from empty input', () => {
+    let example = unique([]);
+    return example !== undefined && arraysEqual(example, []);
 });
 
-assert(testCount, "should return single value for list with all duplicates", () => {
-  let example = unique([2, 2, 2, 2, 2, 2, 2]);
-  return example !== undefined && arraysEqual(example, [2]);
-});
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-assert(testCount, "should return unique values from unsorted list with duplicates", () => {
-  let example = unique([1, 2, 3, 1, 2]);
-  return (
-    example !== undefined &&
-    arraysEqual(
-      example.sort((a, b) => {
-        return a - b;
-      }),
-      [1, 2, 3]
-    )
-  );
-});
-
-assert(testCount, "should return an empty list from empty input", () => {
-  let example = unique([]);
-  return example !== undefined && arraysEqual(example, []);
-});
-
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-console.log("Word Count");
+console.log('Word Count');
 testCount = [0, 0];
 
-assert(testCount, "should return an object with each word and its frequency", () => {
-  let example = wordCount("The cat and the hat.");
-  return (
-    example !== undefined &&
-    example["the"] === 2 &&
-    example["cat"] === 1 &&
-    example["and"] === 1 &&
-    example["hat"] === 1
-  );
+assert(
+    testCount,
+    'should return an object with each word and its frequency',
+    () => {
+        let example = wordCount('The cat and the hat.');
+        return (
+            example !== undefined &&
+            example['the'] === 2 &&
+            example['cat'] === 1 &&
+            example['and'] === 1 &&
+            example['hat'] === 1
+        );
+    }
+);
+
+assert(
+    testCount,
+    'should return object with each word excluding punctuations',
+    () => {
+        let example = wordCount("It's a man, it's a plane, it's superman!");
+        return (
+            example !== undefined &&
+            example['its'] === 3 &&
+            example['a'] === 2 &&
+            example['man'] === 1 &&
+            example['plane'] === 1 &&
+            example['superman'] === 1
+        );
+    }
+);
+
+assert(testCount, 'should return empty object for empty string input', () => {
+    let example = wordCount('');
+    return example !== undefined && Object.keys(example).length === 0;
 });
 
-assert(testCount, "should return object with each word excluding punctuations", () => {
-  let example = wordCount("It's a man, it's a plane, it's superman!");
-  return (
-    example !== undefined &&
-    example["its"] === 3 &&
-    example["a"] === 2 &&
-    example["man"] === 1 &&
-    example["plane"] === 1 &&
-    example["superman"] === 1
-  );
-});
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-assert(testCount, "should return empty object for empty string input", () => {
-  let example = wordCount("");
-  return example !== undefined && Object.keys(example).length === 0;
-});
-
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-console.log("rgb Count");
+console.log('rgb Count');
 testCount = [0, 0];
 
-assert(testCount, "should return number correct number of rgb from input", () => {
-  let example = rgb("rgbrgb");
-  return example !== undefined && example === 2;
+assert(
+    testCount,
+    'should return number correct number of rgb from input',
+    () => {
+        let example = rgb('rgbrgb');
+        return example !== undefined && example === 2;
+    }
+);
+
+assert(
+    testCount,
+    'should return correct number of rgb from input despite characters out of sequence',
+    () => {
+        let example = rgb('rbgrbrgrgbgrrggbbbbrgrgrgrg');
+        return example !== undefined && example === 7;
+    }
+);
+
+assert(testCount, 'should return 0 as output for no number of rgb', () => {
+    let example = rgb('bbrr');
+    return example !== undefined && example === 0;
 });
 
-assert(testCount, "should return correct number of rgb from input despite characters out of sequence", () => {
-  let example = rgb("rbgrbrgrgbgrrggbbbbrgrgrgrg");
-  return example !== undefined && example === 7;
+assert(testCount, 'should return 0 for empty input', () => {
+    let example = rgb('');
+    return example !== undefined && example === 0;
 });
 
-assert(testCount, "should return 0 as output for no number of rgb", () => {
-  let example = rgb("bbrr");
-  return example !== undefined && example === 0;
-});
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-assert(testCount, "should return 0 for empty input", () => {
-  let example = rgb("");
-  return example !== undefined && example === 0;
-});
-
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-console.log("Missing Number Tests");
+console.log('Missing Number Tests');
 testCount = [0, 0];
 
-assert(testCount, "should return [3] for input of [1, 4, 2]", () => {
-  let example = missingNumber(4, [1, 4, 2]);
-  return example !== undefined && arraysEqual(example, [3]);
+assert(testCount, 'should return [3] for input of [1, 4, 2]', () => {
+    let example = missingNumber(4, [1, 4, 2]);
+    return example !== undefined && arraysEqual(example, [3]);
 });
 
-assert(testCount, "should return [2, 3, 5, 8] for input of [4, 7, 1, 6]", () => {
-  let example = missingNumber(8, [4, 7, 1, 6]);
-  return example !== undefined && arraysEqual(example, [2, 3, 5, 8]);
+assert(
+    testCount,
+    'should return [2, 3, 5, 8] for input of [4, 7, 1, 6]',
+    () => {
+        let example = missingNumber(8, [4, 7, 1, 6]);
+        return example !== undefined && arraysEqual(example, [2, 3, 5, 8]);
+    }
+);
+
+assert(testCount, 'should return [3, 5] for input of [6, 4, 2, 1]', () => {
+    let example = missingNumber(6, [6, 4, 2, 1]);
+    return example !== undefined && arraysEqual(example, [3, 5]);
 });
 
-assert(testCount, "should return [3, 5] for input of [6, 4, 2, 1]", () => {
-  let example = missingNumber(6, [6, 4, 2, 1]);
-  return example !== undefined && arraysEqual(example, [3, 5]);
-});
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-console.log("Letter Sort Tests");
+console.log('Letter Sort Tests');
 testCount = [0, 0];
 
 assert(testCount, "should return 'ehllo' for input 'hello'", () => {
-  let example = letterSort("hello");
-  return example !== undefined && example === "ehllo";
+    let example = letterSort('hello');
+    return example !== undefined && example === 'ehllo';
 });
 
-assert(testCount, "should return 'abdehiortw' for input of 'whiteboard'", () => {
-  let example = letterSort("whiteboard");
-  return example !== undefined && example === "abdehiortw";
-});
+assert(
+    testCount,
+    "should return 'abdehiortw' for input of 'whiteboard'",
+    () => {
+        let example = letterSort('whiteboard');
+        return example !== undefined && example === 'abdehiortw';
+    }
+);
 
 assert(testCount, "should return 'eno' for input 'one'", () => {
-  let example = letterSort("one");
-  return example !== undefined && example === "eno";
+    let example = letterSort('one');
+    return example !== undefined && example === 'eno';
 });
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("Character Mode Tests");
+console.log('Character Mode Tests');
 testCount = [0, 0];
 
 assert(testCount, "should return 'l' for input 'hello'", () => {
-  let example = characterMode("hello");
-  return example !== undefined && example === "l";
+    let example = characterMode('hello');
+    return example !== undefined && example === 'l';
 });
 
-assert(testCount, "should return 'a' when input is 'A walk in the park'", () => {
-  let example = characterMode("A walk in the park");
-  return example !== undefined && example === "a";
-});
+assert(
+    testCount,
+    "should return 'a' when input is 'A walk in the park'",
+    () => {
+        let example = characterMode('A walk in the park');
+        return example !== undefined && example === 'a';
+    }
+);
 
 assert(testCount, "should return 'no' when input is 'noon'", () => {
-  let example = characterMode("noon");
-  return example !== undefined && example === "no";
+    let example = characterMode('noon');
+    return example !== undefined && example === 'no';
 });
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("Sort Digits Tests");
+console.log('Sort Digits Tests');
 testCount = [0, 0];
 
 assert(testCount, "should return '789' when input is '8970'", () => {
-  let example = sortDigits(8970);
-  return example !== undefined && example === 789;
+    let example = sortDigits(8970);
+    return example !== undefined && example === 789;
 });
 
 assert(testCount, "should return '23445' when input is '32445'", () => {
-  let example = sortDigits(32445);
-  return example !== undefined && example === 23445;
+    let example = sortDigits(32445);
+    return example !== undefined && example === 23445;
 });
 
 assert(testCount, "should return '111' when input is '10101'", () => {
-  let example = sortDigits(10101);
-  return example !== undefined && example === 111;
+    let example = sortDigits(10101);
+    return example !== undefined && example === 111;
 });
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("Get Duplicates Tests");
+console.log('Get Duplicates Tests');
 testCount = [0, 0];
 
 assert(testCount, "should return '[2]' when input is '[1, 2, 4, 2]'", () => {
-  let example = getDuplicates([1, 2, 4, 2]);
-  return example !== undefined && arraysEqual(example, [2]);
+    let example = getDuplicates([1, 2, 4, 2]);
+    return example !== undefined && arraysEqual(example, [2]);
 });
 
-assert(testCount, "should return '[3, 2]' or '[2, 3]' when input is '[3, 2, 3, 2, 3, 3, 4]'", () => {
-  let example = getDuplicates([3, 2, 3, 2, 3, 3, 4]);
-  return (example !== undefined && arraysEqual(example, [2, 3])) || arraysEqual(example, [3, 2]);
-});
+assert(
+    testCount,
+    "should return '[3, 2]' or '[2, 3]' when input is '[3, 2, 3, 2, 3, 3, 4]'",
+    () => {
+        let example = getDuplicates([3, 2, 3, 2, 3, 3, 4]);
+        return (
+            (example !== undefined && arraysEqual(example, [2, 3])) ||
+            arraysEqual(example, [3, 2])
+        );
+    }
+);
 
 assert(testCount, "should return '[]' when input is '[1, 2, 3, 4]'", () => {
-  let example = getDuplicates([1, 2, 3, 4]);
-  return example !== undefined && arraysEqual(example, []);
+    let example = getDuplicates([1, 2, 3, 4]);
+    return example !== undefined && arraysEqual(example, []);
 });
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("Anagram Pair Tests");
+console.log('Anagram Pair Tests');
 testCount = [0, 0];
 
 assert(testCount, "should return true when input is 'cat, act'", () => {
-  let example = anagramPair("cat", "act");
-  return example !== undefined && example === true;
+    let example = anagramPair('cat', 'act');
+    return example !== undefined && example === true;
 });
 
 assert(testCount, "should return false when input is 'cat, dog'", () => {
-  let example = anagramPair("cat", "dog");
-  return example !== undefined && example === false;
+    let example = anagramPair('cat', 'dog');
+    return example !== undefined && example === false;
 });
 
-assert(testCount, "should return false when input is 'racecar, aaccrres'", () => {
-  let example = anagramPair("racecar", "aaccrres");
-  return example !== undefined && example === false;
-});
+assert(
+    testCount,
+    "should return false when input is 'racecar, aaccrres'",
+    () => {
+        let example = anagramPair('racecar', 'aaccrres');
+        return example !== undefined && example === false;
+    }
+);
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("Anagram Palindrome Tests");
+console.log('Anagram Palindrome Tests');
 testCount = [0, 0];
 
 assert(testCount, "should return true when input is 'carrace'", () => {
-  let example = anagramPalindrome("carrace");
-  return example !== undefined && example === true;
+    let example = anagramPalindrome('carrace');
+    return example !== undefined && example === true;
 });
 
 assert(testCount, "should return false when input is 'cat'", () => {
-  let example = anagramPalindrome("cat");
-  return example !== undefined && example === false;
+    let example = anagramPalindrome('cat');
+    return example !== undefined && example === false;
 });
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
 // captures all elements that were printed to the console
 //
@@ -516,27 +672,27 @@ console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
 // input: {Array} - parameters for the function
 // output: {Array} - array of all the captured logs
 function captureLog(method, ...params) {
-  let record = [];
-  const log = console.log;
-  console.log = (...args) => {
-    record = record.concat(...args);
-  };
-  method(...params);
-  console.log = log;
-  return record;
+    let record = [];
+    const log = console.log;
+    console.log = (...args) => {
+        record = record.concat(...args);
+    };
+    method(...params);
+    console.log = log;
+    return record;
 }
 
 // compare if two flat arrays are equal
 function arraysEqual(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  }
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] !== arr2[i]) {
-      return false;
+    if (arr1.length !== arr2.length) {
+        return false;
     }
-  }
-  return true;
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+            return false;
+        }
+    }
+    return true;
 }
 
 // custom assert function to handle tests
@@ -547,24 +703,24 @@ function arraysEqual(arr1, arr2) {
 //        indicating if test passed
 // output: {undefined}
 function assert(count, name, test) {
-  if (!count || !Array.isArray(count) || count.length !== 2) {
-    count = [0, "*"];
-  } else {
-    count[1]++;
-  }
-
-  let pass = "false";
-  let errMsg = null;
-  try {
-    if (test()) {
-      pass = " true";
-      count[0]++;
+    if (!count || !Array.isArray(count) || count.length !== 2) {
+        count = [0, '*'];
+    } else {
+        count[1]++;
     }
-  } catch (e) {
-    errMsg = e;
-  }
-  console.log("  " + (count[1] + ")   ").slice(0, 5) + pass + " : " + name);
-  if (errMsg !== null) {
-    console.log("       " + errMsg + "\n");
-  }
+
+    let pass = 'false';
+    let errMsg = null;
+    try {
+        if (test()) {
+            pass = ' true';
+            count[0]++;
+        }
+    } catch (e) {
+        errMsg = e;
+    }
+    console.log('  ' + (count[1] + ')   ').slice(0, 5) + pass + ' : ' + name);
+    if (errMsg !== null) {
+        console.log('       ' + errMsg + '\n');
+    }
 }
