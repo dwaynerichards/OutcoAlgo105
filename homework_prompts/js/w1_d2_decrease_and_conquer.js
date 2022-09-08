@@ -81,6 +81,35 @@ function numberOfOnes(arr) {
 
 function closestValue(arr, target) {
     // YOUR WORK HERE
+    // set closest Val to Infini
+    let closestDiff = Infinity;
+    //init val to return
+    let val = null;
+    //init star- end
+    let start = 0;
+    //run while loop until start > end
+    let end = arr.length;
+    //init mid
+    while (start < end) {
+        //less than or equal to?
+        const mid = Math.floor(end / 2);
+        let diff = target - arr[mid];
+        if (diff < closestDiff) {
+            closestDiff = diff;
+            val = arr[mid];
+        }
+        if (arr[mid] < target) {
+            start = mid + 1;
+        } else end = mid - 1;
+    }
+    //init differance  as diff btween target & mid
+    //if diff < cloststDiff mutate cloststDff, mutate val
+
+    //if valAtMid less than target- change range to right sideOfMid
+    //start = mid + 1
+    // else end = mid -1
+
+    //return value
 }
 
 /*
