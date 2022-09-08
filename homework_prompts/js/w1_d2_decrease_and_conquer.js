@@ -20,10 +20,41 @@
  * `[0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1] --> 8`
  * `[0, 0, 0] --> 0`
  * `[0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1] --> 7`
+ *
+ *
+ * * `[0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1] --> 8`
+ * //split rr
+ * //if val at mid = 1
+ * //mutate arr to left side- otherwise mutate arr to right sight
+ * //
+ * * * `[0, 0, 0, 1, 1,
+ *  1, 1,
+ * [0,0,1,1] s-0 e-4 m-2 arr[mid] =1 =>
+ * [0,0,1] s-0, e-2, m-1 arr[mid] =0 => s= m+1
+ *
+ *
  */
 
 function numberOfOnes(arr) {
-  // YOUR WORK HERE
+    let start = 0;
+    let end = arr.length;
+    let mid;
+    while (start < end) {
+        mid = Math.floor(end / 2);
+        if (arr[mid] === 0) {
+            //val required is to the right
+            start = mid + 1;
+        } else {
+            end = mid;
+        }
+    }
+    return arr.length - start;
+
+    //while loop to
+    //find middle of arr
+    //if value at mid is 0
+
+    // YOUR WORK HERE
 }
 
 /*
@@ -49,7 +80,7 @@ function numberOfOnes(arr) {
  */
 
 function closestValue(arr, target) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
 }
 
 /*
@@ -75,7 +106,7 @@ function closestValue(arr, target) {
  */
 
 function squareRoot(n) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
 }
 
 /*
@@ -101,7 +132,7 @@ function squareRoot(n) {
  */
 
 function greaterValues(arr, target) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
 }
 
 /*
@@ -128,7 +159,7 @@ function greaterValues(arr, target) {
  */
 
 function rotatedArraySearch(nums, target) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
 }
 
 /*
@@ -155,7 +186,7 @@ function rotatedArraySearch(nums, target) {
  */
 
 function multiplicationRussianPeasant(a, b) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
 }
 
 ////////////////////////////////////////////////////////////
@@ -164,120 +195,164 @@ function multiplicationRussianPeasant(a, b) {
 
 let testCount;
 
-console.log("Number of Ones Tests");
+console.log('Number of Ones Tests');
 testCount = [0, 0];
 
-assert(testCount, "should return correct number of ones for array with zeroes and ones", () => {
-  let example = numberOfOnes([0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]);
-  return example !== undefined && example === 8;
-});
+assert(
+    testCount,
+    'should return correct number of ones for array with zeroes and ones',
+    () => {
+        let example = numberOfOnes([0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]);
+        return example !== undefined && example === 8;
+    }
+);
 
-assert(testCount, "should return correct number of ones for array with all zeroes", () => {
-  let example = numberOfOnes([0, 0, 0]);
-  return example !== undefined && example === 0;
-});
+assert(
+    testCount,
+    'should return correct number of ones for array with all zeroes',
+    () => {
+        let example = numberOfOnes([0, 0, 0]);
+        return example !== undefined && example === 0;
+    }
+);
 
-assert(testCount, "should return correct number of ones for array with all ones", () => {
-  let example = numberOfOnes([1, 1, 1]);
-  return example !== undefined && example === 3;
-});
+assert(
+    testCount,
+    'should return correct number of ones for array with all ones',
+    () => {
+        let example = numberOfOnes([1, 1, 1]);
+        return example !== undefined && example === 3;
+    }
+);
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("Closest Value Tests");
+console.log('Closest Value Tests');
 testCount = [0, 0];
 
-assert(testCount, "should return correct closest value for number in the middle range", () => {
-  let example = closestValue([1, 2, 3, 5, 5, 7, 9, 10, 11], 6);
-  return example !== undefined && example === 5;
+assert(
+    testCount,
+    'should return correct closest value for number in the middle range',
+    () => {
+        let example = closestValue([1, 2, 3, 5, 5, 7, 9, 10, 11], 6);
+        return example !== undefined && example === 5;
+    }
+);
+
+assert(testCount, 'should return closest value for highest number', () => {
+    let example = closestValue([1, 2, 3], 8);
+    return example !== undefined && example === 3;
 });
 
-assert(testCount, "should return closest value for highest number", () => {
-  let example = closestValue([1, 2, 3], 8);
-  return example !== undefined && example === 3;
+assert(testCount, 'should return closest value for lowest number', () => {
+    let example = closestValue([-2, -1, 0], -5);
+    return example !== undefined && example === -2;
 });
 
-assert(testCount, "should return closest value for lowest number", () => {
-  let example = closestValue([-2, -1, 0], -5);
-  return example !== undefined && example === -2;
-});
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-console.log("Square Root Tests");
+console.log('Square Root Tests');
 testCount = [0, 0];
 
-assert(testCount, "should return correct square root for number < 10", () => {
-  let example = squareRoot(4);
-  return example !== undefined && example === 2.0;
+assert(testCount, 'should return correct square root for number < 10', () => {
+    let example = squareRoot(4);
+    return example !== undefined && example === 2.0;
 });
 
-assert(testCount, "should return correct square root for number between 10 and 100", () => {
-  let example = squareRoot(98);
-  return example !== undefined && parseFloat(example) === 9.899495;
-});
+assert(
+    testCount,
+    'should return correct square root for number between 10 and 100',
+    () => {
+        let example = squareRoot(98);
+        return example !== undefined && parseFloat(example) === 9.899495;
+    }
+);
 
-assert(testCount, "should return correct square root for number over 10,000", () => {
-  let example = squareRoot(14856);
-  return example !== undefined && parseFloat(example) === 121.885192;
-});
+assert(
+    testCount,
+    'should return correct square root for number over 10,000',
+    () => {
+        let example = squareRoot(14856);
+        return example !== undefined && parseFloat(example) === 121.885192;
+    }
+);
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("Greater Values Tests");
+console.log('Greater Values Tests');
 testCount = [0, 0];
 
-assert(testCount, "should return greater values for number in the middle of the array", () => {
-  let example = greaterValues([1, 2, 3, 5, 5, 7, 9, 10, 11], 5);
-  return example !== undefined && example === 4;
-});
+assert(
+    testCount,
+    'should return greater values for number in the middle of the array',
+    () => {
+        let example = greaterValues([1, 2, 3, 5, 5, 7, 9, 10, 11], 5);
+        return example !== undefined && example === 4;
+    }
+);
 
-assert(testCount, "should return 0 for number greater than largest in the array", () => {
-  let example = greaterValues([1, 2, 3], 4);
-  return example !== undefined && example === 0;
-});
+assert(
+    testCount,
+    'should return 0 for number greater than largest in the array',
+    () => {
+        let example = greaterValues([1, 2, 3], 4);
+        return example !== undefined && example === 0;
+    }
+);
 
-assert(testCount, "should return greater values for number less than least in the array", () => {
-  let example = greaterValues([1, 10, 22, 59, 67, 72, 100], -2);
-  return example !== undefined && example === 7;
-});
+assert(
+    testCount,
+    'should return greater values for number less than least in the array',
+    () => {
+        let example = greaterValues([1, 10, 22, 59, 67, 72, 100], -2);
+        return example !== undefined && example === 7;
+    }
+);
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("Rotated Sorted Array Tests");
+console.log('Rotated Sorted Array Tests');
 testCount = [0, 0];
 
-assert(testCount, "returns true when target is in the array", () => {
-  let example = rotatedArraySearch([35, 46, 79, 102, 1, 14, 29, 31], 46);
-  return example !== undefined && example === true;
+assert(testCount, 'returns true when target is in the array', () => {
+    let example = rotatedArraySearch([35, 46, 79, 102, 1, 14, 29, 31], 46);
+    return example !== undefined && example === true;
 });
 
-assert(testCount, "returns false when target is not in the array", () => {
-  let example = rotatedArraySearch([35, 46, 79, 102, 1, 14, 29, 31], 47);
-  return example !== undefined && example === false;
+assert(testCount, 'returns false when target is not in the array', () => {
+    let example = rotatedArraySearch([35, 46, 79, 102, 1, 14, 29, 31], 47);
+    return example !== undefined && example === false;
 });
 
-assert(testCount, "returns true when target is the first number in the array", () => {
-  let example = rotatedArraySearch([7, 8, 9, 10, 1, 2, 3, 4, 5, 6], 7);
-  return example !== undefined && example === true;
-});
+assert(
+    testCount,
+    'returns true when target is the first number in the array',
+    () => {
+        let example = rotatedArraySearch([7, 8, 9, 10, 1, 2, 3, 4, 5, 6], 7);
+        return example !== undefined && example === true;
+    }
+);
 
-assert(testCount, "returns true when target is the last number in the array", () => {
-  let example = rotatedArraySearch([7, 8, 9, 10, 1, 2, 3, 4, 5, 6], 6);
-  return example !== undefined && example === true;
-});
+assert(
+    testCount,
+    'returns true when target is the last number in the array',
+    () => {
+        let example = rotatedArraySearch([7, 8, 9, 10, 1, 2, 3, 4, 5, 6], 6);
+        return example !== undefined && example === true;
+    }
+);
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("Multiplication Russian Tests");
+console.log('Multiplication Russian Tests');
 testCount = [0, 0];
 
-assert(testCount, "returns correct value for two integers", () => {
-  let example = multiplicationRussianPeasant(487, 734);
-  return example !== undefined && example === 357458;
+assert(testCount, 'returns correct value for two integers', () => {
+    let example = multiplicationRussianPeasant(487, 734);
+    return example !== undefined && example === 357458;
 });
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
 // captures all elements that were printed to the console
 //
@@ -285,27 +360,27 @@ console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
 // input: {Array} - parameters for the function
 // output: {Array} - array of all the captured logs
 function captureLog(method, ...params) {
-  let record = [];
-  const log = console.log;
-  console.log = (...args) => {
-    record = record.concat(...args);
-  };
-  method(...params);
-  console.log = log;
-  return record;
+    let record = [];
+    const log = console.log;
+    console.log = (...args) => {
+        record = record.concat(...args);
+    };
+    method(...params);
+    console.log = log;
+    return record;
 }
 
 // compare if two flat arrays are equal
 function arraysEqual(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  }
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] !== arr2[i]) {
-      return false;
+    if (arr1.length !== arr2.length) {
+        return false;
     }
-  }
-  return true;
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+            return false;
+        }
+    }
+    return true;
 }
 
 // custom assert function to handle tests
@@ -316,24 +391,24 @@ function arraysEqual(arr1, arr2) {
 //        indicating if test passed
 // output: {undefined}
 function assert(count, name, test) {
-  if (!count || !Array.isArray(count) || count.length !== 2) {
-    count = [0, "*"];
-  } else {
-    count[1]++;
-  }
-
-  let pass = "false";
-  let errMsg = null;
-  try {
-    if (test()) {
-      pass = " true";
-      count[0]++;
+    if (!count || !Array.isArray(count) || count.length !== 2) {
+        count = [0, '*'];
+    } else {
+        count[1]++;
     }
-  } catch (e) {
-    errMsg = e;
-  }
-  console.log("  " + (count[1] + ")   ").slice(0, 5) + pass + " : " + name);
-  if (errMsg !== null) {
-    console.log("       " + errMsg + "\n");
-  }
+
+    let pass = 'false';
+    let errMsg = null;
+    try {
+        if (test()) {
+            pass = ' true';
+            count[0]++;
+        }
+    } catch (e) {
+        errMsg = e;
+    }
+    console.log('  ' + (count[1] + ')   ').slice(0, 5) + pass + ' : ' + name);
+    if (errMsg !== null) {
+        console.log('       ' + errMsg + '\n');
+    }
 }
