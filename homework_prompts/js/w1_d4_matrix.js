@@ -284,8 +284,8 @@ class Matrix {
         //return if row, column exists
         //if I less 0 or greater than m
         //same for j
-        if (i < 0 || i > m) return false;
-        if (j < 0 || j > n) return false;
+        if (i < 0 || i > this.m) return false;
+        if (j < 0 || j > this.n) return false;
         return true;
     }
 
@@ -356,15 +356,79 @@ class Matrix {
         }, []);
     }
     ///@TODO review slice solution
+    /**
+     *                 matrix.storage == [[0, 1, 2],
+     *                                    [3, 4, 5]]
+     *                 matrix.transpose()
+     *                 result == [[0, 3],
+     *                            [1, 4],
+     *                            [2, 5]]
+     * @returns
+     * columnLength becomes rowLength, rowLength becoems column length
+     * forEach row => the ith value of each row will become ith value of each column
+     *  set m/rows to amount of columns, set n/col to num of rows
+     * instatiate arr of arr=> newStorage => set length to new the new val of M
+     * step thourough curent storage, for each row=> the ith index will be pushed into
+     * new storages ith array
+     * return set new storage to storage- rreturn
+     *  */
 
     transpose() {
-        //YOUR WORK HERE
-        return null;
+        this.m = this.n;
+        this.n = this.storage.length;
+        const newStorage = Array(this.m);
+        this.storage.forEach((row) => {
+            row.forEach((column, i) => newStorage[i].push(column));
+        });
+        return (this.storage = newStorage);
     }
+    /**
+ *                     NOTE: if the original matrix was M x N, the input one MUST be N x K
+ *                           the result matrix will then be M x K dimensions
+ *                    Input:      matrix {Matrix}
+ *                   Output:     {Matrix}
+ *                 matrix.storage == [[4, 1, 3],
+ *                                    [3, 2, 5]]
+ *                 matrix.multiply([[8, 9],
+ *                                  [7, 10],
+ *                                  [0, 6]])
+ *                 result == [[39, 64],
+ *                            [38, 77]]
+ *                 Reasoning:
+ *                          [[(4 * 8) + (1 * 7) + (3 * 0),    (4 * 9) + (1 * 10) + (3 * 6)],
+ *                           [(3 * 8) + (2 * 7) + (5 * 0),    (3 * 9) + (2 * 10) + (5 * 6)]]
+ *
+ *
+ *                      =>  [[32 + 7 + 0,   36 + 10 + 18],
+ *                           [24 + 14 + 0,  27 + 20 + 30]]
+ *
+ *                      =>  [[39, 64],
+ *                           [38, 77]]
+        *resulting matrix will my storages's matrix amount of rows/length, input matrix amount of items per row
+        instantiated with 0's
+    each ith column in my storage matrix must my multiplied by each value in the coresponding ith row of my inputMatrix
+    and this product must be added to the corresponding indices of the inputMatix
+
+    @todo Test
+ */
 
     multiply(matrix) {
         //YOUR WORK HERE
-        return null;
+        const multiplied = [];
+        const K = matrix[0].length;
+        for (let i = 0; i < this.m; i++) {
+            multiplied.push(Array(K).fill(0));
+        }
+        this.storage.forEach((row, rowI) => {
+            row.forEach((col, colIndex) => {
+                matrix[colIndex].forEach((val, matrixI) => {
+                    const product = col * val;
+                    multiplied[rowI][matrixI] += product;
+                });
+            });
+        });
+
+        return multiplied;
     }
 }
 
