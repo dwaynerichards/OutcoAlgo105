@@ -58,345 +58,430 @@
  *
  */
 
-"use strict";
+'use strict';
 
 class ListNode {
-  constructor(value = null) {
-    this.value = value;
-    this.next = null;
-    // YOUR WORK HERE
-  }
+    constructor(value = null) {
+        this.value = value;
+        this.next = null;
+        // YOUR WORK HERE
+    }
 }
 
 class LinkedList {
-  constructor() {
-    // YOUR WORK HERE
-    this.head = null;
-    this.tail = null;
-    this.length = 0;
-  }
-
-  // Time Complexity:
-  // Auxiliary Space Complexity:
-  append(value) {
-    // YOUR WORK HERE
-    //create node, passling in value to node
-    const node = new ListNode(val);
-    let head = this.head;
-    while (head !== null) {
-      //until head is null
-      //initialize next variable
-      //save next o head, contine iteration
-      const next = head.next;
-      head = next;
-    }
-    head = node;
-    this.length += 1;
-    //if head is null, make node head,
-    //if head isnt ull, iterate though next until next is null
-    //make that node's next the created node
-  }
-
-  // Time Complexity:
-  // Auxiliary Space Complexity:
-  insert(value, index) {
-    // YOUR WORK HERE
-    // iterate though list
-    //initiaze head as current head
-    const node = new ListNode(value);
-    if (index === 0 && this.length === 0) {
-      this.head = this.tail = node;
-      this.length++;
-      return;
+    constructor() {
+        // YOUR WORK HERE
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
     }
 
-    let current = this.head;
-    let prev = null;
-    console.log(value, index, ":value, index");
-    while (index > 0) {
-      //each lopp mutate current = current.next
-      prev = current;
-      current = current.next;
-      //end of each iteration mutate prev to curent
-      //0,1,2
-      //  c=1, i=1 p=0
-      //    c=2 i=0 p=1
-      //exit loop- mutate prev.next to node, mutate node's next to current
-      index--;
-      console.log(current, prev, ":current, prev");
+    // Time Complexity: o(1) constant
+    // Auxiliary Space Complexity: o(1)
+    append(value) {
+        // YOUR WORK HERE
+        //create node, passling in value to node
+        const node = new ListNode(val);
+        let current = this.head;
+        //step through nodes until currentNode's next is null- meaning it's the tail
+        //append currentNode's next as the node passed in,
+        //mutate ll's tail to node passed in
+        //increment ll's length
+        while (current.next !== null) {
+            current = current.next;
+        }
+        current.next = this.tail = node;
+        this.length += 1;
     }
-    prev.next = node;
-    node.next = current;
-    this.length += 1;
-    this.ajustTail(node);
-    //iterate, mutating head to head's next until index = index passed in
-    ////initia;ize next, place nodde with value at index, next as that node's.next
-  }
-  ajustTail(node) {
-    //iterate until head.next is null
-    //make node tail
-    console.log("ajusting tail!!!!!!");
-    let current = node;
-    while (current.next !== null) {
-      current = current.next;
+
+    // Time Complexity:
+    // Auxiliary Space Complexity:
+    insert(value, index) {
+        const node = new ListNode(value);
+        if (index === 0 && this.length === 0) {
+            this.head = this.tail = node;
+            this.length++;
+            return;
+        }
+        let current = this.head;
+        //current node => current.next
+        //when you've reached the index before the desired index
+        //your current node's next will need to be saved
+        //insert node at currentnode's next, and add inserted node's next as the save next
+        while (index > 1) {
+            current = current.next; //0-1-2
+            index--;
+            console.log(current, prev, ':current, prev');
+        }
+        //if index = size, inputNode becomes tail, there's no reason to track next
+        if (index === this.length) {
+            current.next = this.tail = node;
+        } else {
+            const { next } = current;
+            current.next = node;
+            node.next = next;
+        }
+        this.length += 1;
     }
-    this.tail = node;
-  }
+    ajustTail(node) {
+        console.log('ajusting tail!!!!!!');
+        let current = node;
+        while (current.next !== null) {
+            current = current.next;
+        }
+        this.tail = node;
+    }
+    // Time Complexity:
+    // Auxiliary Space Complexity:
+    delete(index) {
+        //0-1-2
+        if (index >= this.length) return null;
+        let current = this.head;
+        while (index > 1) {
+            current = current.next;
+            index--;
+        }
+        if (current.next === this.tail) {
+            //current is new tail- we are deleteing tail
+            current = this.tail;
+            delete current.next;
+            this.length--;
+            return;
+        }
+        const { next } = current.next;
+        delete current.next;
+        current.next = next;
+        this.length--;
+        //* =>  t => null
+        //i+1 => i => -1
+        //c => c.n => c.n.n
+        //* => * => * =>
+        //iterate to index before index needed to delete
+        //if index= length -1, tail is deleted, tail's previous needs to be new tail
+        // current => c.next
+        //prior to deleting c.next, save c.next.next
+        //delete c.next- mutate c.next.next to c.next
+        //decrement size
+    }
 
-  // Time Complexity:
-  // Auxiliary Space Complexity:
-  delete(index) {
-    // YOUR WORK HERE
-  }
-
-  // Time Complexity:
-  // Auxiliary Space Complexity:
-  contains(value) {
-    // YOUR WORK HERE
-  }
+    // Time Complexity:
+    // Auxiliary Space Complexity:
+    contains(value) {
+        let current = this.head;
+        while (current !== null) {
+            if (current.value === value) return true;
+            current = current.next;
+        }
+        return false; //ifcurrent = null we've iterted though ll => return false
+        // YOUR WORK HERE
+    }
 }
 
 ////////////////////////////////////////////////////////////
 ///////////////  DO NOT TOUCH TEST BELOW!!!  ///////////////
 ////////////////////////////////////////////////////////////
 
-console.log("ListNode Class");
+console.log('ListNode Class');
 let testCount = [0, 0];
 
-assert(testCount, "ale to create an instance", () => {
-  let node = new ListNode();
-  return typeof node === "object";
+assert(testCount, 'ale to create an instance', () => {
+    let node = new ListNode();
+    return typeof node === 'object';
 });
 
-assert(testCount, "has value property", () => {
-  let node = new ListNode();
-  return node.hasOwnProperty("value");
+assert(testCount, 'has value property', () => {
+    let node = new ListNode();
+    return node.hasOwnProperty('value');
 });
 
-assert(testCount, "has next property", () => {
-  let node = new ListNode();
-  return node.hasOwnProperty("next");
+assert(testCount, 'has next property', () => {
+    let node = new ListNode();
+    return node.hasOwnProperty('next');
 });
 
-assert(testCount, "has default value set to null", () => {
-  let node = new ListNode();
-  return node.value === null;
+assert(testCount, 'has default value set to null', () => {
+    let node = new ListNode();
+    return node.value === null;
 });
 
-assert(testCount, "able to assign a value upon instantiation", () => {
-  let node = new ListNode(5);
-  return node.value === 5;
+assert(testCount, 'able to assign a value upon instantiation', () => {
+    let node = new ListNode(5);
+    return node.value === 5;
 });
 
-assert(testCount, "able to reassign a value", () => {
-  let node = new ListNode();
-  node.value = 5;
-  return node.value === 5;
+assert(testCount, 'able to reassign a value', () => {
+    let node = new ListNode();
+    node.value = 5;
+    return node.value === 5;
 });
 
-assert(testCount, "able to point to another node", () => {
-  let node1 = new ListNode(5);
-  let node2 = new ListNode(10);
-  node1.next = node2;
-  return node1.next.value === 10;
+assert(testCount, 'able to point to another node', () => {
+    let node1 = new ListNode(5);
+    let node2 = new ListNode(10);
+    node1.next = node2;
+    return node1.next.value === 10;
 });
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("LinkedList Class");
+console.log('LinkedList Class');
 testCount = [0, 0];
 
-assert(testCount, "able to create an instance", () => {
-  let linkedList = new LinkedList();
-  return typeof linkedList === "object";
+assert(testCount, 'able to create an instance', () => {
+    let linkedList = new LinkedList();
+    return typeof linkedList === 'object';
 });
 
-assert(testCount, "has head property", () => {
-  let linkedList = new LinkedList();
-  return linkedList.hasOwnProperty("head");
+assert(testCount, 'has head property', () => {
+    let linkedList = new LinkedList();
+    return linkedList.hasOwnProperty('head');
 });
 
-assert(testCount, "has tail property", () => {
-  let linkedList = new LinkedList();
-  return linkedList.hasOwnProperty("tail");
+assert(testCount, 'has tail property', () => {
+    let linkedList = new LinkedList();
+    return linkedList.hasOwnProperty('tail');
 });
 
-assert(testCount, "has length property", () => {
-  let linkedList = new LinkedList();
-  return linkedList.hasOwnProperty("length");
+assert(testCount, 'has length property', () => {
+    let linkedList = new LinkedList();
+    return linkedList.hasOwnProperty('length');
 });
 
-assert(testCount, "default head set to null", () => {
-  let linkedList = new LinkedList();
-  return linkedList.head === null;
+assert(testCount, 'default head set to null', () => {
+    let linkedList = new LinkedList();
+    return linkedList.head === null;
 });
 
-assert(testCount, "default tail set to null", () => {
-  let linkedList = new LinkedList();
-  return linkedList.tail === null;
+assert(testCount, 'default tail set to null', () => {
+    let linkedList = new LinkedList();
+    return linkedList.tail === null;
 });
 
-assert(testCount, "default length set to zero", () => {
-  let linkedList = new LinkedList();
-  return linkedList.length === 0;
+assert(testCount, 'default length set to zero', () => {
+    let linkedList = new LinkedList();
+    return linkedList.length === 0;
 });
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("LinkedList Insert Method");
+console.log('LinkedList Insert Method');
 testCount = [0, 0];
 
-assert(testCount, "has insert method", () => {
-  let linkedList = new LinkedList();
-  return Object.prototype.toString.apply(linkedList.insert) === "[object Function]";
+assert(testCount, 'has insert method', () => {
+    let linkedList = new LinkedList();
+    return (
+        Object.prototype.toString.apply(linkedList.insert) ===
+        '[object Function]'
+    );
 });
 
-assert(testCount, "able to insert a node into empty linked list", () => {
-  let linkedList = new LinkedList();
-  linkedList.insert(5, 0);
-  return linkedList.length === 1 && linkedList.head.value === 5 && linkedList.tail.value === 5;
+assert(testCount, 'able to insert a node into empty linked list', () => {
+    let linkedList = new LinkedList();
+    linkedList.insert(5, 0);
+    return (
+        linkedList.length === 1 &&
+        linkedList.head.value === 5 &&
+        linkedList.tail.value === 5
+    );
 });
 
-assert(testCount, "able to insert a node after another node", () => {
-  let linkedList = new LinkedList();
-  linkedList.insert(5, 0);
-  linkedList.insert(10, 1);
-  return linkedList.length === 2 && linkedList.head.value === 5 && linkedList.tail.value === 10;
+assert(testCount, 'able to insert a node after another node', () => {
+    let linkedList = new LinkedList();
+    linkedList.insert(5, 0);
+    linkedList.insert(10, 1);
+    return (
+        linkedList.length === 2 &&
+        linkedList.head.value === 5 &&
+        linkedList.tail.value === 10
+    );
 });
 
-assert(testCount, "able to insert a node before another node", () => {
-  let linkedList = new LinkedList();
-  linkedList.insert(5, 0);
-  linkedList.insert(10, 0);
-  return linkedList.length === 2 && linkedList.head.value === 10 && linkedList.tail.value === 5;
+assert(testCount, 'able to insert a node before another node', () => {
+    let linkedList = new LinkedList();
+    linkedList.insert(5, 0);
+    linkedList.insert(10, 0);
+    return (
+        linkedList.length === 2 &&
+        linkedList.head.value === 10 &&
+        linkedList.tail.value === 5
+    );
 });
 
-assert(testCount, "able to insert a node in between two nodes", () => {
-  let linkedList = new LinkedList();
-  linkedList.insert(5, 0);
-  linkedList.insert(10, 1);
-  linkedList.insert(7, 1);
-  return (
-    linkedList.length === 3 &&
-    linkedList.head.value === 5 &&
-    linkedList.tail.value === 10 &&
-    linkedList.head.next.value === 7
-  );
+assert(testCount, 'able to insert a node in between two nodes', () => {
+    let linkedList = new LinkedList();
+    linkedList.insert(5, 0);
+    linkedList.insert(10, 1);
+    linkedList.insert(7, 1);
+    return (
+        linkedList.length === 3 &&
+        linkedList.head.value === 5 &&
+        linkedList.tail.value === 10 &&
+        linkedList.head.next.value === 7
+    );
 });
 
-assert(testCount, "does not insert a node if index is out of bounds linked list", () => {
-  let linkedList = new LinkedList();
-  linkedList.insert(5, -1);
-  linkedList.insert(10, 3);
-  return linkedList.length === 0 && linkedList.head === null && linkedList.tail === null;
-});
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+assert(
+    testCount,
+    'does not insert a node if index is out of bounds linked list',
+    () => {
+        let linkedList = new LinkedList();
+        linkedList.insert(5, -1);
+        linkedList.insert(10, 3);
+        return (
+            linkedList.length === 0 &&
+            linkedList.head === null &&
+            linkedList.tail === null
+        );
+    }
+);
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("LinkedList Append Method");
+console.log('LinkedList Append Method');
 testCount = [0, 0];
 
-assert(testCount, "has append method", () => {
-  let linkedList = new LinkedList();
-  return Object.prototype.toString.apply(linkedList.append) === "[object Function]";
+assert(testCount, 'has append method', () => {
+    let linkedList = new LinkedList();
+    return (
+        Object.prototype.toString.apply(linkedList.append) ===
+        '[object Function]'
+    );
 });
 
-assert(testCount, "able to append a node into empty linked list", () => {
-  let linkedList = new LinkedList();
-  linkedList.append(5);
-  return linkedList.length === 1 && linkedList.head.value === 5 && linkedList.tail.value === 5;
+assert(testCount, 'able to append a node into empty linked list', () => {
+    let linkedList = new LinkedList();
+    linkedList.append(5);
+    return (
+        linkedList.length === 1 &&
+        linkedList.head.value === 5 &&
+        linkedList.tail.value === 5
+    );
 });
 
-assert(testCount, "able to append a second node", () => {
-  let linkedList = new LinkedList();
-  linkedList.append(5);
-  linkedList.append(10);
-  return linkedList.length === 2 && linkedList.head.value === 5 && linkedList.tail.value === 10;
+assert(testCount, 'able to append a second node', () => {
+    let linkedList = new LinkedList();
+    linkedList.append(5);
+    linkedList.append(10);
+    return (
+        linkedList.length === 2 &&
+        linkedList.head.value === 5 &&
+        linkedList.tail.value === 10
+    );
 });
 
-assert(testCount, "able to append a third node", () => {
-  let linkedList = new LinkedList();
-  linkedList.append(5);
-  linkedList.append(10);
-  linkedList.append(15);
-  return linkedList.length === 3 && linkedList.head.value === 5 && linkedList.tail.value === 15;
+assert(testCount, 'able to append a third node', () => {
+    let linkedList = new LinkedList();
+    linkedList.append(5);
+    linkedList.append(10);
+    linkedList.append(15);
+    return (
+        linkedList.length === 3 &&
+        linkedList.head.value === 5 &&
+        linkedList.tail.value === 15
+    );
 });
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("LinkedList Delete Method");
+console.log('LinkedList Delete Method');
 testCount = [0, 0];
 
-assert(testCount, "has delete method", () => {
-  let linkedList = new LinkedList();
-  return Object.prototype.toString.apply(linkedList.delete) === "[object Function]";
+assert(testCount, 'has delete method', () => {
+    let linkedList = new LinkedList();
+    return (
+        Object.prototype.toString.apply(linkedList.delete) ===
+        '[object Function]'
+    );
 });
 
-assert(testCount, "able to delete a node from the head", () => {
-  let linkedList = new LinkedList();
-  linkedList.append(5);
-  linkedList.append(10);
-  linkedList.delete(0);
-  return linkedList.length === 1 && linkedList.head.value === 10;
+assert(testCount, 'able to delete a node from the head', () => {
+    let linkedList = new LinkedList();
+    linkedList.append(5);
+    linkedList.append(10);
+    linkedList.delete(0);
+    return linkedList.length === 1 && linkedList.head.value === 10;
 });
 
-assert(testCount, "able to delete a node from the tail", () => {
-  let linkedList = new LinkedList();
-  linkedList.append(5);
-  linkedList.append(10);
-  linkedList.delete(1);
-  return linkedList.length === 1 && linkedList.tail.value === 5;
+assert(testCount, 'able to delete a node from the tail', () => {
+    let linkedList = new LinkedList();
+    linkedList.append(5);
+    linkedList.append(10);
+    linkedList.delete(1);
+    return linkedList.length === 1 && linkedList.tail.value === 5;
 });
 
-assert(testCount, "able to delete a node in between two nodes", () => {
-  let linkedList = new LinkedList();
-  linkedList.append(5);
-  linkedList.append(10);
-  linkedList.append(15);
-  linkedList.delete(1);
-  return linkedList.length === 2 && linkedList.head.value === 5 && linkedList.tail.value === 15;
+assert(testCount, 'able to delete a node in between two nodes', () => {
+    let linkedList = new LinkedList();
+    linkedList.append(5);
+    linkedList.append(10);
+    linkedList.append(15);
+    linkedList.delete(1);
+    return (
+        linkedList.length === 2 &&
+        linkedList.head.value === 5 &&
+        linkedList.tail.value === 15
+    );
 });
 
-assert(testCount, "able to delete the only node in a linked list", () => {
-  let linkedList = new LinkedList();
-  linkedList.append(5);
-  linkedList.delete(0);
-  return linkedList.length === 0 && linkedList.head === null && linkedList.tail === null;
+assert(testCount, 'able to delete the only node in a linked list', () => {
+    let linkedList = new LinkedList();
+    linkedList.append(5);
+    linkedList.delete(0);
+    return (
+        linkedList.length === 0 &&
+        linkedList.head === null &&
+        linkedList.tail === null
+    );
 });
 
-assert(testCount, "does not delete a node when the index is out of bounds", () => {
-  let linkedList = new LinkedList();
-  linkedList.append(5);
-  linkedList.delete(-1);
-  linkedList.delete(2);
-  return linkedList.length === 1 && linkedList.head.value === 5 && linkedList.tail.value === 5;
-});
+assert(
+    testCount,
+    'does not delete a node when the index is out of bounds',
+    () => {
+        let linkedList = new LinkedList();
+        linkedList.append(5);
+        linkedList.delete(-1);
+        linkedList.delete(2);
+        return (
+            linkedList.length === 1 &&
+            linkedList.head.value === 5 &&
+            linkedList.tail.value === 5
+        );
+    }
+);
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("LinkedList Contains Method");
+console.log('LinkedList Contains Method');
 testCount = [0, 0];
 
-assert(testCount, "has contains method", () => {
-  let linkedList = new LinkedList();
-  return Object.prototype.toString.apply(linkedList.contains) === "[object Function]";
+assert(testCount, 'has contains method', () => {
+    let linkedList = new LinkedList();
+    return (
+        Object.prototype.toString.apply(linkedList.contains) ===
+        '[object Function]'
+    );
 });
 
-assert(testCount, "returns true if linked list contains value", () => {
-  let linkedList = new LinkedList();
-  linkedList.append(5);
-  linkedList.append(10);
-  linkedList.append(15);
-  return linkedList.contains(15) === true;
+assert(testCount, 'returns true if linked list contains value', () => {
+    let linkedList = new LinkedList();
+    linkedList.append(5);
+    linkedList.append(10);
+    linkedList.append(15);
+    return linkedList.contains(15) === true;
 });
 
-assert(testCount, "returns false if linked list does not contains value", () => {
-  let linkedList = new LinkedList();
-  linkedList.append(5);
-  linkedList.append(10);
-  linkedList.append(15);
-  return linkedList.contains(8) === false;
-});
+assert(
+    testCount,
+    'returns false if linked list does not contains value',
+    () => {
+        let linkedList = new LinkedList();
+        linkedList.append(5);
+        linkedList.append(10);
+        linkedList.append(15);
+        return linkedList.contains(8) === false;
+    }
+);
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1]);
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1]);
 
 // custom assert function to handle tests
 // input: count {Array} - keeps track out how many tests pass and how many total
@@ -406,24 +491,24 @@ console.log("PASSED: " + testCount[0] + " / " + testCount[1]);
 //        indicating if test passed
 // output: {undefined}
 function assert(count, name, test) {
-  if (!count || !Array.isArray(count) || count.length !== 2) {
-    count = [0, "*"];
-  } else {
-    count[1]++;
-  }
-
-  let pass = "false";
-  let errMsg = null;
-  try {
-    if (test()) {
-      pass = " true";
-      count[0]++;
+    if (!count || !Array.isArray(count) || count.length !== 2) {
+        count = [0, '*'];
+    } else {
+        count[1]++;
     }
-  } catch (e) {
-    errMsg = e;
-  }
-  console.log("  " + (count[1] + ")   ").slice(0, 5) + pass + " : " + name);
-  if (errMsg !== null) {
-    console.log("       " + errMsg + "\n");
-  }
+
+    let pass = 'false';
+    let errMsg = null;
+    try {
+        if (test()) {
+            pass = ' true';
+            count[0]++;
+        }
+    } catch (e) {
+        errMsg = e;
+    }
+    console.log('  ' + (count[1] + ')   ').slice(0, 5) + pass + ' : ' + name);
+    if (errMsg !== null) {
+        console.log('       ' + errMsg + '\n');
+    }
 }
