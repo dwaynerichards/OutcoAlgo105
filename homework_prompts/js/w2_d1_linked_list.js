@@ -98,38 +98,21 @@ class LinkedList {
     // Auxiliary Space Complexity:
     insert(value, index) {
         const node = new ListNode(value);
-        if (index === 0 && this.length === 0) {
+        if (index === 0) {
             this.head = this.tail = node;
-            this.length++;
-            return;
-        }
-        let current = this.head;
-        //current node => current.next
-        //when you've reached the index before the desired index
-        //your current node's next will need to be saved
-        //insert node at currentnode's next, and add inserted node's next as the save next
-        while (index > 1) {
-            current = current.next; //0-1-2
-            index--;
-            console.log(current, prev, ':current, prev');
-        }
-        //if index = size, inputNode becomes tail, there's no reason to track next
-        if (index === this.length) {
-            current.next = this.tail = node;
+        } else if (index === this.length - 1) {
+            this.tail.next = this.tain = node;
         } else {
-            const { next } = current;
+            let current = this.head;
+            while (index > 1) {
+                current = current.next; //0-1-2
+                index--;
+                console.log(current, prev, ':current, prev');
+            }
+            node.next = current.next;
             current.next = node;
-            node.next = next;
         }
         this.length += 1;
-    }
-    ajustTail(node) {
-        console.log('ajusting tail!!!!!!');
-        let current = node;
-        while (current.next !== null) {
-            current = current.next;
-        }
-        this.tail = node;
     }
     // Time Complexity:
     // Auxiliary Space Complexity:
@@ -142,15 +125,11 @@ class LinkedList {
             index--;
         }
         if (current.next === this.tail) {
-            //current is new tail- we are deleteing tail
             current = this.tail;
-            delete current.next;
-            this.length--;
-            return;
+        } else {
+            current.next = current.next.next;
         }
-        const { next } = current.next;
         delete current.next;
-        current.next = next;
         this.length--;
         //* =>  t => null
         //i+1 => i => -1
