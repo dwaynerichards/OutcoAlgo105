@@ -51,214 +51,251 @@
  *
  */
 
-"use strict";
+'use strict';
 
 class TreeNode {
-  constructor(value = null) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
+    constructor(value = null) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
 }
 
 class BinarySearchTree {
-  constructor(root = null) {
-    // create root node with constructor
-    //root node will be tree nide
-    this.root = root;
-    this.size = root ? 1 : 0;
-  }
-
-  // Time Complexity:
-  // Auxiliary Space Complexity:
-  insert(value) {
-    // create new tree node with input value
-    //const node = new TreeNode(value);
-    //search tree
-    //if no root, this bst's root will be the new tree node //return
-    const newTree = new TreeNode(value);
-    if (!this.root) {
-      this.root = newTree;
-      this.size++;
-      return;
+    constructor(root = null) {
+        this.root = root;
+        this.size = root ? 1 : 0;
     }
 
-    //if root
-    //if value greater than root, check if root's right has no root// root.left becomes a new treenode
-    //if less than root, check if root left has no root
-  }
+    // Time Complexity:
+    // Auxiliary Space Complexity:
+    insert(value) {
+        const treeNode = new TreeNode(value);
+        if (!this.root) {
+            this.root = treeNode;
+        } else {
+            let parent = null;
+            let child = this.root;
+            while (child !== null) {
+                parent = child;
+                child = value > parent.value ? parent.right : parent.left;
+            } //arrived at childless parent
+            value > parent.value
+                ? (parent.right = treeNode)
+                : (parent.left = treeNode);
+        }
+        this.size++;
+    }
 
-  // Time Complexity:
-  // Auxiliary Space Complexity:
-  search(value) {
-    // YOUR WORK HERE
-  }
+    // Time Complexity:
+    // Auxiliary Space Complexity:
+    search(value) {
+        // bfs queque queue
+        //dfs stack - [n.r, n.l]
+        //          n
+        //          /\
+        //      n.l   n.r
+        //      /\    /\
+        //   n.l n.r |n.l n.r
+        let current = this.root;
+        while (current !== null) {
+            if (current.value === value) return true;
+            current = value > current.val ? current.right : current.left;
+        }
+        return false;
+    }
 }
 
 ////////////////////////////////////////////////////////////
 ///////////////  DO NOT TOUCH TEST BELOW!!!  ///////////////
 ////////////////////////////////////////////////////////////
 
-console.log("TreeNode Class");
+console.log('TreeNode Class');
 let testCount = [0, 0];
 
-assert(testCount, "able to create an instance", () => {
-  let node = new TreeNode();
-  return typeof node === "object";
+assert(testCount, 'able to create an instance', () => {
+    let node = new TreeNode();
+    return typeof node === 'object';
 });
 
-assert(testCount, "has value property", () => {
-  let node = new TreeNode();
-  return node.hasOwnProperty("value");
+assert(testCount, 'has value property', () => {
+    let node = new TreeNode();
+    return node.hasOwnProperty('value');
 });
 
-assert(testCount, "has left property", () => {
-  let node = new TreeNode();
-  return node.hasOwnProperty("left");
+assert(testCount, 'has left property', () => {
+    let node = new TreeNode();
+    return node.hasOwnProperty('left');
 });
 
-assert(testCount, "has right property", () => {
-  let node = new TreeNode();
-  return node.hasOwnProperty("right");
+assert(testCount, 'has right property', () => {
+    let node = new TreeNode();
+    return node.hasOwnProperty('right');
 });
 
-assert(testCount, "has default value set to null", () => {
-  let node = new TreeNode();
-  return node.value === null;
+assert(testCount, 'has default value set to null', () => {
+    let node = new TreeNode();
+    return node.value === null;
 });
 
-assert(testCount, "able to assign a value upon instantiation", () => {
-  let node = new TreeNode(5);
-  return node.value === 5;
+assert(testCount, 'able to assign a value upon instantiation', () => {
+    let node = new TreeNode(5);
+    return node.value === 5;
 });
 
-assert(testCount, "able to reassign a value", () => {
-  let node = new TreeNode();
-  node.value = 5;
-  return node.value === 5;
+assert(testCount, 'able to reassign a value', () => {
+    let node = new TreeNode();
+    node.value = 5;
+    return node.value === 5;
 });
 
-assert(testCount, "able to point to left child node", () => {
-  let node1 = new TreeNode(5);
-  let node2 = new TreeNode(10);
-  node1.left = node2;
-  return node1.left.value === 10;
+assert(testCount, 'able to point to left child node', () => {
+    let node1 = new TreeNode(5);
+    let node2 = new TreeNode(10);
+    node1.left = node2;
+    return node1.left.value === 10;
 });
 
-assert(testCount, "able to point to right child node", () => {
-  let node1 = new TreeNode(5);
-  let node2 = new TreeNode(10);
-  node1.right = node2;
-  return node1.right.value === 10;
+assert(testCount, 'able to point to right child node', () => {
+    let node1 = new TreeNode(5);
+    let node2 = new TreeNode(10);
+    node1.right = node2;
+    return node1.right.value === 10;
 });
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("Binary Search Tree Class");
+console.log('Binary Search Tree Class');
 testCount = [0, 0];
 
-assert(testCount, "able to create an instance", () => {
-  let bst = new BinarySearchTree();
-  return typeof bst === "object";
+assert(testCount, 'able to create an instance', () => {
+    let bst = new BinarySearchTree();
+    return typeof bst === 'object';
 });
 
-assert(testCount, "has root property", () => {
-  let bst = new BinarySearchTree();
-  return bst.hasOwnProperty("root");
+assert(testCount, 'has root property', () => {
+    let bst = new BinarySearchTree();
+    return bst.hasOwnProperty('root');
 });
 
-assert(testCount, "has size property", () => {
-  let bst = new BinarySearchTree();
-  return bst.hasOwnProperty("size");
+assert(testCount, 'has size property', () => {
+    let bst = new BinarySearchTree();
+    return bst.hasOwnProperty('size');
 });
 
-assert(testCount, "default root set to null", () => {
-  let bst = new BinarySearchTree();
-  return bst.root === null;
+assert(testCount, 'default root set to null', () => {
+    let bst = new BinarySearchTree();
+    return bst.root === null;
 });
 
-assert(testCount, "default size set to zero", () => {
-  let bst = new BinarySearchTree();
-  return bst.size === 0;
+assert(testCount, 'default size set to zero', () => {
+    let bst = new BinarySearchTree();
+    return bst.size === 0;
 });
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("BinarySearchTree Insert Method");
+console.log('BinarySearchTree Insert Method');
 testCount = [0, 0];
 
-assert(testCount, "has insert method", () => {
-  let bst = new BinarySearchTree();
-  return Object.prototype.toString.apply(bst.insert) === "[object Function]";
+assert(testCount, 'has insert method', () => {
+    let bst = new BinarySearchTree();
+    return Object.prototype.toString.apply(bst.insert) === '[object Function]';
 });
 
-assert(testCount, "able to insert a node into empty binary search tree", () => {
-  let bst = new BinarySearchTree();
-  bst.insert(5);
-  return bst.size === 1 && bst.root.value === 5;
+assert(testCount, 'able to insert a node into empty binary search tree', () => {
+    let bst = new BinarySearchTree();
+    bst.insert(5);
+    return bst.size === 1 && bst.root.value === 5;
 });
 
-assert(testCount, "able to insert node to left of root node", () => {
-  let bst = new BinarySearchTree();
-  bst.insert(5);
-  bst.insert(3);
-  return bst.size === 2 && bst.root.value === 5 && bst.root.left.value === 3;
+assert(testCount, 'able to insert node to left of root node', () => {
+    let bst = new BinarySearchTree();
+    bst.insert(5);
+    bst.insert(3);
+    return bst.size === 2 && bst.root.value === 5 && bst.root.left.value === 3;
 });
 
-assert(testCount, "able to insert node to right of node left of root node", () => {
-  let bst = new BinarySearchTree();
-  bst.insert(5);
-  bst.insert(3);
-  bst.insert(4);
-  return bst.size === 3 && bst.root.value === 5 && bst.root.left.value === 3 && bst.root.left.right.value === 4;
+assert(
+    testCount,
+    'able to insert node to right of node left of root node',
+    () => {
+        let bst = new BinarySearchTree();
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(4);
+        return (
+            bst.size === 3 &&
+            bst.root.value === 5 &&
+            bst.root.left.value === 3 &&
+            bst.root.left.right.value === 4
+        );
+    }
+);
+
+assert(testCount, 'able to insert node to right of root node', () => {
+    let bst = new BinarySearchTree();
+    bst.insert(5);
+    bst.insert(8);
+    return bst.size === 2 && bst.root.value === 5 && bst.root.right.value === 8;
 });
 
-assert(testCount, "able to insert node to right of root node", () => {
-  let bst = new BinarySearchTree();
-  bst.insert(5);
-  bst.insert(8);
-  return bst.size === 2 && bst.root.value === 5 && bst.root.right.value === 8;
-});
+assert(
+    testCount,
+    'able to insert node to left of node right of root node',
+    () => {
+        let bst = new BinarySearchTree();
+        bst.insert(5);
+        bst.insert(8);
+        bst.insert(7);
+        return (
+            bst.size === 3 &&
+            bst.root.value === 5 &&
+            bst.root.right.value === 8 &&
+            bst.root.right.left.value === 7
+        );
+    }
+);
 
-assert(testCount, "able to insert node to left of node right of root node", () => {
-  let bst = new BinarySearchTree();
-  bst.insert(5);
-  bst.insert(8);
-  bst.insert(7);
-  return bst.size === 3 && bst.root.value === 5 && bst.root.right.value === 8 && bst.root.right.left.value === 7;
-});
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
-
-console.log("BinarySearchTree Search Method");
+console.log('BinarySearchTree Search Method');
 testCount = [0, 0];
 
-assert(testCount, "has search method", () => {
-  let bst = new BinarySearchTree();
-  return Object.prototype.toString.apply(bst.search) === "[object Function]";
+assert(testCount, 'has search method', () => {
+    let bst = new BinarySearchTree();
+    return Object.prototype.toString.apply(bst.search) === '[object Function]';
 });
 
-assert(testCount, "returns true when element exists in binary search tree", () => {
-  let bst = new BinarySearchTree();
-  bst.insert(5);
-  bst.insert(3);
-  bst.insert(8);
-  bst.insert(4);
-  bst.insert(7);
-  return bst.search(4) === true;
-});
+assert(
+    testCount,
+    'returns true when element exists in binary search tree',
+    () => {
+        let bst = new BinarySearchTree();
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(8);
+        bst.insert(4);
+        bst.insert(7);
+        return bst.search(4) === true;
+    }
+);
 
-assert(testCount, "returns false when element does not exist in binary search tree", () => {
-  let bst = new BinarySearchTree();
-  bst.insert(5);
-  bst.insert(3);
-  bst.insert(8);
-  bst.insert(4);
-  bst.insert(7);
-  return bst.search(10) === false;
-});
+assert(
+    testCount,
+    'returns false when element does not exist in binary search tree',
+    () => {
+        let bst = new BinarySearchTree();
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(8);
+        bst.insert(4);
+        bst.insert(7);
+        return bst.search(10) === false;
+    }
+);
 
-console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
+console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
 // custom assert function to handle tests
 // input: count {Array} - keeps track out how many tests pass and how many total
@@ -268,24 +305,24 @@ console.log("PASSED: " + testCount[0] + " / " + testCount[1], "\n\n");
 //        indicating if test passed
 // output: {undefined}
 function assert(count, name, test) {
-  if (!count || !Array.isArray(count) || count.length !== 2) {
-    count = [0, "*"];
-  } else {
-    count[1]++;
-  }
-
-  let pass = "false";
-  let errMsg = null;
-  try {
-    if (test()) {
-      pass = " true";
-      count[0]++;
+    if (!count || !Array.isArray(count) || count.length !== 2) {
+        count = [0, '*'];
+    } else {
+        count[1]++;
     }
-  } catch (e) {
-    errMsg = e;
-  }
-  console.log("  " + (count[1] + ")   ").slice(0, 5) + pass + " : " + name);
-  if (errMsg !== null) {
-    console.log("       " + errMsg + "\n");
-  }
+
+    let pass = 'false';
+    let errMsg = null;
+    try {
+        if (test()) {
+            pass = ' true';
+            count[0]++;
+        }
+    } catch (e) {
+        errMsg = e;
+    }
+    console.log('  ' + (count[1] + ')   ').slice(0, 5) + pass + ' : ' + name);
+    if (errMsg !== null) {
+        console.log('       ' + errMsg + '\n');
+    }
 }
