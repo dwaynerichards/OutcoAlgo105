@@ -123,6 +123,7 @@ function deserialize(arr) {
 }
 
 function deserializeLL(arr) {
+    if (arr.length === 0) return null;
     const root = new TreeNode(arr[0]);
     const queue = new Queue();
     queue.append(root.val);
@@ -143,8 +144,6 @@ function deserializeLL(arr) {
     }
     return root;
 }
-
-//linkList as queue, capture head, make head into head.next,
 
 /**
  *
@@ -182,7 +181,7 @@ const sampleTree = deserialize(arr);
  *  2. Given the example output binary search tree from Problem 1, what would
  *     the order of values printed be if we used:
  *
- *     a. BREADTH FIRST traversal:
+ *     a. BREADTH FIRST traversal: [4, 2, 5, 1, 3, 7, 6, 8]
  *     b. PRE-ORDER DEPTH first traversal:
  *     c. IN-ORDER DEPTH first traversal:
  *     d. POST-ORDER DEPTH first traversal:
@@ -201,7 +200,17 @@ const sampleTree = deserialize(arr);
  */
 
 function bfs(node) {
-    // YOUR WORK HERE
+    const root = node;
+    const queue = new Queue();
+    queue.append(root.val);
+    const vals = [];
+    while (queue.size > 0) {
+        const current = queue.dequeue();
+        vals.push(current.value);
+        if (current.left) queue.append(current.left);
+        if (current.right) queue.append(current.right);
+    }
+    return vals;
 }
 
 /*
