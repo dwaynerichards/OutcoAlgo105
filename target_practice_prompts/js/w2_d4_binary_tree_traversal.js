@@ -4,8 +4,6 @@
 
 'use strict';
 
-const { timeStamp } = require('console');
-
 // DO NOT EDIT
 // Node class for a binary tree node
 class TreeNode {
@@ -34,6 +32,7 @@ class LinkList {
         const node = new ListNode(value);
         if (this.head === null) {
             this.head = node;
+            console.log('headnull');
         } else {
             node.previous = this.tail;
             this.tail.next = node;
@@ -43,45 +42,52 @@ class LinkList {
         this.size++;
         this.updateCache([this.tail]);
     }
+    retrieve(i) {
+        let [current, index] = [this.head, 0]; //step through chaning c => c.n
+        while (index < i) {
+            current = current.next; // incre index until index = i
+            index++;
+        }
+        return current; // return current
+    }
     delete(i) {
         //head = 0 index
         if (i > this.size) return null; //iterate until index is i- current will be index to delete
-        if (i === this.size - 1) {
+        const node = this.retrieve(i);
+        if (node.val === this.head.val) {
+            this.storage.delete(head.value);
+            this.head = head.next; //head mutated to head.next
+            this.head.previous = null;
+            this.updateCache([this.head]);
+        } else if (node.val === this.tail.val) {
             this.storage.delete(this.tail.value);
-            this.tail = this.tail.previous;
+            this.tail = this.tail.previous; // update tail to prev
             this.tail.next = null;
-            this.size--;
-            return;
+            this.updateCache([this.tail]); //update calls in cache
+        } else {
+            this.storage.delete(node.val);
+            node.prev.next = node.next; //remove node by setting node's prev to node's next
+            this.updateCache([node.prev, node.next]);
         }
-        let [current, index] = [this.head, 0];
-        while (index < i) {
-            current = current.next;
-            index;
-        }
-        current.prev.next = current.next;
         this.size--;
-        this.storage.delete(current);
-        this.updateCache([current.prev, current.next]);
     }
     updateCache(nodesArr) {
         nodesArr.forEach((node) => {
-            const { previous, next } = node;
-            this.storage.set(node.value, {
-                previous,
-                next,
-            });
+            if (node) {
+                //nullNodes value check
+                const { previous, next } = node;
+                this.storage.set(node.value, {
+                    previous,
+                    next,
+                });
+            }
         });
     }
 }
 class Queue extends LinkList {
     dequeue() {
         const oldHead = this.head;
-        this.head = oldHead.next; //head mutated to head.next
-        this.head.previous = null;
-        this.storage.delete(oldHead.value);
-        //delete head from storage
-        this.updateCache([this.head]);
-        this.size--;
+        this.delete(0);
         return oldHead;
     }
 }
@@ -154,9 +160,8 @@ function deserializeLL(arr) {
  *          1
  *            \
  *              3
- *   				  /
- *   				 2
- *
+ *   		  /
+ *   	    2
  * The array that you would pass in to the deserialize function would
  * be [1,null,3,2,null]. The first null represents the left child of
  * the 1 node, and the second null represents the right child of the 3 node.
@@ -223,7 +228,24 @@ function bfs(node) {
  *      NOTE: Confirm with your answer from problem 2b.
  */
 function dfsPre(node) {
-    // YOUR WORK HERE
+    //preorder is default DFS
+    //root get placed in stack first- followed by right child => left child
+    if (node === null) return [];
+    const root = node;
+    const stack = [root];
+    let current;
+    const values = dfs(stack, []);
+
+    function dfs(stack, values) {
+        if (stack.length < 1) return values;
+        current = stack.pop();
+        values.push(current.value);
+        if (current.right) stack.push(current.right);
+        if (current.left) stack.push(current.left);
+        return dfs(stack, values);
+    }
+
+    return values;
 }
 
 /**
@@ -248,8 +270,30 @@ function dfsIn(node) {
  *
  *      NOTE: Confirm with your answer from problem 2d.
  */
+/**
+ * @todo attempt iterativly
+ *  */
 function dfsPost(node) {
-    // YOUR WORK HERE
+    const values = [];
+    if (node === null) return values;
+    const stack = [node];
+    function traverse(_stack) {
+        if (_stack.length < 1) return;
+        //if stack ele at last index has no childen, pop off and add to values arr
+        //otherwise add children to stack in dfs order
+        let current = _stack[_stack.length - 1];
+        if (current.right == null && current.left == null) {
+            current = _stack.pop();
+            values.push(current.value);
+        } else {
+            if (current.right) _stack.push(current.right);
+            if (current.left) _stack.push(current.right);
+        }
+        return traverse(_stack);
+    }
+    traverse(stack);
+    console.log(values);
+    return values;
 }
 
 ////////////////////////////////////////////////////////////
