@@ -257,8 +257,39 @@ function dfsPre(node) {
  *
  *      NOTE: Confirm with your answer from problem 2b.
  */
+/**
+     * function dfsIn(node){
+    if (node === null) return [];
+    const stack = [node];
+    const values = [];
+    function traverse(node) {
+        if (stack.length < 1) return;
+        if (node.left) {
+            stack.push(node.left);
+        } else {
+            const current = stack.pop();
+            values.push(current.val);
+            if (current.right) stack.push(current.right);
+        }
+    }
+
+    return values;
+}
+     */
 function dfsIn(node) {
-    // YOUR WORK HERE
+    const stack = [];
+    const values = [];
+    let current = node;
+    while (stack.length > 0 || current) {
+        while (current) {
+            stack.push(current);
+            current = current.left;
+        }
+        current = stack.pop();
+        values.push(current.value);
+        current = current.right;
+    }
+    return values;
 }
 
 /**
