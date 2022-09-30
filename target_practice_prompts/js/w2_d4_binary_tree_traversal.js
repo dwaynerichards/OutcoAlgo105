@@ -13,84 +13,6 @@ class TreeNode {
         this.right = null;
     }
 }
-class ListNode {
-    previous = null;
-    next = null;
-    constructor(value) {
-        this.value = value;
-    }
-}
-class LinkList {
-    head = null;
-    tail = null;
-    size = 0;
-    storage;
-    constructor() {
-        this.storage = new Map();
-    }
-    append(value) {
-        const node = new ListNode(value);
-        if (this.head === null) {
-            this.head = node;
-            console.log('headnull');
-        } else {
-            node.previous = this.tail;
-            this.tail.next = node;
-            this.updateCache([this.node.previous]);
-        }
-        this.tail = node;
-        this.size++;
-        this.updateCache([this.tail]);
-    }
-    retrieve(i) {
-        let [current, index] = [this.head, 0]; //step through chaning c => c.n
-        while (index < i) {
-            current = current.next; // incre index until index = i
-            index++;
-        }
-        return current; // return current
-    }
-    delete(i) {
-        //head = 0 index
-        if (i > this.size) return null; //iterate until index is i- current will be index to delete
-        const node = this.retrieve(i);
-        if (node.val === this.head.val) {
-            this.storage.delete(head.value);
-            this.head = head.next; //head mutated to head.next
-            this.head.previous = null;
-            this.updateCache([this.head]);
-        } else if (node.val === this.tail.val) {
-            this.storage.delete(this.tail.value);
-            this.tail = this.tail.previous; // update tail to prev
-            this.tail.next = null;
-            this.updateCache([this.tail]); //update calls in cache
-        } else {
-            this.storage.delete(node.val);
-            node.prev.next = node.next; //remove node by setting node's prev to node's next
-            this.updateCache([node.prev, node.next]);
-        }
-        this.size--;
-    }
-    updateCache(nodesArr) {
-        nodesArr.forEach((node) => {
-            if (node) {
-                //nullNodes value check
-                const { previous, next } = node;
-                this.storage.set(node.value, {
-                    previous,
-                    next,
-                });
-            }
-        });
-    }
-}
-class Queue extends LinkList {
-    dequeue() {
-        const oldHead = this.head;
-        this.delete(0);
-        return oldHead;
-    }
-}
 
 // DO NOT EDIT
 // generate tree from array
@@ -187,8 +109,8 @@ const sampleTree = deserialize(arr);
  *     the order of values printed be if we used:
  *
  *     a. BREADTH FIRST traversal: [4, 2, 5, 1, 3, 7, 6, 8]
- *     b. PRE-ORDER DEPTH first traversal:
- *     c. IN-ORDER DEPTH first traversal:
+ *     b. PRE-ORDER DEPTH first traversal: [4,2,1,3,5,7,6,8]
+ *     c. IN-ORDER DEPTH first traversal:[1,2,3,4,5,6,7,8]
  *     d. POST-ORDER DEPTH first traversal:
  */
 
@@ -204,6 +126,84 @@ const sampleTree = deserialize(arr);
  *  NOTE: Confirm with your answer from Problem 2a.
  */
 
+class ListNode {
+    previous = null;
+    next = null;
+    constructor(value) {
+        this.value = value;
+    }
+}
+class LinkList {
+    head = null;
+    tail = null;
+    size = 0;
+    storage;
+    constructor() {
+        this.storage = new Map();
+    }
+    append(value) {
+        const node = new ListNode(value);
+        if (this.head === null) {
+            this.head = node;
+            console.log('headnull');
+        } else {
+            node.previous = this.tail;
+            this.tail.next = node;
+            this.updateCache([node.previous]);
+        }
+        this.tail = node;
+        this.size++;
+        this.updateCache([this.tail]);
+    }
+    retrieve(i) {
+        let [current, index] = [this.head, 0]; //step through chaning c => c.n
+        while (index < i) {
+            current = current.next; // incre index until index = i
+            index++;
+        }
+        return current; // return current
+    }
+    delete(i) {
+        //head = 0 index
+        if (i > this.size) return null; //iterate until index is i- current will be index to delete
+        const node = this.retrieve(i);
+        if (node.val === this.head.val) {
+            this.storage.delete(head.value);
+            this.head = head.next; //head mutated to head.next
+            this.head.previous = null;
+            this.updateCache([this.head]);
+        } else if (node.val === this.tail.val) {
+            this.storage.delete(this.tail.value);
+            this.tail = this.tail.previous; // update tail to prev
+            this.tail.next = null;
+            this.updateCache([this.tail]); //update calls in cache
+        } else {
+            this.storage.delete(node.val);
+            node.prev.next = node.next; //remove node by setting node's prev to node's next
+            this.updateCache([node.prev, node.next]);
+        }
+        this.size--;
+    }
+    updateCache(nodesArr) {
+        nodesArr.forEach((node) => {
+            if (node) {
+                //nullNodes value check
+                const { previous, next } = node;
+                this.storage.set(node.value, {
+                    previous,
+                    next,
+                });
+            }
+        });
+    }
+}
+class Queue extends LinkList {
+    dequeue() {
+        const oldHead = this.retrieve(0);
+        this.delete(0);
+        return oldHead;
+    }
+}
 function bfs(node) {
     const root = node;
     const queue = new Queue();
@@ -320,7 +320,7 @@ function dfsPost(node) {
             if (current.right) _stack.push(current.right);
             if (current.left) _stack.push(current.right);
         }
-        return traverse(_stack);
+        traverse(_stack);
     }
     traverse(stack);
     console.log(values);

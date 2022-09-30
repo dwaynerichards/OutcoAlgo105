@@ -7,26 +7,27 @@
 // DO NOT EDIT
 // Node class for a linked list node
 class ListNode {
-  constructor(value = null) {
-    this.value = value;
-    this.next = null;
-  }
+    constructor(value = null) {
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
 }
-
 
 // DO NOT EDIT
 // Generate a linked list from an array
 function generateList(arr) {
-  if (arr.length === 0) { return null; }
-  let head = new ListNode(arr[0]);
-  let current = head;
-  for (let i = 1; i < arr.length; i++) {
-    current.next = new ListNode(arr[i]);
-    current = current.next;
-  }
-  return head;
+    if (arr.length === 0) {
+        return null;
+    }
+    let head = new ListNode(arr[0]);
+    let current = head;
+    for (let i = 1; i < arr.length; i++) {
+        current.next = new ListNode(arr[i]);
+        current = current.next;
+    }
+    return head;
 }
-
 
 /**
  * Create a method which prints the value of each node until the tail
@@ -45,7 +46,9 @@ function generateList(arr) {
 // Time Complexity:
 // Auxiliary Space Complexity:
 function printForward(node) {
-  // YOUR WORK HERE
+    if (!node.next) return;
+    console.log(node.value);
+    return printForward(node.next);
 }
 
 /**
@@ -63,10 +66,11 @@ function printForward(node) {
  *          1
  */
 
- // Time Complexity:
- // Auxiliary Space Complexity:
+// Time Complexity: 2(n)
+// Auxiliary Space Complexity: O(1)
 function printBackward(node) {
-  // YOUR WORK HERE
+    const newHead = reverse(node, 'returnHead');
+    printForward(newHead);
 }
 
 /**
@@ -81,10 +85,30 @@ function printBackward(node) {
  *          (10) --> (7) --> (5) --> (1)
  */
 
- // Time Complexity:
- // Auxiliary Space Complexity:
+// Time Complexity:linear O(n)
+// Auxiliary Space Complexity: constant O(1)
 function reverse(node) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
+    let current = node;
+    let prev = null;
+    function traverse(head) {
+        if (head === null) return;
+        const { next } = head; //capture next b4 breaking link
+        head.next = prev; //mutatute next to prev
+        prev = head; //mutate prev to current
+        head = next; //mutatue current to next
+        traverse(head);
+    }
+    traverse(node);
+    //considerations: next, prev, current
+    // while (current) {
+    //     //iterate until current is null- prev will be new currentVal
+    //     const { next } = current; //capture next b4 breaking link
+    //     current.next = prev; //mutatute next to prev
+    //     prev = current; //mutate prev to current
+    //     current = next; //mutatue current to next
+    // }
+    return prev;
 }
 
 /**
@@ -110,7 +134,28 @@ function reverse(node) {
 // Time Complexity:
 // Auxiliary Space Complexity:
 function swap(head, a, b) {
-  // YOUR WORK HERE
+    // track previous, current, aPrev,  a, b
+    let prev = null;
+    let current = head;
+    let aPrev;
+    //when a is found -> aPrev = prev
+    const bFutureNext = a.next;
+    const aFutureNext = b.next;
+    while (current !== null) {
+        if (current.value === a.value) {
+            aPrev = prev;
+            break;
+        }
+        prev = current;
+        current = current.next;
+    }
+    a.next = aFutureNext;
+    b.next = bFutureNext;
+    aPrev.next = b;
+    //capture b.n
+    //set a.next to b.next/current/next
+    //set aPrev.next to b
+    //set b.next aPRev.n.n
 }
 
 /**
@@ -126,12 +171,12 @@ let circularNode = new ListNode(Math.floor(Math.random() * 10000));
 let current = circularNode;
 let size = Math.floor(Math.random() * (10000 - 100) + 100);
 for (let i = 0; i < size; i++) {
-  current.next = new ListNode(Math.floor(Math.random() * 10000));
-  current = current.next;
-  if (i === (size - 1)) {
-    // connects the last node to the original circularNode
-    current.next = circularNode;
-  }
+    current.next = new ListNode(Math.floor(Math.random() * 10000));
+    current = current.next;
+    if (i === size - 1) {
+        // connects the last node to the original circularNode
+        current.next = circularNode;
+    }
 }
 
 // DO NOT EDIT
@@ -140,17 +185,15 @@ let terminalNode = new ListNode(Math.floor(Math.random() * 10000));
 current = terminalNode;
 size = Math.floor(Math.random() * (10000 - 100) + 100);
 for (let i = 0; i < size; i++) {
-  current.next = new ListNode(Math.floor(Math.random() * 10000));
-  current = current.next;
+    current.next = new ListNode(Math.floor(Math.random() * 10000));
+    current = current.next;
 }
-
 
 // For your input, use circularNode as a node in a circular linked list and
 // terminalNode as a node in a terminating linked list
 function isCircular(node) {
-  // YOUR WORK HERE
+    // YOUR WORK HERE
 }
-
 
 ////////////////////////////////////////////////////////////
 ///////////////  DO NOT TOUCH TEST BELOW!!!  ///////////////
@@ -161,39 +204,48 @@ console.log('Linked List instantiation tests');
 testCount = [0, 0];
 
 assert(testCount, 'able to create a linked list instance', () => {
-  let test = generateList([1, 5, 7, 10]);
-  return test !== undefined &&
-    test.value === 1 &&
-    test.next.next.next.value === 10;
+    let test = generateList([1, 5, 7, 10]);
+    return (
+        test !== undefined &&
+        test.value === 1 &&
+        test.next.next.next.value === 10
+    );
 });
 
 console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 
-
 console.log('printForward tests');
 testCount = [0, 0];
 
-assert(testCount, 'should be able to print forward ' +
-  'elements of linked list 1 --> 5 --> 7 --> 10', () => {
-  let record = captureLog(printForward, generateList([1, 5, 7, 10]));
+assert(
+    testCount,
+    'should be able to print forward ' +
+        'elements of linked list 1 --> 5 --> 7 --> 10',
+    () => {
+        let record = captureLog(printForward, generateList([1, 5, 7, 10]));
 
-  return record.length === 4 &&
-    record[0] === 1 &&
-    record[1] === 5 &&
-    record[2] === 7 &&
-    record[3] === 10;
-});
+        return (
+            record.length === 4 &&
+            record[0] === 1 &&
+            record[1] === 5 &&
+            record[2] === 7 &&
+            record[3] === 10
+        );
+    }
+);
 
-assert(testCount, 'should be able to print forward with single element' +
-  ' linked list 1', () => {
-  let record = captureLog(printForward, generateList([1]));
-  return record.length === 1 &&
-    record[0] === 1;
-});
+assert(
+    testCount,
+    'should be able to print forward with single element' + ' linked list 1',
+    () => {
+        let record = captureLog(printForward, generateList([1]));
+        return record.length === 1 && record[0] === 1;
+    }
+);
 
 assert(testCount, 'should print nothing for empty list node', () => {
-  let record = captureLog(printForward, generateList([]));
-  return record.length === 0;
+    let record = captureLog(printForward, generateList([]));
+    return record.length === 0;
 });
 
 console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
@@ -201,127 +253,171 @@ console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 console.log('printBackward tests');
 testCount = [0, 0];
 
-assert(testCount, 'should be able to print backward ' +
-  'elements of linked list 1 --> 5 --> 7 --> 10', () => {
-  let record = captureLog(printBackward, generateList([1, 5, 7, 10]));
-  return record.length === 4 &&
-    record[0] === 10 &&
-    record[1] === 7 &&
-    record[2] === 5 &&
-    record[3] === 1;
-});
+assert(
+    testCount,
+    'should be able to print backward ' +
+        'elements of linked list 1 --> 5 --> 7 --> 10',
+    () => {
+        let record = captureLog(printBackward, generateList([1, 5, 7, 10]));
+        return (
+            record.length === 4 &&
+            record[0] === 10 &&
+            record[1] === 7 &&
+            record[2] === 5 &&
+            record[3] === 1
+        );
+    }
+);
 
-assert(testCount, 'should be able to print backward with single element' +
-  ' linked list 1', () => {
-  let record = captureLog(() => {
-    let test = new ListNode(1);
-    printBackward(test);
-  });
-  return record.length === 1 &&
-    record[0] === 1;
-});
+assert(
+    testCount,
+    'should be able to print backward with single element' + ' linked list 1',
+    () => {
+        let record = captureLog(() => {
+            let test = new ListNode(1);
+            printBackward(test);
+        });
+        return record.length === 1 && record[0] === 1;
+    }
+);
 
 assert(testCount, 'should print nothing for empty list node', () => {
-  let record = captureLog(printBackward, null);
-  return record.length === 0;
+    let record = captureLog(printBackward, null);
+    return record.length === 0;
 });
 
 console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
-
 
 console.log('reverse tests');
 testCount = [0, 0];
 
-assert(testCount, 'should be able to reverse 1 --> 5 --> 7 --> 10 ' +
-  'to be 10 --> 7 --> 5 --> 1', () => {
-  let test = generateList([1, 5, 7, 10]);
-  test = reverse(test);
-  return test.value === 10 &&
-         test.next.value === 7 &&
-         test.next.next.value === 5 &&
-         test.next.next.next.value === 1;
-});
+assert(
+    testCount,
+    'should be able to reverse 1 --> 5 --> 7 --> 10 ' +
+        'to be 10 --> 7 --> 5 --> 1',
+    () => {
+        let test = generateList([1, 5, 7, 10]);
+        test = reverse(test);
+        return (
+            test.value === 10 &&
+            test.next.value === 7 &&
+            test.next.next.value === 5 &&
+            test.next.next.next.value === 1
+        );
+    }
+);
 
-assert(testCount, 'should be able to handle single element linked lists', () => {
-  let test = new ListNode(1);
-  test = reverse(test);
-  return test.value === 1 && test.next === null;
-});
+assert(
+    testCount,
+    'should be able to handle single element linked lists',
+    () => {
+        let test = new ListNode(1);
+        test = reverse(test);
+        return test.value === 1 && test.next === null;
+    }
+);
 
 console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
-
 
 console.log('swap tests');
 testCount = [0, 0];
 
-assert(testCount, 'should be able to swap 1 and 5 to change 1 --> 5 --> 7 -->' +
-' 10 linked list to look like 5 --> 1 --> 7 --> 10', () => {
-  let test = generateList([1, 5, 7, 10]);
-  test = swap(test, 1, 5);
-  return test.value === 5 &&
-    test.next.value === 1 &&
-    test.next.next.value === 7 &&
-    test.next.next.next.value === 10;
-});
+assert(
+    testCount,
+    'should be able to swap 1 and 5 to change 1 --> 5 --> 7 -->' +
+        ' 10 linked list to look like 5 --> 1 --> 7 --> 10',
+    () => {
+        let test = generateList([1, 5, 7, 10]);
+        test = swap(test, 1, 5);
+        return (
+            test.value === 5 &&
+            test.next.value === 1 &&
+            test.next.next.value === 7 &&
+            test.next.next.next.value === 10
+        );
+    }
+);
 
-assert(testCount, 'should be able to swap 1 and 7 to change 1 --> 5 --> 7 -->' +
-' 10 linked list to look like 7 --> 5 --> 1 --> 10', () => {
-  let test = generateList([1, 5, 7, 10]);
-  test = swap(test, 1, 7);
-  return test.value === 7 &&
-    test.next.value === 5 &&
-    test.next.next.value === 1 &&
-    test.next.next.next.value === 10;
-});
+assert(
+    testCount,
+    'should be able to swap 1 and 7 to change 1 --> 5 --> 7 -->' +
+        ' 10 linked list to look like 7 --> 5 --> 1 --> 10',
+    () => {
+        let test = generateList([1, 5, 7, 10]);
+        test = swap(test, 1, 7);
+        return (
+            test.value === 7 &&
+            test.next.value === 5 &&
+            test.next.next.value === 1 &&
+            test.next.next.next.value === 10
+        );
+    }
+);
 
-assert(testCount, 'should be able to swap 1 and 10 to change 1 --> 5 --> 7 -->' +
-' 10 linked list to look like 10 --> 5 --> 7 --> 1', () => {
-  let test = generateList([1, 5, 7, 10]);
-  test = swap(test, 1, 10);
-  return test.value === 10 &&
-    test.next.value === 5 &&
-    test.next.next.value === 7 &&
-    test.next.next.next.value === 1;
-});
+assert(
+    testCount,
+    'should be able to swap 1 and 10 to change 1 --> 5 --> 7 -->' +
+        ' 10 linked list to look like 10 --> 5 --> 7 --> 1',
+    () => {
+        let test = generateList([1, 5, 7, 10]);
+        test = swap(test, 1, 10);
+        return (
+            test.value === 10 &&
+            test.next.value === 5 &&
+            test.next.next.value === 7 &&
+            test.next.next.next.value === 1
+        );
+    }
+);
 
-assert(testCount, 'should be able to swap 5 and 7 to change 1 --> 5 --> 7 -->' +
-' 10 linked list to look like 1 --> 7 --> 5 --> 10', () => {
-  let test = generateList([1, 5, 7, 10]);
-  test = swap(test, 5, 7);
-  return test.value === 1 &&
-    test.next.value === 7 &&
-    test.next.next.value === 5 &&
-    test.next.next.next.value === 10;
-});
+assert(
+    testCount,
+    'should be able to swap 5 and 7 to change 1 --> 5 --> 7 -->' +
+        ' 10 linked list to look like 1 --> 7 --> 5 --> 10',
+    () => {
+        let test = generateList([1, 5, 7, 10]);
+        test = swap(test, 5, 7);
+        return (
+            test.value === 1 &&
+            test.next.value === 7 &&
+            test.next.next.value === 5 &&
+            test.next.next.next.value === 10
+        );
+    }
+);
 
-assert(testCount, 'should be able to swap 5 and 10 to change 1 --> 5 --> 7 -->' +
-' 10 linked list to look like 1 --> 10 --> 7 --> 5', () => {
-  let test = generateList([1, 5, 7, 10]);
-  test = swap(test, 5, 10);
-  return test.value === 1 &&
-    test.next.value === 10 &&
-    test.next.next.value === 7 &&
-    test.next.next.next.value === 5;
-});
+assert(
+    testCount,
+    'should be able to swap 5 and 10 to change 1 --> 5 --> 7 -->' +
+        ' 10 linked list to look like 1 --> 10 --> 7 --> 5',
+    () => {
+        let test = generateList([1, 5, 7, 10]);
+        test = swap(test, 5, 10);
+        return (
+            test.value === 1 &&
+            test.next.value === 10 &&
+            test.next.next.value === 7 &&
+            test.next.next.next.value === 5
+        );
+    }
+);
 
 console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
-
 
 console.log('isCircular tests');
 testCount = [0, 0];
 
 assert(testCount, 'should return true for circular linked list', () => {
-  let test = isCircular(circularNode);
-  return test === true;
+    let test = isCircular(circularNode);
+    return test === true;
 });
 
 assert(testCount, 'should return false for terminal linked list', () => {
-  let test = isCircular(terminalNode);
-  return test === false;
+    let test = isCircular(terminalNode);
+    return test === false;
 });
 
 console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
-
 
 // captures all elements that were printed to the console
 //
@@ -329,20 +425,19 @@ console.log('PASSED: ' + testCount[0] + ' / ' + testCount[1], '\n\n');
 // input: {Array} - parameters for the function
 // output: {Array} - array of all the captured logs
 function captureLog(method, ...params) {
-  let record = [];
-  const log = console.log;
-  console.log = (...args) => {
-    record = record.concat(...args);
-  };
-  if (params[0] === null) {
+    let record = [];
+    const log = console.log;
+    console.log = (...args) => {
+        record = record.concat(...args);
+    };
+    if (params[0] === null) {
+        console.log = log;
+        return [];
+    }
+    method(...params);
     console.log = log;
-    return [];
-  }
-  method(...params);
-  console.log = log;
-  return record;
+    return record;
 }
-
 
 // custom assert function to handle tests
 // input: count {Array} - keeps track out how many tests pass and how many total
@@ -352,24 +447,24 @@ function captureLog(method, ...params) {
 //        indicating if test passed
 // output: {undefined}
 function assert(count, name, test) {
-  if(!count || !Array.isArray(count) || count.length !== 2) {
-    count = [0, '*'];
-  } else {
-    count[1]++;
-  }
-
-  let pass = 'false';
-  let errMsg = null;
-  try {
-    if (test()) {
-      pass = ' true';
-      count[0]++;
+    if (!count || !Array.isArray(count) || count.length !== 2) {
+        count = [0, '*'];
+    } else {
+        count[1]++;
     }
-  } catch(e) {
-    errMsg = e;
-  }
-  console.log('  ' + (count[1] + ')   ').slice(0,5) + pass + ' : ' + name);
-  if (errMsg !== null) {
-    console.log('       ' + errMsg + '\n');
-  }
+
+    let pass = 'false';
+    let errMsg = null;
+    try {
+        if (test()) {
+            pass = ' true';
+            count[0]++;
+        }
+    } catch (e) {
+        errMsg = e;
+    }
+    console.log('  ' + (count[1] + ')   ').slice(0, 5) + pass + ' : ' + name);
+    if (errMsg !== null) {
+        console.log('       ' + errMsg + '\n');
+    }
 }
