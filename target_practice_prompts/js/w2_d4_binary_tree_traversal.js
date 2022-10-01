@@ -141,44 +141,53 @@ class LinkList {
     constructor() {
         this.storage = new Map();
     }
-    append(value) {
-        const node = new ListNode(value);
+    append(_node) {
+        console.log('appending');
+        const node = new ListNode(_node);
         if (this.head === null) {
             this.head = node;
-            console.log('headnull');
+            console.log('appending to head');
         } else {
             node.previous = this.tail;
             this.tail.next = node;
             this.updateCache([node.previous]);
         }
+        console.log('appending to tail');
         this.tail = node;
         this.size++;
+        console.log('tailValue:', this.tail.value);
         this.updateCache([this.tail]);
     }
+
     retrieve(i) {
+        console.log('retrieving');
         let [current, index] = [this.head, 0]; //step through chaning c => c.n
         while (index < i) {
             current = current.next; // incre index until index = i
             index++;
         }
+        console.log('retrieved:', current.value);
         return current; // return current
     }
     delete(i) {
-        //head = 0 index
+        console.log('deleting');
         if (i > this.size) return null; //iterate until index is i- current will be index to delete
         const node = this.retrieve(i);
-        if (node.val === this.head.val) {
-            this.storage.delete(head.value);
-            this.head = head.next; //head mutated to head.next
-            this.head.previous = null;
+        console.log('nodeToDelete:', node);
+        if (node.value === this.head.value) {
+            this.storage.delete(this.head.value);
+            console.log(this.head);
+            this.head = this.head.next; //head mutated to head.next
+            console.log(this.head);
+            if (this.head) this.head.previous = null;
             this.updateCache([this.head]);
-        } else if (node.val === this.tail.val) {
+        } else if (node.value === this.tail.value) {
             this.storage.delete(this.tail.value);
             this.tail = this.tail.previous; // update tail to prev
             this.tail.next = null;
             this.updateCache([this.tail]); //update calls in cache
         } else {
-            this.storage.delete(node.val);
+            this.storage.delete(node.value);
             node.prev.next = node.next; //remove node by setting node's prev to node's next
             this.updateCache([node.prev, node.next]);
         }
@@ -199,21 +208,29 @@ class LinkList {
 }
 class Queue extends LinkList {
     dequeue() {
+        console.log('dequeueing');
         const oldHead = this.retrieve(0);
+        console.log('oldhead:', oldHead);
         this.delete(0);
+        console.log('exitingDequeue');
         return oldHead;
     }
 }
 function bfs(node) {
-    const root = node;
     const queue = new Queue();
-    queue.append(root.val);
+    console.log('bfsNode:', node.value);
+    queue.append(node);
+    console.log('queueSize', queue.size);
+    console.log('queueSize', queue.storage);
     const vals = [];
     while (queue.size > 0) {
         const current = queue.dequeue();
+        console.log('dequededCurent:', current);
         vals.push(current.value);
-        if (current.left) queue.append(current.left);
-        if (current.right) queue.append(current.right);
+        console.log('vals', vals);
+        if (current.left) queue.append(current.left.value);
+        if (current.right) queue.append(current.right.value);
+        console.log(queue.storage);
     }
     return vals;
 }

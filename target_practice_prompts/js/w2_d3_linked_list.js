@@ -192,7 +192,38 @@ for (let i = 0; i < size; i++) {
 // For your input, use circularNode as a node in a circular linked list and
 // terminalNode as a node in a terminating linked list
 function isCircular(node) {
-    // YOUR WORK HERE
+    if (node === null) return false;
+    let slow = node;
+    let fast = node;
+    while (fast !== null && fast.next !== null) {
+        fast = node.next.next;
+        slow = node.next;
+        if (slow.val === fast.val) return true;
+    }
+    return false;
+}
+function isCircular2(node) {
+    const nodes = new Map();
+    let current = node;
+    const traverse = (_node) => {
+        console.log(nodes.size);
+        if (_node === null) return false;
+        if (nodes.has(_node.value)) return true;
+        nodes.set(_node.value, _node.next);
+        return traverse(_node.next);
+    };
+    return traverse(current);
+    /**
+    while (current !== null) {
+        console.log('nodes', nodes);
+        if (nodes.has(current.value)) return true;
+        else {
+            nodes.add(current.value);
+        }
+        current = current.next;
+    }
+    return false;
+   */
 }
 
 ////////////////////////////////////////////////////////////
