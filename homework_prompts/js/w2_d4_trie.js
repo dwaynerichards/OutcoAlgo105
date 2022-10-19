@@ -55,7 +55,16 @@
 
 'use strict';
 
-
+/**
+ *  Prompt:    Create a TrieNode class
+ *             The TrieNode class should contain the following properties:
+ *                 value:   {Character} - default null
+ *                  next:   {HashTable}
+ *                   end:   {Boolean}
+ *               Example:   let sample = new TrieNode("b")
+ *                          sample.value     // "b"
+ *                          sample.end       // false
+ */
 class TrieNode {
   // YOUR WORK HERE
 }
