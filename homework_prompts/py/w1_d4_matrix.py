@@ -286,9 +286,9 @@ class Matrix:
             return True
 
     def initialize(self, arrayOfArrays):
+        self.storage = arrayOfArrays
         self.m = len(arrayOfArrays)
         self.n = len(arrayOfArrays[0])
-        self.storage = arrayOfArrays
 
     def insert(self, i, j, val):
         if self.isValid(i, j):
@@ -305,7 +305,7 @@ class Matrix:
 
     def scale(self, factor):
         for row in range(self.m):
-            for col in range(self.m):
+            for col in range(self.n):
                 scaled = factor * self.retrieve(row, col)
                 self.insert(row, col, scaled)
 
@@ -355,12 +355,11 @@ class Matrix:
 
     def transpose(self):
         rows, columns = self.m, self.n
-        transposed = Matrix(rows, columns)
+        transposed = Matrix(columns, rows)
         for rowIndex in range(rows):
             for colIndex in range(columns):
                 retrievedVal = self.retrieve(rowIndex, colIndex)
                 transposed.insert(colIndex, rowIndex, retrievedVal)
-        self.initialize(transposed)
         return transposed
 
     def multiply(self, matrix):
