@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Homework - Matrices
-=======
 # Homework 17 - Matrices
->>>>>>> a63a631 (yuck)
 #
 # Prompt: Create a Matrix class
 #
@@ -271,6 +267,8 @@
 
 
 # NOTE: Please attempt to complete this hw without using additional modules such as numpy
+
+
 class Matrix:
     def __init__(self, m, n):
         self.m = m
@@ -278,44 +276,92 @@ class Matrix:
         self.storage = [[0 for col in range(n)] for row in range(m)]
 
     def printer(self):
-        # YOUR WORK HERE
-        pass
+        for row in self.storage:
+            print(row)
 
     def isValid(self, i, j):
-        # YOUR WORK HERE
-        pass
+        if i < 0 or i > self.m or j < 0 or j > self.n:
+            return False
+        else:
+            return True
 
     def initialize(self, arrayOfArrays):
-        # YOUR WORK HERE
-        pass
+        self.m = len(arrayOfArrays)
+        self.n = len(arrayOfArrays[0])
+        self.storage = arrayOfArrays
 
     def insert(self, i, j, val):
-        # YOUR WORK HERE
-        pass
+        if self.isValid(i, j):
+            self.storage[i][j] = val
+            return True
+        else:
+            return False
 
     def retrieve(self, i, j):
-        # YOUR WORK HERE
-        pass
+        if not self.isValid(i, j):
+            return float("-inf")
+        else:
+            return self.storage[i][j]
 
     def scale(self, factor):
-        # YOUR WORK HERE
-        pass
+        for row in range(self.m):
+            for col in range(self.m):
+                scaled = factor * self.retrieve(row, col)
+                self.insert(row, col, scaled)
 
     def fill(self, val):
-        # YOUR WORK HERE
-        pass
+        for row in range(self.m):
+            for col in range(self.m):
+                self.insert(row, col, val)
 
     def flatten(self):
-        # YOUR WORK HERE
-        pass
+        result = list()
+        for row in self.storage:
+            result.extend(row)
+            # result += row
+            print(result)
+        return result
 
     def slice(self, rowRange, colRange):
-        # YOUR WORK HERE
-        pass
+        # validate rowRange, 0i > 0, 1i <= m
+        # validate colRange, 0i > 0, 1i <= n
+        print("rowRange: ", rowRange)
+        print("colRange: ", colRange)
+        print("currentStorage", self.storage)
+        m = rowRange[1] - rowRange[0]
+        n = colRange[1] - colRange[0]
+        # if range is larger or =
+        if m >= self.m and n >= self.n:
+            return self
+        elif self.isValid(rowRange[0], colRange[0]) and self.isValid(
+            rowRange[1], colRange[1]
+        ):
+            rows = list()
+
+            # use range of rowRange for iteration
+            for rowIndex in range(rowRange[0], rowRange[1]):
+
+                print("iteratingRows")
+                # slice col range, add to list to return, return list
+                row = self.storage[rowIndex]
+                slicedRow = row[colRange[0] : colRange[1]]
+                rows.append(slicedRow)
+                print("slicedRow: ", slicedRow)
+            newMatrix = Matrix(m, n)
+            newMatrix.initialize(rows)
+            return newMatrix
+        else:
+            return
 
     def transpose(self):
-        # YOUR WORK HERE
-        pass
+        rows, columns = self.m, self.n
+        transposed = Matrix(rows, columns)
+        for rowIndex in range(rows):
+            for colIndex in range(columns):
+                retrievedVal = self.retrieve(rowIndex, colIndex)
+                transposed.insert(colIndex, rowIndex, retrievedVal)
+        self.initialize(transposed)
+        return transposed
 
     def multiply(self, matrix):
         # YOUR WORK HERE
@@ -333,24 +379,24 @@ class Matrix:
 # Function test : performs a set of operations and returns a boolean
 #   indicating if test passed
 def expect(count, name, test):
-  if(count == None or not isinstance(count, list) or len(count) != 2):
-    count = [0, 0]
-  else:
-    count[1] += 1
+    if count == None or not isinstance(count, list) or len(count) != 2:
+        count = [0, 0]
+    else:
+        count[1] += 1
 
+    result = "false"
+    errMsg = None
+    try:
+        if test():
+            result = " true"
+            count[0] += 1
+    except Exception as err:
+        errMsg = str(err)
 
-  result = 'false'
-  errMsg = None
-  try:
-    if test():
-      result = ' true'
-      count[0] += 1
-  except Exception as err:
-    errMsg = str(err)
+    print("  " + (str(count[1]) + ")   ") + result + " : " + name)
+    if errMsg != None:
+        print("       " + errMsg + "\n")
 
-  print('  ' + (str(count[1]) + ')   ') + result + ' : ' + name)
-  if errMsg != None:
-    print('       ' + errMsg + '\n')
 
 # code for capturing print output
 #
@@ -359,301 +405,477 @@ def expect(count, name, test):
 #             the function given to capture_print must be fed using lambda.
 #             Example cis provided below
 
-print('Matrix Tests')
+print("Matrix Tests")
 
 test_count = [0, 0]
-print('IsValid Tests')
+print("IsValid Tests")
+
+
 def test():
     matrix = Matrix(3, 4)
     return matrix.isValid(1, 1) == True
-expect(test_count, 'should return true for a valid set of coordinates', test)
+
+
+expect(test_count, "should return true for a valid set of coordinates", test)
+
 
 def test():
     matrix = Matrix(3, 4)
     return matrix.isValid(5, 1) == False
-expect(test_count, 'should return false for a set of coordinates off the matrix', test)
+
+
+expect(test_count, "should return false for a set of coordinates off the matrix", test)
+
 
 def test():
     matrix = Matrix(3, 4)
     return matrix.isValid(-4, 1) == False
-expect(test_count, 'should return false for a negative set of coordinates', test)
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
+
+expect(test_count, "should return false for a negative set of coordinates", test)
+
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
 
 test_count = [0, 0]
-print('Initialize Tests')
+print("Initialize Tests")
+
+
 def test():
     matrix = Matrix(1, 1)
     matrix.initialize([[1, 2, 3], [4, 5, 6]])
     return matrix.m == 2 and matrix.n == 3
-expect(test_count, 'should override m and n values in old matrix', test)
+
+
+expect(test_count, "should override m and n values in old matrix", test)
+
 
 def test():
     matrix = Matrix(1, 1)
     matrix.initialize([[1, 2], [3, 4]])
-    return matrix.storage != None and matrix.storage[0] != None and \
-        matrix.storage[1] != None and matrix.storage[0][0] == 1 and \
-        matrix.storage[0][1] == 2 and matrix.storage[1][0] == 3 and \
-        matrix.storage[1][1] == 4
-expect(test_count, 'should override contents of old matrix', test)
+    return (
+        matrix.storage != None
+        and matrix.storage[0] != None
+        and matrix.storage[1] != None
+        and matrix.storage[0][0] == 1
+        and matrix.storage[0][1] == 2
+        and matrix.storage[1][0] == 3
+        and matrix.storage[1][1] == 4
+    )
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
 
+expect(test_count, "should override contents of old matrix", test)
+
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
 
 test_count = [0, 0]
-print('Insert Tests')
+print("Insert Tests")
+
+
 def test():
     matrix = Matrix(1, 1)
     matrix.initialize([[1, 2, 3], [4, 5, 6]])
     return matrix.insert(1, 1, 50) == True
-expect(test_count, 'should return true if given valid coordinates', test)
+
+
+expect(test_count, "should return true if given valid coordinates", test)
+
 
 def test():
-    matrix =  Matrix(1, 1)
+    matrix = Matrix(1, 1)
     matrix.initialize([[1, 2, 3], [4, 5, 6]])
     return matrix.insert(1, 1, 50) == True and matrix.storage[1][1] == 50
-expect(test_count, 'should override old value in matrix given valid coordinates', test)
+
+
+expect(test_count, "should override old value in matrix given valid coordinates", test)
+
 
 def test():
-    matrix =  Matrix(1, 1)
+    matrix = Matrix(1, 1)
     matrix.initialize([[1, 2, 3], [4, 5, 6]])
     return matrix.insert(5, 5, 10) == False
-expect(test_count, 'should return false if given invalid coordinates', test)
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
 
+expect(test_count, "should return false if given invalid coordinates", test)
+
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
 
 test_count = [0, 0]
-print('Retrieve Tests')
+print("Retrieve Tests")
+
+
 def test():
     matrix = Matrix(1, 1)
-    matrix.initialize([[0, 1, 2],[3, 4, 5],[6, 7, 8]])
+    matrix.initialize([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
     return matrix.retrieve(1, 1) == 4
-expect(test_count, 'should return correct value if given valid coordinates', test)
+
+
+expect(test_count, "should return correct value if given valid coordinates", test)
+
 
 def test():
     matrix = Matrix(1, 1)
-    matrix.initialize([[0, 1, 2],[3, 4, 5],[6, 7, 8]])
-    return matrix.retrieve(10, 10) == float('-inf')
-expect(test_count, 'should return -Infinity if given invalid coordinates', test)
+    matrix.initialize([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+    return matrix.retrieve(10, 10) == float("-inf")
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
 
+expect(test_count, "should return -Infinity if given invalid coordinates", test)
+
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
 
 test_count = [0, 0]
-print('Scale Tests')
+print("Scale Tests")
+
+
 def test():
     matrix = Matrix(1, 1)
-    matrix.initialize([[0, 1],[3, 4]])
+    matrix.initialize([[0, 1], [3, 4]])
     matrix.scale(2)
-    return matrix.storage[0][0] == 0 and  matrix.storage[0][1] == 2 and \
-         matrix.storage[1][0] == 6 and  matrix.storage[1][1] == 8
-expect(test_count, 'should scale values in matrix by amount given', test)
+    return (
+        matrix.storage[0][0] == 0
+        and matrix.storage[0][1] == 2
+        and matrix.storage[1][0] == 6
+        and matrix.storage[1][1] == 8
+    )
+
+
+expect(test_count, "should scale values in matrix by amount given", test)
+
 
 def test():
     matrix = Matrix(1, 1)
-    matrix.initialize([[0, 1],[3, 4]])
+    matrix.initialize([[0, 1], [3, 4]])
     matrix.scale(-3)
-    return matrix.storage[0][0] == 0 and matrix.storage[0][1] == -3 and \
-        matrix.storage[1][0] == -9 and matrix.storage[1][1] == -12
-expect(test_count, 'should scale values in matrix by amount given', test)
+    return (
+        matrix.storage[0][0] == 0
+        and matrix.storage[0][1] == -3
+        and matrix.storage[1][0] == -9
+        and matrix.storage[1][1] == -12
+    )
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
 
+expect(test_count, "should scale values in matrix by amount given", test)
+
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
 
 test_count = [0, 0]
-print('Fill Tests')
+print("Fill Tests")
+
+
 def test():
     matrix = Matrix(1, 1)
-    matrix.initialize([[0, 1],[3, 4]])
+    matrix.initialize([[0, 1], [3, 4]])
     matrix.fill(2)
-    return matrix.storage[0][0] == 2 and  matrix.storage[0][1] == 2 and \
-         matrix.storage[1][0] == 2 and  matrix.storage[1][1] == 2
-expect(test_count, 'should scale values in matrix by amount given', test)
+    return (
+        matrix.storage[0][0] == 2
+        and matrix.storage[0][1] == 2
+        and matrix.storage[1][0] == 2
+        and matrix.storage[1][1] == 2
+    )
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
 
+expect(test_count, "should scale values in matrix by amount given", test)
+
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
 
 test_count = [0, 0]
-print('Flatten Tests')
+print("Flatten Tests")
+
+
 def test():
     matrix = Matrix(1, 1)
     matrix.initialize([[0], [1], [3], [4]])
     return matrix.flatten() == [0, 1, 3, 4]
-expect(test_count, 'should work for a single column matrix', test)
+
+
+expect(test_count, "should work for a single column matrix", test)
+
 
 def test():
     matrix = Matrix(1, 1)
     matrix.initialize([[0, 1, 3, 4]])
     return matrix.flatten() == [0, 1, 3, 4]
-expect(test_count, 'should work for a single row matrix', test)
+
+
+expect(test_count, "should work for a single row matrix", test)
+
 
 def test():
     matrix = Matrix(1, 1)
     matrix.initialize([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
     return matrix.flatten() == [0, 1, 2, 3, 4, 5, 6, 7, 8]
-expect(test_count, 'should work for example matrix', test)
-
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
 
 
+expect(test_count, "should work for example matrix", test)
 
-
-test_count = [0, 0]
-print('Slice Tests')
-def test():
-    matrix = Matrix(1, 1)
-    matrix.initialize([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
-    newMatrix = matrix.slice([0,2], [0,2])
-
-    return newMatrix != None and newMatrix.m == 2 and newMatrix.n == 2 and \
-         newMatrix.storage[0][0] == 0 and newMatrix.storage[0][1] == 1 and \
-         newMatrix.storage[1][0] == 3 and newMatrix.storage[1][1] == 4
-expect(test_count, 'should return 2x2 matrix slice from a 3x3 matrix when rowRange is [0,2] and colRange is [0,2]', test)
-
-def test():
-    matrix = Matrix(1, 1)
-    matrix.initialize([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
-    newMatrix = matrix.slice([1,3], [1,3])
-
-    return newMatrix != None and newMatrix.m == 2 and newMatrix.n == 2 and \
-         newMatrix.storage[0][0] == 4 and newMatrix.storage[0][1] == 5 and \
-         newMatrix.storage[1][0] == 7 and newMatrix.storage[1][1] == 8
-expect(test_count, 'should return 2x2 matrix slice from a 3x3 matrix when rowRange is [1,3] and colRange is [1,3]', test)
-
-def test():
-    matrix = Matrix(1, 1)
-    matrix.initialize([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
-    newMatrix = matrix.slice([-5,20], [-2,6])
-
-    return newMatrix != None and newMatrix.m == 3 and newMatrix.n == 3 and \
-         newMatrix.storage[0][0] == 0 and newMatrix.storage[0][1] == 1 and \
-         newMatrix.storage[0][2] == 2 and newMatrix.storage[1][0] == 3 and \
-         newMatrix.storage[1][1] == 4 and newMatrix.storage[1][2] == 5 and \
-         newMatrix.storage[2][0] == 6 and newMatrix.storage[2][1] == 7 and \
-         newMatrix.storage[2][2] == 8
-expect(test_count, 'should return copy of original matrix if rowRange and colRange are larger than original', test)
-
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
-
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
 
 test_count = [0, 0]
-print('Transpose Tests')
+print("Slice Tests")
+
+
+def test():
+    matrix = Matrix(1, 1)
+    matrix.initialize([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+    newMatrix = matrix.slice([0, 2], [0, 2])
+
+    return (
+        newMatrix != None
+        and newMatrix.m == 2
+        and newMatrix.n == 2
+        and newMatrix.storage[0][0] == 0
+        and newMatrix.storage[0][1] == 1
+        and newMatrix.storage[1][0] == 3
+        and newMatrix.storage[1][1] == 4
+    )
+
+
+expect(
+    test_count,
+    "should return 2x2 matrix slice from a 3x3 matrix when rowRange is [0,2] and colRange is [0,2]",
+    test,
+)
+
+
+def test():
+    matrix = Matrix(1, 1)
+    matrix.initialize([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+    newMatrix = matrix.slice([1, 3], [1, 3])
+
+    return (
+        newMatrix != None
+        and newMatrix.m == 2
+        and newMatrix.n == 2
+        and newMatrix.storage[0][0] == 4
+        and newMatrix.storage[0][1] == 5
+        and newMatrix.storage[1][0] == 7
+        and newMatrix.storage[1][1] == 8
+    )
+
+
+expect(
+    test_count,
+    "should return 2x2 matrix slice from a 3x3 matrix when rowRange is [1,3] and colRange is [1,3]",
+    test,
+)
+
+
+def test():
+    matrix = Matrix(1, 1)
+    matrix.initialize([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+    newMatrix = matrix.slice([-5, 20], [-2, 6])
+
+    return (
+        newMatrix != None
+        and newMatrix.m == 3
+        and newMatrix.n == 3
+        and newMatrix.storage[0][0] == 0
+        and newMatrix.storage[0][1] == 1
+        and newMatrix.storage[0][2] == 2
+        and newMatrix.storage[1][0] == 3
+        and newMatrix.storage[1][1] == 4
+        and newMatrix.storage[1][2] == 5
+        and newMatrix.storage[2][0] == 6
+        and newMatrix.storage[2][1] == 7
+        and newMatrix.storage[2][2] == 8
+    )
+
+
+expect(
+    test_count,
+    "should return copy of original matrix if rowRange and colRange are larger than original",
+    test,
+)
+
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
+
+
+test_count = [0, 0]
+print("Transpose Tests")
+
+
 def test():
     matrix = Matrix(1, 1)
     matrix.initialize([[1]])
     newMatrix = matrix.transpose()
-    return newMatrix != None and newMatrix.m == 1 and newMatrix.n == 1 and \
-         newMatrix.storage[0][0] == 1
-expect(test_count, 'should work correctly on a 1x1 matrix', test)
+    return (
+        newMatrix != None
+        and newMatrix.m == 1
+        and newMatrix.n == 1
+        and newMatrix.storage[0][0] == 1
+    )
+
+
+expect(test_count, "should work correctly on a 1x1 matrix", test)
+
 
 def test():
     matrix = Matrix(1, 1)
     matrix.initialize([[0, 1], [2, 3]])
     newMatrix = matrix.transpose()
 
-    return newMatrix != None and newMatrix.m == 2 and newMatrix.n == 2 and \
-         newMatrix.storage[0][0] == 0 and newMatrix.storage[0][1] == 2 and \
-         newMatrix.storage[1][0] == 1 and newMatrix.storage[1][1] == 3
-expect(test_count, 'should work correctly on a 2x2 matrix', test)
+    return (
+        newMatrix != None
+        and newMatrix.m == 2
+        and newMatrix.n == 2
+        and newMatrix.storage[0][0] == 0
+        and newMatrix.storage[0][1] == 2
+        and newMatrix.storage[1][0] == 1
+        and newMatrix.storage[1][1] == 3
+    )
+
+
+expect(test_count, "should work correctly on a 2x2 matrix", test)
+
 
 def test():
     matrix = Matrix(1, 1)
     matrix.initialize([[0, 1], [3, 4], [6, 7]])
     newMatrix = matrix.transpose()
 
-    return newMatrix != None and newMatrix.m == 2 and newMatrix.n == 3 and \
-         newMatrix.storage[0][0] == 0 and newMatrix.storage[0][1] == 3 and \
-         newMatrix.storage[0][2] == 6 and newMatrix.storage[1][0] == 1 and \
-         newMatrix.storage[1][1] == 4 and newMatrix.storage[1][2] == 7
-expect(test_count, 'should work correctly on a 3x2 matrix', test)
+    return (
+        newMatrix != None
+        and newMatrix.m == 2
+        and newMatrix.n == 3
+        and newMatrix.storage[0][0] == 0
+        and newMatrix.storage[0][1] == 3
+        and newMatrix.storage[0][2] == 6
+        and newMatrix.storage[1][0] == 1
+        and newMatrix.storage[1][1] == 4
+        and newMatrix.storage[1][2] == 7
+    )
+
+
+expect(test_count, "should work correctly on a 3x2 matrix", test)
+
 
 def test():
     matrix = Matrix(1, 1)
     matrix.initialize([[0, 1, 3], [4, 6, 7]])
     newMatrix = matrix.transpose()
 
-    return newMatrix != None and newMatrix.m == 3 and newMatrix.n == 2 and \
-         newMatrix.storage[0][0] == 0 and newMatrix.storage[0][1] == 4 and \
-         newMatrix.storage[1][0] == 1 and newMatrix.storage[1][1] == 6 and \
-         newMatrix.storage[2][0] == 3 and newMatrix.storage[2][1] == 7
-expect(test_count, 'should work correctly on a 2x3 matrix', test)
+    return (
+        newMatrix != None
+        and newMatrix.m == 3
+        and newMatrix.n == 2
+        and newMatrix.storage[0][0] == 0
+        and newMatrix.storage[0][1] == 4
+        and newMatrix.storage[1][0] == 1
+        and newMatrix.storage[1][1] == 6
+        and newMatrix.storage[2][0] == 3
+        and newMatrix.storage[2][1] == 7
+    )
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
 
+expect(test_count, "should work correctly on a 2x3 matrix", test)
 
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
 
 test_count = [0, 0]
-print('Multiply Tests')
+print("Multiply Tests")
+
+
 def test():
     matrix1 = Matrix(1, 1)
     matrix2 = Matrix(1, 1)
 
-    matrix1.initialize([[4, 1, 3],
-                      [3, 2, 5]])
+    matrix1.initialize([[4, 1, 3], [3, 2, 5]])
 
-    matrix2.initialize([[8, 9],
-                      [7, 10],
-                      [0, 6]])
+    matrix2.initialize([[8, 9], [7, 10], [0, 6]])
 
     newMatrix = matrix1.multiply(matrix2)
 
-    return newMatrix != None and newMatrix.m == 2 and newMatrix.n == 2 and \
-         newMatrix.storage[0][0] == 39 and newMatrix.storage[0][1] == 64 and \
-         newMatrix.storage[1][0] == 38 and newMatrix.storage[1][1] == 77
-expect(test_count, 'should work correctly on example matrix with valid input', test)
+    return (
+        newMatrix != None
+        and newMatrix.m == 2
+        and newMatrix.n == 2
+        and newMatrix.storage[0][0] == 39
+        and newMatrix.storage[0][1] == 64
+        and newMatrix.storage[1][0] == 38
+        and newMatrix.storage[1][1] == 77
+    )
+
+
+expect(test_count, "should work correctly on example matrix with valid input", test)
+
 
 def test():
     matrix1 = Matrix(1, 1)
     matrix2 = Matrix(1, 1)
 
-    matrix1.initialize([[4, 1, 3],
-                      [3, 2, 5]])
+    matrix1.initialize([[4, 1, 3], [3, 2, 5]])
 
     matrix2.initialize([[8]])
 
     newMatrix = matrix1.multiply(matrix2)
 
     return newMatrix == None
-expect(test_count, 'should work correctly on example matrix with invalid input of wrong dimensions', test)
+
+
+expect(
+    test_count,
+    "should work correctly on example matrix with invalid input of wrong dimensions",
+    test,
+)
+
 
 def test():
     matrix1 = Matrix(1, 1)
     matrix2 = Matrix(1, 1)
 
-    matrix1.initialize([[4, 1, 3],
-                      [3, 2, 5]])
+    matrix1.initialize([[4, 1, 3], [3, 2, 5]])
 
     matrix2.initialize([[8], [1], [2]])
 
     newMatrix = matrix1.multiply(matrix2)
 
-    return newMatrix != None and newMatrix.m == 2 and newMatrix.n == 1 and \
-         newMatrix.storage[0][0] == 39 and newMatrix.storage[1][0] == 36
-expect(test_count, 'should work correctly on example matrix when multiplied by 3x1 matrix', test)
+    return (
+        newMatrix != None
+        and newMatrix.m == 2
+        and newMatrix.n == 1
+        and newMatrix.storage[0][0] == 39
+        and newMatrix.storage[1][0] == 36
+    )
+
+
+expect(
+    test_count,
+    "should work correctly on example matrix when multiplied by 3x1 matrix",
+    test,
+)
+
 
 def test():
     matrix1 = Matrix(1, 1)
     matrix2 = Matrix(1, 1)
 
-    matrix1.initialize([[4, 1, 3],
-                      [3, 2, 5]])
+    matrix1.initialize([[4, 1, 3], [3, 2, 5]])
 
     matrix2.initialize([[3, 5]])
 
     newMatrix = matrix2.multiply(matrix1)
 
-    return newMatrix != None and newMatrix.m == 1 and newMatrix.n == 3 and \
-         newMatrix.storage[0][0] == 27 and newMatrix.storage[0][1] == 13 and \
-         newMatrix.storage[0][2] == 34
-expect(test_count, 'should work correctly when 1x2 matrix is multiplied by example matrix', test)
+    return (
+        newMatrix != None
+        and newMatrix.m == 1
+        and newMatrix.n == 3
+        and newMatrix.storage[0][0] == 27
+        and newMatrix.storage[0][1] == 13
+        and newMatrix.storage[0][2] == 34
+    )
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
+
+expect(
+    test_count,
+    "should work correctly when 1x2 matrix is multiplied by example matrix",
+    test,
+)
+
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")

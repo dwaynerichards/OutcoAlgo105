@@ -72,14 +72,7 @@ class LinkedList:
     # Time Complexity:
     # Auxiliary Space Complexity:
     def append(self, value):
-        node = ListNode(value)
-        if self.tail == None:
-            self.head = node
-            self.tail = node
-        else:
-            self.tail.next = node
-            self.tail = node
-        self.length += 1
+        self.insert(value, self.length)
 
     def getPrev(self, index):
         # iterate untilyou get the prev index of index to capture
@@ -96,34 +89,41 @@ class LinkedList:
     # Time Complexity:
     # Auxiliary Space Complexity:
     def insert(self, value, index):
+        if index < 0 or index > self.length:
+            return
         node = ListNode(value)
-        if index == 0:
+        if self.length == 0:
+            self.head = node
+            self.tail = node
+        elif index == 0:
             node.next = self.head
             self.head = node
-            self.length += 1
-            if self.length == 1:
-                self.tail = node
-        elif index == self.length - 1:
-            self.append(value)
+        elif index == self.length:
+            self.tail.next = node
+            self.tail = node
         else:
             prev = self.getPrev(index)
-            futureNext = prev.next
+            node.next = prev.next
             prev.next = node
-            node.next = futureNext
-            self.length += 1
+        self.length += 1
 
     # Time Complexity:
     # Auxiliary Space Complexity:
     def remove(self, index):
-        if index == 0:
+        if index < 0 or index >= self.length:
+            return
+        elif index == 0:
             self.head = self.head.next
-            self.length -= 1
             if self.length == 1:
-                self.tail = self
+                self.head = None
+                self.tail = None
         else:
             prev = self.getPrev(index)
             prev.next = prev.next.next
-            del prev.next
+            # if index is tail, and it's removed, the tail's previos = tail
+            if index == self.length - 1:
+                self.tail = prev
+        self.length -= 1
 
     # Time Complexity:
     # Auxiliary Space Complexity:
