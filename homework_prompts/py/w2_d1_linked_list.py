@@ -1,10 +1,4 @@
-#
-<<<<<<< HEAD
-#  Homework - Linked List
-=======
 #  Homework 09 - Linked List
->>>>>>> a63a631 (yuck)
-#
 #  Problem 1: ListNode class
 #
 #  Prompt:    Create a ListNode class
@@ -59,40 +53,87 @@
 #
 
 
+from operator import truediv
+
+
 class ListNode:
     def __init__(self, value=None):
-        # YOUR WORK HERE
-        pass
+        self.value = value
+        self.next = None
 
 
 class LinkedList:
     def __init__(self):
-        # YOUR WORK HERE
+        self.length = 0
+        self.head = None
+        self.tail = None
         pass
 
     # Time Complexity:
     # Auxiliary Space Complexity:
     def append(self, value):
-        # YOUR WORK HERE
-        pass
+        node = ListNode(value)
+        if self.tail == None:
+            self.head = node
+            self.tail = node
+        else:
+            self.tail.next = node
+            self.tail = node
+        self.length += 1
+
+    def getPrev(self, index):
+        # iterate untilyou get the prev index of index to capture
+        # return prev node
+        current = self.head
+        prev = None
+        i = 0
+        while i < index:
+            prev = current
+            current = current.next
+            i += 1
+        return prev
 
     # Time Complexity:
     # Auxiliary Space Complexity:
     def insert(self, value, index):
-        # YOUR WORK HERE
-        pass
+        node = ListNode(value)
+        if index == 0:
+            node.next = self.head
+            self.head = node
+            self.length += 1
+            if self.length == 1:
+                self.tail = node
+        elif index == self.length - 1:
+            self.append(value)
+        else:
+            prev = self.getPrev(index)
+            futureNext = prev.next
+            prev.next = node
+            node.next = futureNext
+            self.length += 1
 
     # Time Complexity:
     # Auxiliary Space Complexity:
     def remove(self, index):
-        # YOUR WORK HERE
-        pass
+        if index == 0:
+            self.head = self.head.next
+            self.length -= 1
+            if self.length == 1:
+                self.tail = self
+        else:
+            prev = self.getPrev(index)
+            prev.next = prev.next.next
+            del prev.next
 
     # Time Complexity:
     # Auxiliary Space Complexity:
     def contains(self, value):
-        # YOUR WORK HERE
-        pass
+        current = self.head
+        while current is not None:
+            if current.value == value:
+                return True
+            current = current.next
+        return False
 
 
 # ###########################################################
@@ -112,23 +153,23 @@ import sys
 #        indicating if test passed
 # output: {None}
 def expect(count, name, test):
-    if (count is None or not isinstance(count, list) or len(count) != 2):
+    if count is None or not isinstance(count, list) or len(count) != 2:
         count = [0, 0]
     else:
         count[1] += 1
 
-    result = 'false'
+    result = "false"
     error_msg = None
     try:
         if test():
-            result = ' true'
+            result = " true"
             count[0] += 1
     except Exception as err:
         error_msg = str(err)
 
-    print('  ' + (str(count[1]) + ')   ') + result + ' : ' + name)
+    print("  " + (str(count[1]) + ")   ") + result + " : " + name)
     if error_msg is not None:
-        print('       ' + error_msg + '\n')
+        print("       " + error_msg + "\n")
 
 
 class Capturing(list):
@@ -152,7 +193,7 @@ def lists_equal(lst1, lst2):
     return True
 
 
-print('ListNode Class')
+print("ListNode Class")
 test_count = [0, 0]
 
 
@@ -161,23 +202,23 @@ def test():
     return isinstance(node, object)
 
 
-expect(test_count, 'able to create an instance', test)
+expect(test_count, "able to create an instance", test)
 
 
 def test():
     node = ListNode()
-    return hasattr(node, 'value')
+    return hasattr(node, "value")
 
 
-expect(test_count, 'has value property', test)
+expect(test_count, "has value property", test)
 
 
 def test():
     node = ListNode()
-    return hasattr(node, 'next')
+    return hasattr(node, "next")
 
 
-expect(test_count, 'has next property', test)
+expect(test_count, "has next property", test)
 
 
 def test():
@@ -185,7 +226,7 @@ def test():
     return node is not None and node.value is None
 
 
-expect(test_count, 'has default value set to None', test)
+expect(test_count, "has default value set to None", test)
 
 
 def test():
@@ -193,7 +234,7 @@ def test():
     return node is not None and node.value == 5
 
 
-expect(test_count, 'able to assign a value upon instantiation', test)
+expect(test_count, "able to assign a value upon instantiation", test)
 
 
 def test():
@@ -202,23 +243,22 @@ def test():
     return node is not None and node.value == 5
 
 
-expect(test_count, 'able to reassign a value', test)
+expect(test_count, "able to reassign a value", test)
 
 
 def test():
     node1 = ListNode(5)
     node2 = ListNode(10)
     node1.next = node2
-    return (node1 is not None and node1.next is not None and
-            node1.next.value == 10)
+    return node1 is not None and node1.next is not None and node1.next.value == 10
 
 
-expect(test_count, 'able to point to another node', test)
+expect(test_count, "able to point to another node", test)
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
 
-print('LinkedList Class')
+print("LinkedList Class")
 test_count = [0, 0]
 
 
@@ -227,31 +267,31 @@ def test():
     return isinstance(linked_list, object)
 
 
-expect(test_count, 'able to create an instance', test)
+expect(test_count, "able to create an instance", test)
 
 
 def test():
     linked_list = LinkedList()
-    return hasattr(linked_list, 'head')
+    return hasattr(linked_list, "head")
 
 
-expect(test_count, 'has head property', test)
-
-
-def test():
-    linked_list = LinkedList()
-    return hasattr(linked_list, 'tail')
-
-
-expect(test_count, 'has tail property', test)
+expect(test_count, "has head property", test)
 
 
 def test():
     linked_list = LinkedList()
-    return hasattr(linked_list, 'length')
+    return hasattr(linked_list, "tail")
 
 
-expect(test_count, 'has length property', test)
+expect(test_count, "has tail property", test)
+
+
+def test():
+    linked_list = LinkedList()
+    return hasattr(linked_list, "length")
+
+
+expect(test_count, "has length property", test)
 
 
 def test():
@@ -259,7 +299,7 @@ def test():
     return linked_list is not None and linked_list.head is None
 
 
-expect(test_count, 'default head set to None', test)
+expect(test_count, "default head set to None", test)
 
 
 def test():
@@ -267,7 +307,7 @@ def test():
     return linked_list is not None and linked_list.tail is None
 
 
-expect(test_count, 'default tail set to None', test)
+expect(test_count, "default tail set to None", test)
 
 
 def test():
@@ -275,54 +315,65 @@ def test():
     return linked_list is not None and linked_list.length == 0
 
 
-expect(test_count, 'default length set to 0', test)
+expect(test_count, "default length set to 0", test)
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
 
-print('LinkedList Insert Method')
+print("LinkedList Insert Method")
 test_count = [0, 0]
 
 
 def test():
     linked_list = LinkedList()
-    return (hasattr(linked_list, 'insert') and
-            callable(getattr(linked_list, 'insert')))
+    return hasattr(linked_list, "insert") and callable(getattr(linked_list, "insert"))
 
 
-expect(test_count, 'has insert method', test)
+expect(test_count, "has insert method", test)
 
 
 def test():
     linked_list = LinkedList()
     linked_list.insert(5, 0)
-    return (linked_list is not None and linked_list.length == 1 and
-            linked_list.head.value == 5 and linked_list.tail.value == 5)
+    return (
+        linked_list is not None
+        and linked_list.length == 1
+        and linked_list.head.value == 5
+        and linked_list.tail.value == 5
+    )
 
 
-expect(test_count, 'able to insert a node into empty linked list', test)
+expect(test_count, "able to insert a node into empty linked list", test)
 
 
 def test():
     linked_list = LinkedList()
     linked_list.insert(5, 0)
     linked_list.insert(10, 1)
-    return (linked_list is not None and linked_list.length == 2 and
-            linked_list.head.value == 5 and linked_list.tail.value == 10)
+    return (
+        linked_list is not None
+        and linked_list.length == 2
+        and linked_list.head.value == 5
+        and linked_list.tail.value == 10
+    )
 
 
-expect(test_count, 'able to insert a node after another node', test)
+expect(test_count, "able to insert a node after another node", test)
 
 
 def test():
     linked_list = LinkedList()
     linked_list.insert(5, 0)
     linked_list.insert(10, 0)
-    return (linked_list is not None and linked_list.length == 2 and
-            linked_list.head.value == 10 and linked_list.tail.value == 5)
+    return (
+        linked_list is not None
+        and linked_list.length == 2
+        and linked_list.head.value == 10
+        and linked_list.tail.value == 5
+    )
 
 
-expect(test_count, 'able to insert a node before another node', test)
+expect(test_count, "able to insert a node before another node", test)
 
 
 def test():
@@ -330,59 +381,74 @@ def test():
     linked_list.insert(5, 0)
     linked_list.insert(10, 1)
     linked_list.insert(7, 1)
-    return (linked_list is not None and linked_list.length == 3 and
-            linked_list.head.value == 5 and linked_list.tail.value == 10 and
-            linked_list.head.next.value == 7)
+    return (
+        linked_list is not None
+        and linked_list.length == 3
+        and linked_list.head.value == 5
+        and linked_list.tail.value == 10
+        and linked_list.head.next.value == 7
+    )
 
 
-expect(test_count, 'able to insert a node in between two nodes', test)
+expect(test_count, "able to insert a node in between two nodes", test)
 
 
 def test():
     linked_list = LinkedList()
     linked_list.insert(5, -1)
     linked_list.insert(10, 3)
-    return (linked_list is not None and linked_list.length == 0 and
-            linked_list.head is None and linked_list.tail is None)
+    return (
+        linked_list is not None
+        and linked_list.length == 0
+        and linked_list.head is None
+        and linked_list.tail is None
+    )
 
 
-expect(test_count, 'does not insert a node if index is out of bounds', test)
+expect(test_count, "does not insert a node if index is out of bounds", test)
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
 
-print('LinkedList Append Method')
+print("LinkedList Append Method")
 test_count = [0, 0]
 
 
 def test():
     linked_list = LinkedList()
-    return (hasattr(linked_list, 'append') and
-            callable(getattr(linked_list, 'append')))
+    return hasattr(linked_list, "append") and callable(getattr(linked_list, "append"))
 
 
-expect(test_count, 'has append method', test)
+expect(test_count, "has append method", test)
 
 
 def test():
     linked_list = LinkedList()
     linked_list.append(5)
-    return (linked_list is not None and linked_list.length == 1 and
-            linked_list.head.value == 5 and linked_list.tail.value == 5)
+    return (
+        linked_list is not None
+        and linked_list.length == 1
+        and linked_list.head.value == 5
+        and linked_list.tail.value == 5
+    )
 
 
-expect(test_count, 'able to append a node into empty linked list', test)
+expect(test_count, "able to append a node into empty linked list", test)
 
 
 def test():
     linked_list = LinkedList()
     linked_list.append(5)
     linked_list.append(10)
-    return (linked_list is not None and linked_list.length == 2 and
-            linked_list.head.value == 5 and linked_list.tail.value == 10)
+    return (
+        linked_list is not None
+        and linked_list.length == 2
+        and linked_list.head.value == 5
+        and linked_list.tail.value == 10
+    )
 
 
-expect(test_count, 'able to append a second node into linked list', test)
+expect(test_count, "able to append a second node into linked list", test)
 
 
 def test():
@@ -390,25 +456,28 @@ def test():
     linked_list.append(5)
     linked_list.append(10)
     linked_list.append(15)
-    return (linked_list is not None and linked_list.length == 3 and
-            linked_list.head.value == 5 and linked_list.tail.value == 15)
+    return (
+        linked_list is not None
+        and linked_list.length == 3
+        and linked_list.head.value == 5
+        and linked_list.tail.value == 15
+    )
 
 
-expect(test_count, 'able to append a third node into linked list', test)
+expect(test_count, "able to append a third node into linked list", test)
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
-print('LinkedList Remove Method')
+print("LinkedList Remove Method")
 test_count = [0, 0]
 
 
 def test():
     linked_list = LinkedList()
-    return (hasattr(linked_list, 'remove') and
-            callable(getattr(linked_list, 'remove')))
+    return hasattr(linked_list, "remove") and callable(getattr(linked_list, "remove"))
 
 
-expect(test_count, 'has remove method', test)
+expect(test_count, "has remove method", test)
 
 
 def test():
@@ -416,11 +485,15 @@ def test():
     linked_list.append(5)
     linked_list.append(10)
     linked_list.remove(0)
-    return (linked_list is not None and linked_list.length == 1 and
-            linked_list.head.value == 10 and linked_list.tail.value == 10)
+    return (
+        linked_list is not None
+        and linked_list.length == 1
+        and linked_list.head.value == 10
+        and linked_list.tail.value == 10
+    )
 
 
-expect(test_count, 'able to remove a node from the head', test)
+expect(test_count, "able to remove a node from the head", test)
 
 
 def test():
@@ -428,11 +501,15 @@ def test():
     linked_list.append(5)
     linked_list.append(10)
     linked_list.remove(1)
-    return (linked_list is not None and linked_list.length == 1 and
-            linked_list.head.value == 5 and linked_list.tail.value == 5)
+    return (
+        linked_list is not None
+        and linked_list.length == 1
+        and linked_list.head.value == 5
+        and linked_list.tail.value == 5
+    )
 
 
-expect(test_count, 'able to remove a node from the tail', test)
+expect(test_count, "able to remove a node from the tail", test)
 
 
 def test():
@@ -441,22 +518,30 @@ def test():
     linked_list.append(10)
     linked_list.append(15)
     linked_list.remove(1)
-    return (linked_list is not None and linked_list.length == 2 and
-            linked_list.head.value == 5 and linked_list.tail.value == 15)
+    return (
+        linked_list is not None
+        and linked_list.length == 2
+        and linked_list.head.value == 5
+        and linked_list.tail.value == 15
+    )
 
 
-expect(test_count, 'able to remove a node in between two nodes', test)
+expect(test_count, "able to remove a node in between two nodes", test)
 
 
 def test():
     linked_list = LinkedList()
     linked_list.append(5)
     linked_list.remove(0)
-    return (linked_list is not None and linked_list.length == 0 and
-            linked_list.head is None and linked_list.tail is None)
+    return (
+        linked_list is not None
+        and linked_list.length == 0
+        and linked_list.head is None
+        and linked_list.tail is None
+    )
 
 
-expect(test_count, 'able to remove the only node in a linked list', test)
+expect(test_count, "able to remove the only node in a linked list", test)
 
 
 def test():
@@ -464,26 +549,30 @@ def test():
     linked_list.append(5)
     linked_list.remove(-1)
     linked_list.remove(2)
-    return (linked_list is not None and linked_list.length == 1 and
-            linked_list.head.value == 5 and linked_list.tail.value == 5)
+    return (
+        linked_list is not None
+        and linked_list.length == 1
+        and linked_list.head.value == 5
+        and linked_list.tail.value == 5
+    )
 
 
-expect(test_count, 'does not remove a node when the index is out of bounds',
-       test)
+expect(test_count, "does not remove a node when the index is out of bounds", test)
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
 
-print('LinkedList Contains Method')
+print("LinkedList Contains Method")
 test_count = [0, 0]
 
 
 def test():
     linked_list = LinkedList()
-    return (hasattr(linked_list, 'contains') and
-            callable(getattr(linked_list, 'contains')))
+    return hasattr(linked_list, "contains") and callable(
+        getattr(linked_list, "contains")
+    )
 
 
-expect(test_count, 'has contains method', test)
+expect(test_count, "has contains method", test)
 
 
 def test():
@@ -494,7 +583,7 @@ def test():
     return linked_list.contains(15) is True
 
 
-expect(test_count, 'returns True if linked list contains value', test)
+expect(test_count, "returns True if linked list contains value", test)
 
 
 def test():
@@ -505,6 +594,6 @@ def test():
     return linked_list.contains(8) is False
 
 
-expect(test_count, 'returns False if linked list contains value', test)
+expect(test_count, "returns False if linked list contains value", test)
 
-print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
+print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
