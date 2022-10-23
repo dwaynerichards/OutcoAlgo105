@@ -51,9 +51,6 @@
 #
 
 
-from urllib.parse import _NetlocResultMixinBytes
-
-
 class TreeNode:
     def __init__(self, value=None):
         self.value = value
@@ -64,39 +61,44 @@ class TreeNode:
 class BinarySearchTree:
     def __init__(self):
         self.root = None
-        self.size = None
+        self.size = 0
 
-    # Time Complexity:
-    # Auxiliary Space Complexity:
+    # Time Complexity: O(log(N))
+    # Auxiliary Space Complexity: O(1)
     def insert(self, value):
-        branch = TreeNode(value)
-        if self.root == None:
-            self.root = branch
+        new_node = TreeNode(value)
+        if (self.root is None):
+            self.root = new_node
             self.size += 1
-        else:
-            parent = None
-            child = self.root
-            # traverse until child is null/parent is present
-            while child != None:
-                parent = child
-                # values greater than parentValue go on right, child => child.right => traversing right
-                if parent.value < value:
-                    child = child.right
-                else:
-                    child = child.left
-            # end
-            if parent.value < value:
-                parent.right = branch
-            else:
-                parent.left = value
-            # if branchVal greate than currentVal, traverse left
-            # if branchVal less than currentVal traverse left
+            return
 
-    # Time Complexity:
-    # Auxiliary Space Complexity:
+        parent = None
+        child = self.root
+        while (child is not None):
+            parent = child
+            if(parent.value > value):
+                child = parent.left
+            else:
+                child = parent.right
+
+        if (parent.value > value):
+            parent.left = new_node
+        else:
+            parent.right = new_node
+        self.size += 1
+
+    # Time Complexity: O(log(N))
+    # Auxiliary Space Complexity: O(1)
     def search(self, value):
-        # YOUR WORK HERE
-        pass
+        current = self.root
+        while (current is not None):
+            if (current.value == value):
+                return True
+            if (current.value > value):
+                current = current.left
+            else:
+                current = current.right
+        return False
 
 
 # ###########################################################
@@ -117,23 +119,23 @@ import random
 #        indicating if test passed
 # output: {None}
 def expect(count, name, test):
-    if count is None or not isinstance(count, list) or len(count) != 2:
+    if (count is None or not isinstance(count, list) or len(count) != 2):
         count = [0, 0]
     else:
         count[1] += 1
 
-    result = "false"
+    result = 'false'
     error_msg = None
     try:
         if test():
-            result = " true"
+            result = ' true'
             count[0] += 1
     except Exception as err:
         error_msg = str(err)
 
-    print("  " + (str(count[1]) + ")   ") + result + " : " + name)
+    print('  ' + (str(count[1]) + ')   ') + result + ' : ' + name)
     if error_msg is not None:
-        print("       " + error_msg + "\n")
+        print('       ' + error_msg + '\n')
 
 
 class Capturing(list):
@@ -147,7 +149,7 @@ class Capturing(list):
         sys.stdout = self._stdout
 
 
-print("TreeNode Class")
+print('TreeNode Class')
 test_count = [0, 0]
 
 
@@ -156,31 +158,31 @@ def test():
     return isinstance(node, object)
 
 
-expect(test_count, "able to create an instance", test)
+expect(test_count, 'able to create an instance', test)
 
 
 def test():
     node = TreeNode()
-    return hasattr(node, "value")
+    return hasattr(node, 'value')
 
 
-expect(test_count, "has value property", test)
-
-
-def test():
-    node = TreeNode()
-    return hasattr(node, "left")
-
-
-expect(test_count, "has left property", test)
+expect(test_count, 'has value property', test)
 
 
 def test():
     node = TreeNode()
-    return hasattr(node, "right")
+    return hasattr(node, 'left')
 
 
-expect(test_count, "has right property", test)
+expect(test_count, 'has left property', test)
+
+
+def test():
+    node = TreeNode()
+    return hasattr(node, 'right')
+
+
+expect(test_count, 'has right property', test)
 
 
 def test():
@@ -188,7 +190,7 @@ def test():
     return node.value is None
 
 
-expect(test_count, "has default value set to None", test)
+expect(test_count, 'has default value set to None', test)
 
 
 def test():
@@ -196,7 +198,7 @@ def test():
     return node.value == 5
 
 
-expect(test_count, "able to assign a value upon instantiation", test)
+expect(test_count, 'able to assign a value upon instantiation', test)
 
 
 def test():
@@ -205,7 +207,7 @@ def test():
     return node.value == 5
 
 
-expect(test_count, "able to reassign a value", test)
+expect(test_count, 'able to reassign a value', test)
 
 
 def test():
@@ -215,7 +217,7 @@ def test():
     return node1.left.value == 10
 
 
-expect(test_count, "able to point to left child node", test)
+expect(test_count, 'able to point to left child node', test)
 
 
 def test():
@@ -225,11 +227,11 @@ def test():
     return node1.right.value == 10
 
 
-expect(test_count, "able to point to right child node", test)
-print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
+expect(test_count, 'able to point to right child node', test)
+print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
 
 
-print("Binary Search Tree Class")
+print('Binary Search Tree Class')
 test_count = [0, 0]
 
 
@@ -238,23 +240,23 @@ def test():
     return isinstance(bst, object)
 
 
-expect(test_count, "able to create an instance", test)
+expect(test_count, 'able to create an instance', test)
 
 
 def test():
     bst = BinarySearchTree()
-    return hasattr(bst, "root")
+    return hasattr(bst, 'root')
 
 
-expect(test_count, "has root property", test)
+expect(test_count, 'has root property', test)
 
 
 def test():
     bst = BinarySearchTree()
-    return hasattr(bst, "size")
+    return hasattr(bst, 'size')
 
 
-expect(test_count, "has size property", test)
+expect(test_count, 'has size property', test)
 
 
 def test():
@@ -262,7 +264,7 @@ def test():
     return bst.root is None
 
 
-expect(test_count, "default root set to None", test)
+expect(test_count, 'default root set to None', test)
 
 
 def test():
@@ -270,22 +272,22 @@ def test():
     return bst.size == 0
 
 
-expect(test_count, "default size set to 0", test)
+expect(test_count, 'default size set to 0', test)
 
 
-print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
+print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
 
 
-print("BinarySearchTree Insert Method")
+print('BinarySearchTree Insert Method')
 test_count = [0, 0]
 
 
 def test():
     bst = BinarySearchTree()
-    return hasattr(bst, "insert") and callable(getattr(bst, "insert"))
+    return hasattr(bst, 'insert') and callable(getattr(bst, 'insert'))
 
 
-expect(test_count, "has insert method", test)
+expect(test_count, 'has insert method', test)
 
 
 def test():
@@ -294,7 +296,7 @@ def test():
     return bst.size == 1 and bst.root.value == 5
 
 
-expect(test_count, "able to insert a node into empty binary search tree", test)
+expect(test_count, 'able to insert a node into empty binary search tree', test)
 
 
 def test():
@@ -304,7 +306,7 @@ def test():
     return bst.size == 2 and bst.root.value == 5 and bst.root.left.value == 3
 
 
-expect(test_count, "able to insert node to left of root node", test)
+expect(test_count, 'able to insert node to left of root node', test)
 
 
 def test():
@@ -312,15 +314,12 @@ def test():
     bst.insert(5)
     bst.insert(3)
     bst.insert(4)
-    return (
-        bst.size == 3
-        and bst.root.value == 5
-        and bst.root.left.value == 3
+    return bst.size == 3 and bst.root.value == 5 and bst.root.left.value == 3 \
         and bst.root.left.right.value == 4
-    )
 
 
-expect(test_count, "able to insert node to right of node left of root node", test)
+expect(test_count, 'able to insert node to right of node left of root node',
+       test)
 
 
 def test():
@@ -330,7 +329,7 @@ def test():
     return bst.size == 2 and bst.root.value == 5 and bst.root.right.value == 8
 
 
-expect(test_count, "able to insert node to right of root node", test)
+expect(test_count, 'able to insert node to right of root node', test)
 
 
 def test():
@@ -338,29 +337,26 @@ def test():
     bst.insert(5)
     bst.insert(8)
     bst.insert(7)
-    return (
-        bst.size == 3
-        and bst.root.value == 5
-        and bst.root.right.value == 8
-        and bst.root.right.left.value == 7
-    )
+    return bst.size == 3 and bst.root.value == 5 and \
+        bst.root.right.value == 8 and bst.root.right.left.value == 7
 
 
-expect(test_count, "able to insert node to left of node right of root node", test)
+expect(test_count, 'able to insert node to left of node right of root node',
+       test)
 
-print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
+print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')
 
 
-print("BinarySearchTree Search Method")
+print('BinarySearchTree Search Method')
 test_count = [0, 0]
 
 
 def test():
     bst = BinarySearchTree()
-    return hasattr(bst, "search") and callable(getattr(bst, "search"))
+    return hasattr(bst, 'search') and callable(getattr(bst, 'search'))
 
 
-expect(test_count, "has search method", test)
+expect(test_count, 'has search method', test)
 
 
 def test():
@@ -373,7 +369,8 @@ def test():
     return bst.search(4) is True
 
 
-expect(test_count, "returns true when element exists in binary search tree", test)
+expect(test_count, 'returns true when element exists in binary search tree',
+       test)
 
 
 def test():
@@ -386,10 +383,7 @@ def test():
     return bst.search(10) is False
 
 
-expect(
-    test_count,
-    "returns false when element does not exist in binary " + "search tree",
-    test,
-)
+expect(test_count, 'returns false when element does not exist in binary ' +
+       'search tree', test)
 
-print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
+print('PASSED: ' + str(test_count[0]) + ' / ' + str(test_count[1]) + '\n\n')

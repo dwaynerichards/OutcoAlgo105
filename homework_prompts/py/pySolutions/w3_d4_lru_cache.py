@@ -63,151 +63,114 @@
 #     lruCache.get('doc'); => 'david'
 #     lruCache.set('swe', 'ron');
 #     lruCache.get('cpo'); => -1
-#          I.  Node Class
-#              Create a Node class
 #
-#              The Node class should contain the following properties:
-#              key: {Integer}
-#              value: {Integer}
-#              previous: {Node} (initially None)
-#              next: {Node} (initially None)
-#         II.  LRUCache Class
-#              Create an LRUCache class
-#
-#              The LRUCache class should contain the following properties:
-#              capacity: {Integer}
-#              count: {Integer} (initially 0)
-#              cache: {Hash Table} The keys represent unique ids of each node, and the values represent the node objects
-#                                that possess those keys.
-#              head: {Node}
-#              tail: {Node}
-from w2_d1_linked_list import LinkedList, ListNode
 
 
-class Node(ListNode):
+class Node:
+    pass
+
     def __init__(self, key=None, value=None):
-        super().__init__(value)
         self.key = key
+        self.value = value
         self.previous = None
+        self.next = None
 
 
-class Queue(LinkedList):
-    def __init__(self):
-        super().__init__()
+class LRUCache:
+    pass
 
-    def dequeue(self):
-        oldHead = self.head
-        self.remove(0)
-        return oldHead
-
-    def enqueue(self, node):
-        if self.length == 0:
-            self.head = node
-            self.tail = node
-        else:
-            self.tail.next = node
-            self.tail = node
-        self.length += 1
-
-
-class LRUCache(Queue):
     def __init__(self, capacity=0):
-        super().__init__()
         self.capacity = capacity
         self.count = 0
         self.cache = {}
+        self.head = Node()
+        self.tail = Node()
+        self.head.next = self.tail
+        self.tail.previous = self.head
 
-    # Time Complexity:
-    # Time Complexity:
+    # Time Complexity: O(1)
+    # Auxiliary Space Complexity: O(1)
     def add_node(self, node):
-        # if over cap, dequeue, remove from cache, then add
-        if self.count >= self.capacity:
-            removedNode = self.dequeue()
-            self.remove_node(removedNode)
-        if self.count == 0:
-            self.head = node
-            self.tail = node
-        else:
-            node.previous = self.tail
-            self.tail.next = node
-            self.tail = node
+        """
+        Helper function: adds a node right after the head.
+        """
+        pass
         if node.key not in self.cache:
             self.cache[node.key] = node
-        else:
-            # if keyInCache, update value of node at that key
-            self.cache[node.key].value = node.value
-        self.count += 1
+        node.previous = self.head
+        node.next = self.head.next
+        self.head.next.previous = node
+        self.head.next = node
 
-        # Time Complexity:
-        # Auxiliary Space Complexity:
+        # Time Complexity: O(1)
+        # Auxiliary Space Complexity: O(1)
 
     def remove_node(self, node):
-        key = node.key
-        if self.count > 1:
-            prev = node.previous
-            next = node.next
-            prev.next = next
-            next.previous = prev
-        del self.cache[key]
-        self.count -= 1
         """
         Helper function: Removes a node from its position.
         """
         pass
+        prev_node = node.previous
+        next_node = node.next
+        prev_node.next = next_node
+        next_node.previous = prev_node
 
+        del self.cache[node.key]
+
+    # Time Complexity: O(1)
+    # Auxiliary Space Complexity: O(1)
     def move_to_head(self, node):
-        # Time Complexity:
-        # Auxiliary Space Complexity:
-        # update old head, update new head, extract key add to cache
-        node.pevious = None
-        node.next = self.head
-        self.head.previous = node
-        nodeKey, oldHeadKey = node.key, self.head.key
-        self.cache[nodeKey] = node
-        self.cache[oldHeadKey] = self.head
-        self.head = node
+        """
+        Helper function: Moves a node to the position right after the head.
+        """
+        pass
+        self.remove_node(node)
+        self.add_node(node)
 
-    # Time Complexity:
-    # Auxiliary Space Complexity:
+    # Time Complexity: O(1)
+    # Auxiliary Space Complexity: O(1)
     def remove_from_tail(self):
-        oldTailKey = self.tail.key
-        self.tail = self.tail.previous
-        self.tail.next = None
-        del self.cache[oldTailKey]
-        self.count -= 1
         """
         Helper function: Removes the node right before the tail.
         """
+        pass
+        c_node = self.tail.previous
+        self.remove_node(c_node)
+        return c_node
 
-    # Time Complexity:
-    # Auxiliary Space Complexity:
+    # Time Complexity: O(1)
+    # Auxiliary Space Complexity: O(1)
     def get(self, key):
+        pass
         if key in self.cache:
-            # update list
-            node = self.cache[key]
-            self.remove_node(node)
-            self.add_node(node)
-            return node.value
-        else:
-            return -1
+            c_node = self.cache[key]
+            self.move_to_head(c_node)
+            return c_node.value
+        return -1
 
-    # Time Complexity:
-    # Auxiliary Space Complexity:
+    # Time Complexity: O(1)
+    # Auxiliary Space Complexity: O(1)
     def set(self, key, value):
-        node = Node(key, value)
-        self.add_node(node)
+        pass
+        if key in self.cache:
+            c_node = self.cache[key]
+            c_node.value = value
+            self.move_to_head(c_node)
+        else:
+            new_node = Node(key, value)
+            self.cache[key] = new_node
+            self.add_node(new_node)
+
+            self.count += 1
+
+            if self.count > self.capacity:
+                remove_node = self.remove_from_tail()
+                self.cache.pop(remove_node.key, None)
+                self.count -= 1
 
 
-cache = LRUCache(3)
-print("cache", cache.tail)
-node = Node("key", "node1Value")
-node1 = Node("key1", "Node2Value")
-cache.set(node.key, node.value)
-cache.set(node1.key, node1.value)
-captured = cache.get(node.key)
-print("captured", captured)
-print(cache.cache)
-
+#############################################################
+################  DO NOT TOUCH TEST BELOW!!!  ###############
 #############################################################
 
 # custom expect function to handle tests
@@ -219,13 +182,9 @@ print(cache.cache)
 def expect(count, name, test):
     if count == None or not isinstance(count, list) or len(count) != 2:
         count = [0, 0]
-    if count == None or not isinstance(count, list) or len(count) != 2:
-        count = [0, 0]
-    if count == None or not isinstance(count, list) or len(count) != 2:
-        count = [0, 0]
     else:
         count[1] += 1
-    errMsg = None
+
     result = "false"
     errMsg = None
     try:
@@ -234,12 +193,15 @@ def expect(count, name, test):
             count[0] += 1
     except Exception as err:
         errMsg = str(err)
-        print("       " + errMsg + "\n")
+
     print("  " + (str(count[1]) + ")   ") + result + " : " + name)
     if errMsg != None:
         print("       " + errMsg + "\n")
 
 
+# code for capturing print output
+#
+# directions: capture_print function returns a list of all elements that were
 #             printed using print with the function that it is given. Note that
 #             the function given to capture_print must be fed using lambda.
 #             Example cis provided below
@@ -279,7 +241,6 @@ def test():
     example1 = lru_cache.get("doc")
     example2 = lru_cache.get("cpo")
     example3 = lru_cache.get("ceo")
-    print(example1, example2, example3)
     return example1 == "david" and example2 == "joshua" and example3 == "andy"
 
 
@@ -354,8 +315,3 @@ def test():
 expect(test_count, "should be able to replace multiple stale items", test)
 
 print("PASSED: " + str(test_count[0]) + " / " + str(test_count[1]) + "\n\n")
-expect(
-    test_count,
-    "most recently modified/viewed items should be moved to front of LRU cache while stale items are moved to end",
-    test,
-)
