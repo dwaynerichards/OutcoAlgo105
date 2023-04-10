@@ -293,35 +293,60 @@ class Matrix {
     }
 
     public boolean isValid(int i, int j) {
-        // YOUR WORK HERE
-        return false;
+        if(i > this.m || j > this.n || i < 0 || j < 0){
+            return false;
+        }
+        return true;
     }
 
     public void initialize(int[][] arrayOfArrays) {
-        // YOUR WORK HERE
+        this.m = arrayOfArrays.length;
+        this.n = arrayOfArrays[0].length;
     }
 
     public boolean insert(int i, int j, int val) {
-        // YOUR WORK HERE
-        return false;
+        if(!isValid(i,j)){
+            return false;
+        } else {
+            this.storage[i][j] = val;
+            return true;
+        }
     }
 
     public int retrieve(int i, int j) {
-        // YOUR WORK HERE
-        return Integer.MIN_VALUE;
+        if(isValid(i,j)){
+            return this.storage[i][j];
+        } else {
+            return Integer.MIN_VALUE;
+        }
     }
-
     public void scale(int factor) {
-        // YOUR WORK HERE
+        for(int i = 0; i < this.m; i++){
+            for(int j = 0; j < this.n; j++){
+                int scaled = this.retrieve(i,j) * scaled;
+                this.insert(i,j, scaled);
+            }
+        }
     }
 
     public void fill(int val) {
-        // YOUR WORK HERE
+        for(int i = 0; i < this.m; i++){
+            for(int j = 0; j < this.n; j++){
+                this.insert(i,j,val);
+            }
+        }
     }
 
     public int[] flatten() {
-        // YOUR WORK HERE
-        return new int[]{};
+        int size = getM() * getN();
+        int[] flat = new int[size];
+        for(int i = this.getM(); i > 0 ; i--){
+            for(int j = this.getN(); j > 0; j--){
+                flat[size] = this.retrieve(i,j);
+                size--;
+            }
+        }
+        return flat ;
     }
 
     public Matrix slice(int[] rowRange, int[] colRange) {
