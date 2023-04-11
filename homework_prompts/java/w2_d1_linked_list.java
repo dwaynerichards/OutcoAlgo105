@@ -60,7 +60,7 @@ class ListNode {
   public ListNode next;
 
   public ListNode(int value){
-    // YOUR WORK HERE
+    this.value = value;
   }
 }
 
@@ -73,7 +73,17 @@ class LinkedList {
   // Time Complexity:
   // Auxiliary Space Complexity:
   public void append(int value){
-    // YOUR WORK HERE
+    //if ehead is null, all list node as head and tail
+    ListNode     newNode = new ListNode(value) ;
+    if(this.head == null){
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      //current tail's next is instantiated as newNode, newNode beause LL's tail
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+    this.length++;
   }
 
 
