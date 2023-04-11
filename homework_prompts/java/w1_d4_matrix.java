@@ -350,13 +350,36 @@ class Matrix {
     }
 
     public Matrix slice(int[] rowRange, int[] colRange) {
-        // YOUR WORK HERE
-        return null;
+        //if in bounds
+        if(!this.isValid(rowRange[0], colRange[0]) || !this.isValid(rowRange[1], colRange[1])){
+            return null;
+        }
+        //if greater than ranger -> return origStorage
+        int slicedRowRange = rowRange[1] - rowRange[0];
+        int slicedColRange = colRange[1] - colRange[0];
+        if(slicedRowRange > this.m || slicedColRange > this.n){
+            return this.storage;
+        }
+        int[][] slicedStorage = new int[slicedRowRange][slicedColRange];
+            //step thru range placing in new matrix
+        for(int i = rowRange[0]; i < rowRange[1] i ++){
+            for(int j = colRange[0]; j < colRange[1]; j++){
+
+            }
+        }
     }
 
     public Matrix transpose() {
-        // YOUR WORK HERE
-        return null;
+       Matrix transposedMatrix = new Matrix(this.n, this.n);
+
+       for(int i = 0; i < this.m; i++){
+           for(int j = 0; j < this.n; j++){
+               int retrived = this.retrieve(i,j);
+               transposedMatrix.insert(j,i, retrived);
+           }
+       }
+
+        return transposedMatrix;
     }
 
     public Matrix multiply(Matrix matrix) {
